@@ -1,0 +1,14 @@
+.word-content{
+  padding: 30px;
+  font-size: 28px;
+  background: #fff;
+  min-height: 100%;
+  .p{
+    text-indent: 30px;
+  }
+  p{
+    +p{
+      margin-top: 30px;
+    }
+  }
+}

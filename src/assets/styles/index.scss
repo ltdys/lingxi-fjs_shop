@@ -1,0 +1,209 @@
+@import './base/index';
+@import './var';
+@import './word';
+
+html,body{
+  height: 100%;
+}
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: $font-family-base;
+  font-size:.28rem;
+  line-height: 1.4;
+  height: 100%;
+  background: #eaeef1;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select:  none;
+}
+.page{
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #eaeef1;
+  position: relative;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+}
+.page-content{
+  position: relative;
+  // height: calc(100% - 110px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling:touch;
+  width: 100%;
+  flex:1;
+  // display: flex;
+  // flex-direction: column;
+}
+.content{
+  background: #fff;
+}
+.scroller{
+  -webkit-overflow-scrolling:touch;
+  overflow: auto;
+  flex:1;
+}
+.amap-logo,.amap-copyright{
+  display: none!important;
+}
+
+.md-icon{
+  vertical-align: middle;
+}
+
+.com-marker{
+  // margin-left: -18px;
+}
+
+
+.maker-desc{
+  position: absolute;
+  bottom: 100%;
+  // height: 60px;
+  // min-width: 200px;
+  line-height: 1.6;
+  background: #fff;
+  box-shadow: 0 0 10px 1px #ccc;
+  border-radius: 50px;
+  padding: 10px 30px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  .split{
+    // color: #999;
+    border-right: 1px rgba(0,0,0,.1) solid;
+    margin-right: 10px;
+    padding-right: 10px;
+  }
+  em{
+    color:#ff7b27;
+  }
+}
+.muted{
+  color:#ff7b27;
+}
+
+.com-field-desc{
+  &.md-field .md-field-content{
+    .md-field-item{
+      padding: 0;
+      .md-field-item-inner{
+        padding: 0 0;
+        &::before{
+          display: none;
+        }
+      }
+
+      .md-field-item-title,
+      .md-field-item-content{
+        font-size:24px;
+      }
+    }
+  }
+}
+.dashed{
+  border-top: 2px rgba(0,0,0,.1) dashed;
+}
+
+.amount{
+  color:#ff7b27;
+  em{
+    font-size: .32rem;
+  }
+}
+
+.flex-1{
+  flex:1;
+}
+.h-100{
+  height: 100%;
+}
+.fccc{
+  color:#999;
+}
+.f999{
+  color:#999;
+}
+.f666{
+  color:#666;
+}
+.f333{
+  color:#333;
+}
+.fred{
+  color:#ea584e;
+}
+.rotate-180{
+  transform: rotate(180deg);
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pos-bottom{
+  position: absolute!important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  bottom: env(safe-area-inset-bottom);
+}
+.pos-top{
+  position: absolute!important;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.dashed{
+  border-bottom: rgba(0,0,0,.1) 1px dashed;
+}
+
+.text{
+  vertical-align: middle;
+}
+
+.driver_logo{
+  width: 253px;
+  height: 298px;
+}
+img{
+  max-width: 100%;
+}
+.a{
+  color:#ea584e;
+}
+.logo-title{
+  margin:80px 20px;
+  text-align: center;
+}
+.c-primary{
+  color:#5db84f;
+}

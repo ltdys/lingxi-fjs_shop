@@ -1,0 +1,8 @@
+.row{
+  display: flex;
+}
+@for $i from 1 through 24 {
+  .col-#{$i} {
+    width: 100% * $i/24;
+  }
+}

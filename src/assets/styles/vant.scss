@@ -1,0 +1,120 @@
+$color-primary: #ec9300;
+
+body{
+  .van-tabbar-item--active{
+    color: $color-primary!important;
+  }
+  
+  .van-nav-bar .van-icon{
+    color: #333!important;
+  }
+
+  .van-switch--on{
+    // background-color: $color-primary;
+  }
+  
+  .van-header {
+    // background-color: #fff;
+    color: #333;
+  }
+  .van-button:not(.is-disabled):active::after {
+      opacity: .2 /* .6 */
+  }
+  .van-button--primary {
+      background-color: $color-primary;
+      border: 0.02rem solid $color-primary;
+  }
+  .van-button--primary.van-button--plain {
+      border: 1px solid $color-primary;
+      color: $color-primary;
+      background-color: #fff;
+  }
+  .van-badge.is-primary {
+    background-color: $color-primary
+  }
+  .van-switch-input:checked + .van-switch-core {
+    border-color: $color-primary;
+    background-color: $color-primary; 
+  }
+  .van-navbar .van-tab-item.is-selected {
+    border-bottom: 3px solid $color-primary;
+    color: $color-primary;
+  }
+  .van-tabbar > .van-tab-item.is-selected {
+    color: $color-primary;
+  }
+  .van-searchbar-cancel {
+    color: $color-primary;
+  }
+  .van-checkbox-input:checked + .van-checkbox-core {
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+  .van-radio-input:checked + .van-radio-core {
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+  .van-range-progress {
+    background-color: $color-primary;
+  }
+  .van-progress-progress {
+    background-color: $color-primary;
+  }
+  .van-msgbox-confirm {
+    color: $color-primary;
+  }
+  .van-msgbox-confirm:active {
+    color: $color-primary;
+  }
+  .van-datetime-action {
+    color: $color-primary;
+  }
+  
+  .van-field-core{
+    text-align: right;
+  }
+  
+  .mintui{
+    &.van-toast-icon{
+      font-size:56px;
+      line-height: 1;
+    }
+  }
+  
+  .van-cell-group{
+    &:not(:first-child){
+      margin-top: 10px;
+    }
+  }
+  .van-address-list{
+    overflow: auto;
+  }
+  
+  .box {
+    border-radius: 10px;
+    .van-cell{
+      background: transparent;
+    }
+    .van-hairline--top-bottom::after{
+      border-width:0;
+    }
+  }
+  
+  .submit_buttons{
+    padding: 30px 15px;
+    .van-button+.van-button{
+      margin-top: 15px;
+    }
+  }
+  
+  .van-dialog__confirm, .van-dialog__confirm:active{
+    color: $color-primary;
+  }
+
+
+  .flex5{
+    .van-cell__title{
+      flex:.5;
+    }
+  }
+}

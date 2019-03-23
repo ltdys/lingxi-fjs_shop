@@ -1,0 +1,59 @@
+$space : 5px;
+
+$stars: (
+    p: padding,
+    m: margin
+);
+$sizes: (
+    0: 0,
+    sm: $space,
+    md: $space*2,
+    lg: $space*4
+);
+$stars2: (
+    l: left,
+    r: right,
+    t: top,
+    b: bottom
+);
+@each $k, $v in $stars {
+    @each $k1, $v1 in $sizes {
+        @each $k2, $v2 in $stars2 {
+            @if($k1 == md){
+                .#{$k}-#{$k2} {
+                    #{$v}-#{$v2}:#{$v1}!important;
+                }
+            }@else{
+                .#{$k}-#{$k2}-#{$k1} {
+                    #{$v}-#{$v2}:#{$v1}!important;
+                }
+            }
+        }
+
+        @if($k1 == md){
+            .#{$k}-x{
+                #{$v}-left:#{$v1}!important;
+                #{$v}-right:#{$v1}!important;
+            }
+            .#{$k}-y{
+                #{$v}-top:#{$v1}!important;
+                #{$v}-bottom:#{$v1}!important;
+            }
+            .#{$k}-a{
+                #{$v}:#{$v1}!important;
+            }
+        }@else{
+            .#{$k}-x-#{$k1}{
+                #{$v}-left:#{$v1}!important;
+                #{$v}-right:#{$v1}!important;
+            }
+            .#{$k}-y-#{$k1}{
+                #{$v}-top:#{$v1}!important;
+                #{$v}-bottom:#{$v1}!important;
+            }
+            .#{$k}-a-#{$k1}{
+                #{$v}:#{$v1}!important;
+            }
+        }
+    }
+}
