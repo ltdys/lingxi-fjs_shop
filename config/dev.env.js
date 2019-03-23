@@ -2,7 +2,7 @@ module.exports = {
   NODE_ENV: '"development"',
   ENV_CONFIG: '"dev"',
   //api 跟路径
-  BASE_API: '"http://192.168.0.27:4561"',
+  BASE_API: '""',
   //webscoket url
   WS_URL: '"ws://192.168.0.27:10"',
   //用户端下载URL
