@@ -17,6 +17,7 @@
     <div class="submit_buttons">
       <van-button type="primary" block>保存</van-button>
     </div>
+		<div>Mr Shinphy </div>
 	</com-page>
 </template>
 
