@@ -9,7 +9,6 @@ import './assets/styles/vant.scss';
 import './assets/styles/index.scss'
 
 
-
 import './utils/rem'
 
 import './directives' // global directives
