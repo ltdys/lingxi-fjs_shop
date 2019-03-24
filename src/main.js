@@ -8,8 +8,6 @@ import './assets/styles/vant.scss';
 // import 'vant/lib/index.less';
 import './assets/styles/index.scss'
 
-
-
 import './utils/rem'
 
 import './directives' // global directives
@@ -24,7 +22,6 @@ import FastClick from 'fastclick'
 // document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body); 
 // }, false);
-
 
 // import 'mint-ui/lib/style.css'
 // import MintUI from 'mint-ui'
