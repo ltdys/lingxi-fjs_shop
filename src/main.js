@@ -8,7 +8,6 @@ import './assets/styles/vant.scss';
 // import 'vant/lib/index.less';
 import './assets/styles/index.scss'
 
-
 import './utils/rem'
 
 import './directives' // global directives
