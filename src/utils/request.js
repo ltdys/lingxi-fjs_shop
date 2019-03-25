@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from './auth'
+// import { getToken } from './auth'
 
 // create an axios instance
 const service = axios.create({
@@ -10,10 +10,10 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(config => {
   config.data = config.data || {}
-  if (getToken()) {
-    // config.headers['Auth-Token'] = getToken()
-    config.data.uId = getToken()
-  }
+  // if (getToken()) {
+  //   config.headers['Auth-Token'] = getToken()
+  //   config.data.uId = getToken()
+  // }
   return config
 }, error => {
   Promise.reject(error)

@@ -6,7 +6,7 @@ export const send_smscode = (params) =>  axios.post('/common/smscode',params)
 export const service_price = (params) =>  axios.post('/common/service_price',params)
 
 /** 密码登陆 */
-export const login = (params) =>  axios.post(prefix+'/login',params)
+export const login = (queryParams, params) =>  axios.post('/login' + queryParams, params)
 /**短信登录*/
 export const login_smscode = (params) =>  axios.post(prefix+'/login_smscode',params)
 /** 退出登陆 */
