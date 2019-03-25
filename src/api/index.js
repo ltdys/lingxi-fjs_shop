@@ -12,7 +12,7 @@ export const login_smscode = (params) =>  axios.post(prefix+'/login_smscode',par
 /** 退出登陆 */
 export const logout = (params) =>  axios.post(prefix+'/logout',params)
 /**注册*/
-export const register = (params) =>  axios.post(prefix+'/register',params)
+export const register = (queryParams ,params) => axios.post('/register' + queryParams, params)
 /**设置密码*/
 export const user_set_password = (params) =>  axios.post(prefix+'/user/set_password',params)
 /**忘记密码*/

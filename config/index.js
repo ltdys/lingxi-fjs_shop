@@ -18,6 +18,20 @@ module.exports = {
         pathRewrite: {
             '^/api': ''   //需要rewrite重写的,
         }
+      },
+      '/register': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/register': '/register'
+        }
+      },
+      '/login': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': '/login'
+        }
       }
     },
 
