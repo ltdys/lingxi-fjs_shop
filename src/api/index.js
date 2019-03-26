@@ -19,3 +19,9 @@ export const user_set_password = (params) =>  axios.post(prefix+'/user/set_passw
 export const changepassword = (params) =>  axios.post(prefix+'/changepassword',params)
 
 export const user_info = (params) =>  axios.post(prefix+'/changepassword',params)
+
+/* 获取商品 */
+export const getHot = () => axios.post('/Home/GetHot')
+
+/* 获取商品详情 */
+export const shopInfo = (queryParams ,params) => axios.post('/Shop/ShopInfo' + queryParams, params)

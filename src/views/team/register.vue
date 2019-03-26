@@ -151,7 +151,7 @@ export default {
 		async register () {
 			let queryParams = paramConvert(this.formData)
 			let resData = await register(queryParams, this.formData)
-			if (resData.status === 200 && resData.data.Success === true) {
+			if (resData.status === 200 && resData.data.Success) {
 				Toast("注册成功")
 				this.$router.push('/team/myteam')
 			} else {

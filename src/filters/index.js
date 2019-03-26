@@ -92,7 +92,12 @@ export function ellipsis(str,len,rp = '...') {
   return str.substr(0,len) + rp;
 }
 
-
 export function toThousandslsFilter(num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+}
+
+//保留两位小数
+export function vFixedTwo (value) {
+  if (!value) { value = 0 }
+  return "￥" + parseFloat(value).toFixed(2)
 }
