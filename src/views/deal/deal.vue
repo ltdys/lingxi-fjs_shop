@@ -18,7 +18,6 @@
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
-            <div></div>
             <div>持仓数量</div>
             <div>详情</div>
           </div>
@@ -26,21 +25,21 @@
         </div>
         <div class="goods-content">
           <div>
-            <div>购买数量</div>
+            <div class="lx-mr-15">购买数量</div>
             <div>6000</div>
           </div>
           <div>
-            <div>提成</div>
+            <div class="lx-mr-15">提成</div>
             <div>0</div>
           </div>
         </div>
         <div class="goods-content">
           <div>
-            <div>系统奖励</div>
+            <div class="lx-mr-15">系统奖励</div>
             <div>6000</div>
           </div>
           <div>
-            <div>提货数量</div>
+            <div class="lx-mr-15">提货数量</div>
             <div>2000</div>
           </div>
         </div>
@@ -83,7 +82,7 @@ $defaultColor:#EC9300;
     padding: 15px;
     .goods-middle-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
     }
     .goods-middle-bottom {
       text-align: center;
@@ -101,7 +100,10 @@ $defaultColor:#EC9300;
   .goods-content {
     display: flex;
     justify-content: space-around;
-    padding: 15px;
+    padding-bottom: 30px;
+    .lx-mr-15 {
+      margin-bottom: 15px;
+    }
   }
   .goods-bottom {
     display: flex;
