@@ -4,9 +4,10 @@
 		<div class="my-info">
 				<img class="my__avatar" src="static/images/user.png" @click="$router.push('/my/info')"/>
 				<div>
-						<div>133****2332 <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
-						<div class="m-t-sm">会员账号：a12312312</div>
+					<div>133****2332 <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
+					<div class="m-t-sm">会员账号：a12312312</div>
 				</div>
+					<vue-q-art :config="config"></vue-q-art>
 		</div>
 		<div class="my-main">
 			<div class="my_info2">
@@ -53,7 +54,32 @@
 </template>
 
 <script>
+import VueQArt from 'vue-qart'
+export default {
+	components: {
+		VueQArt
+	},
+	data () {
+		return {
+			config: {
+				size: 50,
+				value: 'http://192.168.0.103:8000/#/my',
+				imagePath: 'static/images/user.png',
+				filter: 'threshold',
+				background: '#FFF',
+			},
+			downloadButton: false
+		}
+	},
+	mounted () {
+
+	},
+	motheds: {
+
+	}
+}
 </script>
+
 
 <style lang="scss">
 
