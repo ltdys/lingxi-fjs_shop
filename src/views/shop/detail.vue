@@ -1,63 +1,72 @@
 <template>
-    <com-page>
-        <com-header title="商品详情" slot="header" is-back></com-header>
-        <img class="w-100"  src="static/images/home_shop.png"/>
+  <com-page>
+    <com-header title="商品详情" slot="header" is-back></com-header>
+    <img class="w-100" src="static/images/home_shop.png">
 
-        <van-cell-group class="shop-detail">
-          <van-cell title="产品名称">
-            <span class="f333">{{goods.title}}</span>
-          </van-cell>
-          <van-cell title="产品价格">
-              <span class="amount">¥<em>{{goods.price  | number}}</em></span>
-          </van-cell>
-          <van-cell title="风险说明">
-              <span class="fred">虚拟商品无法退货，请谨慎操作</span>
-          </van-cell>
-          <van-cell title="促销说明">
-              <van-tag type="danger" plain>赠品</van-tag>
-              <span class="m-l-sm">豪峰整套功夫陶瓷茶具套装XXXXXX四合一电磁炉套装</span>
-          </van-cell>
-        </van-cell-group>
+    <van-cell-group class="shop-detail">
+      <van-cell title="产品名称">
+        <span class="f333">{{goods.title}}</span>
+      </van-cell>
+      <van-cell title="产品价格">
+        <span class="amount">
+          ¥
+          <em>{{goods.price | number}}</em>
+        </span>
+      </van-cell>
+      <van-cell title="风险说明">
+        <span class="fred">虚拟商品无法退货，请谨慎操作</span>
+      </van-cell>
+      <van-cell title="促销说明">
+        <van-tag type="danger" plain>赠品</van-tag>
+        <span class="m-l-sm">豪峰整套功夫陶瓷茶具套装XXXXXX四合一电磁炉套装</span>
+      </van-cell>
+    </van-cell-group>
 
-        <van-button type="primary" bottom-action  slot="footer" bottom block @click="preBuy">立刻购买</van-button>
+    <van-button type="primary" bottom-action slot="footer" bottom block @click="preBuy">立刻购买</van-button>
 
-        <van-sku slot="popup"
-          v-model="showCustomAction"
-          :sku="sku"
-          :goods="goods"
-          :goods-id="goodsId"
-          :hide-stock="sku.hide_stock"
-          :quota="0"
-          :quota-used="0"
-          @buy-clicked="onBuyClicked"
-        >
-          <!-- 自定义 sku-header-price -->
-          <template slot="sku-header-price" slot-scope="props">
-            <div class="van-sku__goods-price">
-              <span class="van-sku__price-symbol">￥</span><span class="van-sku__price-num">{{ props.price }}</span>
-            </div>
-          </template>
-          <!-- 自定义 sku actions -->
-          <template slot="sku-actions" slot-scope="props">
-            <div class="van-sku-actions">
-              <van-submit-bar style="position:relative"
-                  :price="350"
-                  button-text="立刻购买"
-           his.page       @submit="props.skuEventBus.$emit('sku:buy')"
-                />
-            </div>
-          </template>
-        </van-sku>
-    </com-page>
+    <van-sku
+      slot="popup"
+      v-model="showCustomAction"
+      :sku="sku"
+      :goods="goods"
+      :goods-id="goodsId"
+      :hide-stock="sku.hide_stock"
+      :quota="0"
+      :quota-used="0"
+      @buy-clicked="onBuyClicked"
+    >
+      <!-- 自定义 sku-header-price -->
+      <template slot="sku-header-price" slot-scope="props">
+        <div class="van-sku__goods-price">
+          <span class="van-sku__price-symbol">￥</span>
+          <span class="van-sku__price-num">{{ props.price }}</span>
+        </div>
+      </template>
+      <!-- 自定义 sku actions -->
+      <template slot="sku-actions" slot-scope="props">
+        <div class="van-sku-actions">
+          <van-submit-bar
+            style="position:relative"
+            :price="350"
+            button-text="立刻购买"
+            his.page
+            @submit="props.skuEventBus.$emit('sku:buy')"
+          />
+        </div>
+      </template>
+    </van-sku>
+  </com-page>
 </template>
 
 <script>
-import { Sku,SubmitBar } from "vant";
+import { Sku, SubmitBar } from "vant";
+import { paramConvert } from "@/utils/stringUtil.js"
+import { shopInfo } from "@/api/index.js"
 
 export default {
   components: {
-    [Sku.name]:Sku,
-    [SubmitBar.name]:SubmitBar
+    [Sku.name]: Sku,
+    [SubmitBar.name]: SubmitBar
   },
   data() {
     return {
@@ -86,15 +95,30 @@ export default {
         hide_stock: true // 是否隐藏剩余库存
       },
       goods: {
-        // 商品标题
-        title: "钻石DC元券（代码CEPL）",
-        // 默认商品 sku 缩略图
-        picture: "static/images/home_shop.png",
-        price: 1
-      }
+        // // 商品标题
+        // title: "钻石DC元券（代码CEPL）",
+        // // 默认商品 sku 缩略图
+        // picture: "",
+        // price: 1
+      },
+      id: '',
+      imgDefaultUrl: 'static/images/home_shop.png'
     };
   },
+
+  created () {
+    this.id = this.$route.params.id
+    this.shopInfo()
+  },
+
   methods: {
+    async shopInfo () {
+      let queryParams = paramConvert({ id: this.id })
+      let resData = await shopInfo(queryParams, { id: this.id })
+      if (resData.status === 200 && resData.data.Success) {
+        this.goods = resData.data.Data || {}
+			}
+    },
     preBuy() {
       // this.popupVisible = true;
       this.showCustomAction = true;

@@ -18,6 +18,48 @@ module.exports = {
         pathRewrite: {
             '^/api': ''   //需要rewrite重写的,
         }
+      },
+      '/register': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/register': '/register'
+        }
+      },
+      '/login': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': '/login'
+        }
+      },
+      '/Home': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/Home': '/Home'
+        }
+      },
+      '/GetUserByPhone': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/GetUserByPhone': '/GetUserByPhone'
+        }  
+      },
+      '/Shop': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/Shop': '/Shop'
+        }
+      },
+      'UserInfo': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/UserInfo': '/UserInfo'
+        }
       }
     },
 

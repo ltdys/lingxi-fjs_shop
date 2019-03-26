@@ -1,0 +1,101 @@
+<template>
+  <com-page>
+    <com-header title="用户登录" is-back slot="header"></com-header>
+    <div class="lx-header-img">
+      <img :src="userHeader" alt="">
+    </div>
+    <van-field
+      type="tel"
+      label="帐户"
+      placeholder="请输入手机号/用户名"
+      clearable
+      v-model="formData.phone"
+    >
+    </van-field>
+    <van-field
+      label="密码"
+      type="password"
+      placeholder="请输入登录密码"
+      clearable
+      v-model="formData.pwd"
+    >
+		</van-field>
+    <div class="lx-wrap">
+      <span>忘记密码?</span>
+      <span @click="$router.push('/team/register')">立即注册</span>
+    </div>
+    <div class="lx-btn">
+      <van-button type="primary" block @click="submit">登录</van-button>
+    </div>
+  </com-page>
+</template>
+
+<script>
+  import { Toast } from "vant"
+  import { login } from "@/api/index.js"
+  import { paramConvert } from "@/utils/stringUtil.js"
+  export default {
+    data () {
+      return {
+        userHeader: './static/images/icon/user_defu.png',
+        formData: {
+          phone: '',  //手机号
+          pwd: ''  //密码
+        },
+      }
+    },
+
+    methods: {
+      submit () {
+        if (this.formData.phone === '') {
+          Toast('手机号/用户名不能为空!')
+          return
+        }
+        if (this.formData.pwd === '') {
+          Toast('登录密码不能为空!')
+          return
+        }
+        this.login()
+      },
+      async login () {
+        let queryParams = paramConvert(this.formData)
+        let resData = await login(queryParams, this.formData)
+        if (resData.status === 200 && resData.data.Success === true) {
+          Toast("登录成功")
+          this.$store.dispatch('setUserId', resData.data.Data.userId)
+          this.$router.push('/')
+        } else {
+          Toast(resData.data.Msg)
+        }
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .lx-header-img {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    img {
+      display: block;
+      width: 1.2rem;
+    }
+  }
+  .lx-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.3rem;
+    span {
+      color:#ec9300;
+    }
+  }
+  .lx-btn {
+    padding: 0rem 0.3rem;
+  }
+</style>
+
+

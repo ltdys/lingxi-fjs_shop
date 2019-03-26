@@ -1,20 +1,19 @@
 import axios from 'axios'
-import { getToken } from './auth'
+// import { getToken } from './auth'
 
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.BASE_API, // api的base_url
-  timeout: 5000 // request timeout
+  timeout: 5000, // request timeout
 })
-
 
 // request interceptor
 service.interceptors.request.use(config => {
   config.data = config.data || {}
-  if (getToken()) {
-    // config.headers['Auth-Token'] = getToken()
-    config.data.uId = getToken()
-  }
+  // if (getToken()) {
+  //   config.headers['Auth-Token'] = getToken()
+  //   config.data.uId = getToken()
+  // }
   return config
 }, error => {
   Promise.reject(error)
@@ -29,12 +28,13 @@ service.interceptors.response.use(
    * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除
    */
   response => {
-    let res = response.data
-    if (res.status !== 0) {
-      return Promise.reject(res)
-    } else {
-      return res.data
-    }
+    return response
+    // let res = response.data
+    // if (res.status !== 0) {
+    //   return Promise.reject(res)
+    // } else {
+    //   return res.data
+    // }
   },
   e => {
     return Promise.reject({
@@ -47,8 +47,9 @@ service.interceptors.response.use(
 axios.defaults.transformRequest.unshift((data, headers)=> {
   var key, result = [];
   for (key in data) {
-    if ((data.hasOwnProperty(key) && data[key]) || data[key] === 0)
-    result.push(key + "=" + data[key]);
+    if ((data.hasOwnProperty(key) && data[key]) || data[key] === 0) {
+      result.push(key + "=" + data[key]);
+    }
     // result.push(encodeURIComponent(key) + "=" + encodeURIComponent(data[key]));
   }
   // result.push('sign='+sign(result))
