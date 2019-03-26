@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 import './permission'
 
 import './assets/styles/vant.scss';
@@ -38,9 +39,13 @@ import { Lazyload } from 'vant';
 // options 为可选参数，无则不传
 Vue.use(Lazyload);
 
+// 使用复制插件
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
 
 
 Vue.config.productionTip = false
+Vue.prototype.$axios = axios
 
 import MyComponents from './components/index'
 Vue.use(MyComponents)

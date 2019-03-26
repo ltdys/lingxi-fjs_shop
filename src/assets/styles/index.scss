@@ -218,3 +218,27 @@ input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {
 input {
 	 background-color:transparent;
 }
+
+/* 我的页面 */
+/* 复制button样式修改 */
+.my-info .my_vip .my_vip__copy {
+  background-color:transparent;
+  color: #EBEBEB;
+  border: none;
+}
+.my-info .my_vip .my_vip__copy:after{
+  border-radius: 50px;
+}
+.my-main .my__navs .my__navs__auto{
+  background-color: #FFB54C;
+  border: none;
+}
+.my-main .my__navs .my__navs__cash{
+  background-color: #F4F4F4;
+  color: #EC9300;
+  border: none;
+}
+.my-order .van-cell__value,
+.my-order .van-cell__right-icon{
+  font-size: 12px;
+}

@@ -54,7 +54,7 @@ module.exports = {
           '^/Shop': '/Shop'
         }
       },
-      'UserInfo': {
+      '/UserInfo': {
         target: 'http://zzlh.api.witrh.com',
         changeOrigin: true,
         pathRewrite: {

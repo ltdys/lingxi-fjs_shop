@@ -25,3 +25,7 @@ export const getHot = () => axios.post('/Home/GetHot')
 
 /* 获取商品详情 */
 export const shopInfo = (queryParams ,params) => axios.post('/Shop/ShopInfo' + queryParams, params)
+
+/* 获取用户信息 */
+export const getUserInfo = (queryParams ,params) => axios.post('/UserInfo' + queryParams, params)
+// export const getUserInfo = (params) => axios.post('/UserInfo' , params)
