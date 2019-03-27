@@ -8,44 +8,44 @@
           <div class="goods__count">
             <div class="tl-l">
               <div class="fa-stack-14x fa-color-969">总市值(元)</div>
-              <div class="fa-stack-24x fa-color-default h24x">130,000</div>
+              <div class="fa-stack-24x fa-color-default h24x">{{item.ZSZ}}</div>
             </div>
             <div class="tl-r">
               <div class="fa-stack-14x fa-color-969">单价(元/张)</div>
-              <div class="fa-stack-17x fa-color-323 h24x">1.30</div>
+              <div class="fa-stack-17x fa-color-323 h24x">{{item.danjia}}</div>
             </div>
           </div>
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
             <div class="fa-stack-14x fa-color-969">持仓数量(张)</div>
-            <div class="fa-stack-24x fa-color-323">1000</div>
+            <div class="fa-stack-24x fa-color-323">{{item.CCSL}}</div>
           </div>
           <div class="goods-middle-bottom fa-stack-14x fa-color-default">详情</div>
         </div>
         <div class="goods-content">
           <div>
             <div class="lx-mr-15 fa-stack-14x fa-color-969">购买数量</div>
-            <div class="tl-c fa-stack-17x fa-color-327">6000</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.GMSL}}</div>
           </div>
           <div>
             <div class="lx-mr-15 fa-stack-14x fa-color-969">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成</div>
-            <div class="tl-c fa-stack-17x fa-color-327">0</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.TC}}</div>
           </div>
         </div>
         <div class="goods-content">
           <div>
             <div class="lx-mr-15 fa-stack-14x fa-color-969">系统奖励</div>
-            <div class="tl-c fa-stack-17x fa-color-327">6000</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.XTJL}}</div>
           </div>
           <div>
             <div class="lx-mr-15 fa-stack-14x fa-color-969">提货数量</div>
-            <div class="tl-c fa-stack-17x fa-color-327">2000</div>
+          <div class="tl-c fa-stack-17x fa-color-327">{{item.THSL}}</div>
           </div>
         </div>
         <div class="goods-bottom">
           <div class="shop-btn lx-mr" @click="buy(item.id)">买入</div>
-          <div class="shop-btn lx-th" @click="$router.push('/deal/delivery')">提货</div>
+          <div class="shop-btn lx-th" @click="pushDelivery(item)">提货</div>
         </div>
       </div>
     </van-list>
@@ -88,6 +88,13 @@ export default {
       if (resData.status === 200 && resData.data.Success) {
         this.tradeList = resData.data.Data || []
       }
+    },
+    pushDelivery (item) {
+      this.$store.dispatch("setDeliveryList", item)
+      this.$router.push("/deal/delivery")
+    },
+    buy (id) {
+      this.$router.push("/shop/" + id)
     }
   }
 };

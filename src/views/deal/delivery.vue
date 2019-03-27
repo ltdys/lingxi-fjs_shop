@@ -2,12 +2,16 @@
   <com-page>
     <com-header title="我要提货" is-back slot="header"></com-header>
     <div class="delivery-top">
-      <div>钻石DC元券(代码CEPL)</div>
-      <div>当前数量 500,000张</div>
-      <div>注意: 兑换功能不能反向操作</div>
+      <div>{{this.deliveryList.title}}</div>
+      <div>
+        <span class="fa-stack-14x fa-color-333">当前数量</span>
+        <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.CCSL}} </span>
+        <span class="fa-stack-14x fa-color-333">张</span>
+      </div>
+      <div class="tip-color">注意: 兑换功能不能反向操作</div>
     </div>
     <div class="delivery-middle">
-      <div>您本次提货数量</div>
+      <div>本次提货数量</div>
       <van-field
         placeholder="您本次提货数量"
         clearable
@@ -51,9 +55,17 @@
       }
     },
 
+    computed: {
+      deliveryList: {
+        get: function () {
+          return this.$store.getters.getDeliveryList
+        }
+      }
+    },
+
     methods: {
       submit () {
-
+        
       }
     }
   }
