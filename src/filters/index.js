@@ -72,7 +72,14 @@ export function date (date,fmt)   {
     if(new RegExp("("+ k +")").test(fmt))   
   fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
   return fmt;   
-}  
+}
+
+export function dateChange (date)   {  
+  console.log(new Date(date).getTime())
+  let oldTime = (new Date(date)).getTime();
+  let curTime = date(new Date(oldTime), "yyyy-MM-dd hh:mm");
+  return curTime
+}
 
 export function distance(value) {
   if(value>1000){

@@ -38,3 +38,12 @@ export const getTradeRecord = (queryParams, params) => axios.post('/Trade/GetTra
 
 /* 提货 */
 export const pickGoods = (queryParams, params) => axios.post('/Trade/PickGoods' + queryParams, params)
+
+/* 根据用户ID获取我的订单 */
+export const getMyOrder = (queryParams, params) => axios.post('/My/GetMyOrder' + queryParams, params)
+
+/* 根据订单iD获取订单详情 */
+export const getOrderInfo = (queryParams, params) => axios.post('/My/GetOrderInfo' + queryParams, params)
+
+/* 支付商品订单 */
+export const paymentOrder = (queryParams, params) => axios.post('/My/PaymentOrder' + queryParams, params)

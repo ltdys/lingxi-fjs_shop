@@ -3,7 +3,7 @@
     <com-header slot="header" title="订单详情" is-back></com-header>
 
     <div class="order-detail__status">
-      <div>订单状态：待付款</div>
+      <div>订单状态：{{ orderDetail.status }}</div>
       <div class="fs-12">剩10小时22分钟自动关闭</div>
     </div>
     <van-cell-group>
@@ -62,7 +62,8 @@
 
 <script>
 import { Card, Panel } from "vant";
-
+import { getOrderInfo } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   components: {
     [Card.name]: Card,
@@ -70,6 +71,8 @@ export default {
   },
   data() {
     return {
+      orderId: '', //订单id
+      orderDetail: {},
       i: 1,
       imageURL: "static/images/banner.png",
        address:{
@@ -79,7 +82,24 @@ export default {
       }
     };
   },
+  created () {
+    this.orderId = this.$route.params.id,
+    this.getOrderInfo()
+  },
   methods: {
+    async getOrderInfo () { //获取订单详情
+      let self = this;
+      let param = {
+        id: self.orderId,
+      }
+			let queryParams = paramConvert(param)
+			let resData = await getOrderInfo(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        self.orderDetail = resData.data.Data;
+        
+        console.log(resData)
+			}
+    },
     changeItem(item) {}
   }
 };
