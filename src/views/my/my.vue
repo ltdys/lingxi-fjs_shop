@@ -133,9 +133,6 @@ export default {
 <style lang="scss">
 
 .my {
-	&-main{
-		// padding: 15px;
-	}
   &-info {
     // background: #f5c678;
     background: #ec9300;
