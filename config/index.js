@@ -60,6 +60,13 @@ module.exports = {
         pathRewrite: {
           '^/UserInfo': '/UserInfo'
         }
+      },
+      '/Trade': {
+        target: 'http://zzlh.api.witrh.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/Trade': '/Trade'
+        }
       }
     },
 
