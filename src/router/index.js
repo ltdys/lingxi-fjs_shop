@@ -155,6 +155,11 @@ export const routes = [{
     path: '*',
     component: () => import('@/views/common/404')
   },
+  //交易
+  {
+    path: '/deal/delivery',
+    component: () => import('@/views/deal/delivery.vue')
+  }
 ]
 
 export default new Router({

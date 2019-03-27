@@ -29,3 +29,12 @@ export const shopInfo = (queryParams ,params) => axios.post('/Shop/ShopInfo' + q
 /* 获取用户信息 */
 export const getUserInfo = (queryParams ,params) => axios.post('/UserInfo' + queryParams, params)
 // export const getUserInfo = (params) => axios.post('/UserInfo' , params)
+
+/* 根据用户id获取交易商品 */
+export const getTrade = (queryParams, params) => axios.post('/Trade/GetTrade' + queryParams, params)
+
+/* 根据用户id获取商品变动明细 */
+export const getTradeRecord = (queryParams, params) => axios.post('/Trade/GetTradeRecord' + queryParams, params)
+
+/* 提货 */
+export const pickGoods = (queryParams, params) => axios.post('/Trade/PickGoods' + queryParams, params)

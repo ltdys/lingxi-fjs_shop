@@ -1,51 +1,51 @@
 <template>
   <com-page>
-    <com-header title="交易" slot="header"></com-header>
+    <com-header title="交易" is-back slot="header"></com-header>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="loadBottom">
-      <div class="goods">
+      <div class="goods" v-for="(item, index) in tradeList" :key="index">
         <div class="good-top">
-          <div class="goods__title">钻石DC元券(代码CEPL)</div>
+          <div class="goods__title">{{item.title}}</div>
           <div class="goods__count">
-            <div>
-              <div>总市值（元）</div>
-              <div>130,000</div>
+            <div class="tl-l">
+              <div class="fa-stack-14x fa-color-969">总市值(元)</div>
+              <div class="fa-stack-24x fa-color-default h24x">{{item.ZSZ}}</div>
             </div>
-            <div>
-              <div>单价（元/张）</div>
-              <div>1.3</div>
+            <div class="tl-r">
+              <div class="fa-stack-14x fa-color-969">单价(元/张)</div>
+              <div class="fa-stack-17x fa-color-323 h24x">{{item.danjia}}</div>
             </div>
           </div>
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
-            <div>持仓数量</div>
-            <div>详情</div>
+            <div class="fa-stack-14x fa-color-969">持仓数量(张)</div>
+            <div class="fa-stack-24x fa-color-323">{{item.CCSL}}</div>
           </div>
-          <div class="goods-middle-bottom">1000</div>
+          <div class="goods-middle-bottom fa-stack-14x fa-color-default">详情</div>
         </div>
         <div class="goods-content">
           <div>
-            <div class="lx-mr-15">购买数量</div>
-            <div>6000</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">购买数量</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.GMSL}}</div>
           </div>
           <div>
-            <div class="lx-mr-15">提成</div>
-            <div>0</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.TC}}</div>
           </div>
         </div>
         <div class="goods-content">
           <div>
-            <div class="lx-mr-15">系统奖励</div>
-            <div>6000</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">系统奖励</div>
+            <div class="tl-c fa-stack-17x fa-color-327">{{item.XTJL}}</div>
           </div>
           <div>
-            <div class="lx-mr-15">提货数量</div>
-            <div>2000</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">提货数量</div>
+          <div class="tl-c fa-stack-17x fa-color-327">{{item.THSL}}</div>
           </div>
         </div>
         <div class="goods-bottom">
           <div class="shop-btn lx-mr" @click="buy(item.id)">买入</div>
-          <div class="shop-btn lx-th" @click="buy(item.id)">提货</div>
+          <div class="shop-btn lx-th" @click="pushDelivery(item)">提货</div>
         </div>
       </div>
     </van-list>
@@ -55,14 +55,55 @@
 <script>
 import { list_mixins } from "@/mixins";
 import { Button  } from 'vant'
+import { paramConvert } from "@/utils/stringUtil.js"
+import { getTrade } from "@/api/index"
 export default {
-  mixins: [list_mixins]
+  mixins: [list_mixins],
+
+  data () {
+    return {
+      tradeList: []
+    }
+  },
+
+  created () {
+    this.getTrade()
+  },
+
+  computed: {
+    userId: {
+      get: function () {
+        return this.$store.getters.getUserId
+      }
+    }
+  },
+
+  methods: {
+    async getTrade () {
+      let id = this.userId
+      let queryParams = paramConvert({
+        id: id
+      })
+      let resData = await getTrade(queryParams, { id: id })
+      if (resData.status === 200 && resData.data.Success) {
+        this.tradeList = resData.data.Data || []
+      }
+    },
+    pushDelivery (item) {
+      this.$store.dispatch("setDeliveryList", item)
+      this.$router.push("/deal/delivery")
+    },
+    buy (id) {
+      this.$router.push("/shop/" + id)
+    }
+  }
 };
 </script>
 
 
 <style lang="scss" scoped>
 $defaultColor:#EC9300;
+$otherColor: #3279FF;
 .goods {
   margin: 15px;
   background: #fff;
@@ -75,17 +116,27 @@ $defaultColor:#EC9300;
       background: $defaultColor;
       box-shadow: 0px 1px 5px 0pa rgba(153, 153, 153, 0.25);
       border-radius: 4px 4px 0px 0px;
+      font-size: 17px;
       color: #fff;
     }
   }
   .goods-middle {
     padding: 15px;
+    display: flex;
     .goods-middle-top {
-      display: flex;
-      justify-content: center;
+      width: 90%;
+      text-align: center;
+      margin-left: 10%;
+      div:nth-child(1) {
+        margin-bottom: 15px;
+      }
+      div:nth-child(2) {
+        height: 24px;
+        line-height: 24px;
+      }
     }
     .goods-middle-bottom {
-      text-align: center;
+      width: 10%;
     }
   }
 	.goods__count {
@@ -96,6 +147,11 @@ $defaultColor:#EC9300;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
+    .h24x {
+      height: 24px;
+      line-height: 24px;
+      margin-top: 15px;
+    }
 	}
   .goods-content {
     display: flex;
@@ -122,7 +178,7 @@ $defaultColor:#EC9300;
       background: $defaultColor;
     }
     .lx-th {
-      background: #3279FF;
+      background: $otherColor;
       margin-left: 15px;
     }
   }
