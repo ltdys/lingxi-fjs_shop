@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import { Card, Panel } from "vant";
-import { getOrderInfo } from "@/api/index.js"
+import { Toast, Card, Panel } from "vant";
+import { getOrderInfo, paymentOrder } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   components: {
@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      id: '', //用户id
       orderId: '', //订单id
       orderDetail: {},
       i: 1,
@@ -83,8 +84,10 @@ export default {
     };
   },
   created () {
+    this.id = this.$store.getters.getUserId
     this.orderId = this.$route.params.id,
-    this.getOrderInfo()
+    // this.getOrderInfo()
+    this.paymentOrder()
   },
   methods: {
     async getOrderInfo () { //获取订单详情
@@ -97,8 +100,25 @@ export default {
       if (resData.status === 200 && resData.data.Success) {
         self.orderDetail = resData.data.Data;
         
-        console.log(resData)
+        console.log('获取订单详情',resData)
 			}
+    },
+    async paymentOrder () { //支付商品订单
+      let self = this;
+      let param = {
+        id: self.id,
+        orderid: self.orderId,
+      }
+			let queryParams = paramConvert(param)
+			let resData = await paymentOrder(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        console.log('支付商品订单',resData)
+			} else {
+        Toast({
+          message: resData.data.Msg,
+          duration: 1500
+        })
+      }
     },
     changeItem(item) {}
   }
