@@ -36,6 +36,12 @@ export function validateAlphabets(str) {
   return reg.test(str)
 }
 
+/* 密码以字母开头，只能包含字母、数字和下划线 */
+export function validatePwd (str) {
+  const reg = /^[a-zA-Z]\w{5,17}$/
+  return reg.test(str)
+}
+
 /**
  * validate email
  * @param email

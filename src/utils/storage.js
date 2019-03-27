@@ -1,46 +1,83 @@
-const stroage = window.localStorage
-
-
-const prefix = 'driver.'
-
 /**
- * 存储Storage
+ * storage操作类
+ * @authors wgs
+ * @date    2018-06-08
  */
-export const set = (name, content,f) => {
 
-  if (!name) return
-
-  if(content === undefined || content === null){
-    return remove(name)
-  }
-
+ /**
+ * 存储sessionStorage
+ */
+export const setSesStore = (name, content) => {
+  if (!name) return;
   if (typeof content !== 'string') {
-    content = JSON.stringify(content)
+    content = JSON.stringify(content);
   }
-
-  stroage.setItem(prefix + name, content)
+  window.sessionStorage.setItem(name, content);
 }
 
 /**
- * 获取Storage
+ * 获取sessionStorage
  */
-export const get = (name, type) => {
-  if (!name) return
-  const val = stroage.getItem(prefix + name)
-  if (type === 'json') {
+export const getSesStore = (name,type) => {
+  if (!name) return;
+  let val = window.sessionStorage.getItem(name);
+  if(type === 'json'){
     return JSON.parse(val)
   }
   return val
 }
 
 /**
- * 删除Storage
+ * 删除sessionStorage
  */
-export const remove = name => {
-  if (!name) return
-  stroage.removeItem(prefix + name)
+export const removeSesStore = name => {
+  if (!name) return;
+  window.sessionStorage.removeItem(name);
 }
 
-export default {
-  set,get,remove
+/*
+ * 存储localStorage
+ */
+export const setLocalStore = (name, content) => {
+  if (!name) return;
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content);
+  }
+  window.localStorage.setItem(name, content);
 }
+
+/*
+ * 获取localStorage
+ */
+export const getLocalStore = (name,type) => {
+  if (!name) return;
+  let val = window.localStorage.getItem(name);
+  if(type === 'json'){
+    return JSON.parse(val)
+  }
+  return val
+}
+
+/**
+ * 删除localStorage
+ */
+export const removeLocalStore = name => {
+  if (!name) return;
+  window.localStorage.removeItem(name);
+}
+
+/*
+删除所有的缓存
+ */ 
+export const clearStore= () =>{
+  window.localStorage.clear()
+  window.sessionStorage.clear()
+}
+
+export const setSesStorage = (name, type) => setSesStore(name, type)
+export const getSesStorage = (name, val) => getSesStore(name, val)
+export const removeSesStorage = (name) => removeSesStore(name)
+export const setLocalStorage = (name, val) => setLocalStore(name, val)
+export const getLocalStorage = (name, type) => getLocalStore(name, type)
+export const removeLocalStorage = (name) => removeLocalStore(name)
+export const clearStorage = () => clearStore()

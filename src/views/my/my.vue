@@ -2,11 +2,26 @@
 	<com-page>
 		<com-header title="我的" slot="header"></com-header>
 		<div class="my-info">
-				<img class="my__avatar" src="static/images/user.png" @click="$router.push('/my/info')"/>
-				<div>
-						<div>133****2332 <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
-						<div class="m-t-sm">会员账号：a12312312</div>
+			<img class="my__avatar" src="static/images/user.png" @click="$router.push('/my/info')"/>
+			<div>
+				<div>133****2332 <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
+				<div class="m-t-sm my_vip">
+					<!-- <input class="my_vip__acc" id="account" value="a12312312" readonly> -->
+					<span>会员账号：<span class="my_vip__acc">a12312312</span></span>
+					<!-- <span class="my_vip__copy"
+						@click="copyVip"
+						>复制</span> -->
+					<van-button
+						type="primary"
+						size="mini"
+						plain
+						hairline
+						class="my_vip__copy"
+						v-clipboard:copy="sysAppIds"
+						v-clipboard:success="onCopy"
+						v-clipboard:error="onError">复制</van-button>
 				</div>
+			</div>
 		</div>
 		<div class="my-main">
 			<div class="my_info2">
@@ -16,27 +31,30 @@
 				</div>
 				<van-row class="my__navs">
 					<van-col span="8">
-						<van-button type="primary" plain round size="small" @click="$router.push('/my/recharge')">充值</van-button>
+						<van-button type="primary" class="my__navs__topup" round size="small" @click="$router.push('/my/recharge')">充值</van-button>
 					</van-col>
 					<van-col span="8">
-						<van-button type="primary" plain round size="small" @click="$router.push('/my/transfer')">转账</van-button>
+						<van-button type="primary" class="my__navs__auto" round size="small" @click="$router.push('/my/transfer')">转账</van-button>
 					</van-col>
 					<van-col span="8">
-						<van-button type="primary" plain round size="small" @click="$router.push('/my/withdraw')">提现</van-button>
+						<van-button type="primary" class="my__navs__cash" plain round size="small" @click="$router.push('/my/withdraw')">提现</van-button>
 					</van-col>
 				</van-row>
 			</div>
 			<van-cell-group class="m-t">
-				<van-cell title="我的订单" icon="records" value="查看全部订单" is-link to="/my/order"></van-cell>
+				<van-cell class="my-order" title="我的订单" icon="records" value="查看全部订单" is-link to="/my/order"></van-cell>
 				<van-row class="my-links">
-					<van-col span="8" @click.native="$router.push('/my/order?tab=1')">
-						<van-icon name="pending-payment" />待付款
+					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=1')">
+						<img class="my_img__box" src="static/images/icon/all_order.png" alt="">全部
 					</van-col>
-					<van-col span="8" @click.native="$router.push('/my/order?tab=2')">
-						<van-icon name="tosend" />待发货
+					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=2')">
+						<img class="my_img__box" src="static/images/icon/pay_order.png" alt="">待付款
 					</van-col>
-					<van-col span="8" @click.native="$router.push('/my/order?tab=3')">
-						<van-icon name="logistics" />已发货
+					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
+						<img class="my_img__box" src="static/images/icon/car_order.png" alt="">待收货
+					</van-col>
+					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
+						<img class="my_img__box" src="static/images/icon/finish_order.png" alt="">已完成
 					</van-col>
 				</van-row>
 			</van-cell-group>
@@ -53,7 +71,42 @@
 </template>
 
 <script>
+import { getUserInfo } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
+export default {
+	data () {
+		return {
+			id: '', //用户id
+			sysAppIds: 'a12312312', //会员账号
+		}
+	},
+	created () {
+		this.id = this.$store.getters.getUserId
+		console.log('id',this.id)
+    this.getUserInfo()
+  },
+	mounted () {
+
+	},
+	methods: {
+		//获取用户消息
+		async getUserInfo () {
+			let queryParams = paramConvert({ "uId": this.id })
+			let resData = await getUserInfo(queryParams, { "uId": this.id })
+      if (resData.status === 200 && resData.data.Success) {
+        console.log(resData)
+			}
+		},
+		onCopy () { //复制成功
+			alert('复制成功')
+		},
+		onError () { //复制失败
+		
+		},
+	}
+}
 </script>
+
 
 <style lang="scss">
 
@@ -112,5 +165,38 @@
       font-size: 24px;
     }
   }
+	&_vip {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		&__acc{
+			width: 80px;
+			outline: none;
+			background: transparent;
+			border: none;
+		}
+		&__copy {
+			width: 27px;
+			height: 15px;
+			text-align: center;
+			line-height: 15px;
+			border-radius: 50px;
+			font-size: 10px;
+			margin-left: 10px;
+			background: transparent;
+		}
+	}
+	&_img{
+		display: flex;
+    flex-direction: column;
+    align-items: center;
+		justify-content: center;
+		&__box{
+			display: block;
+			// width: 32px;
+			height: 32px;
+			margin-bottom: 12px;
+		}
+	}
 }
 </style>

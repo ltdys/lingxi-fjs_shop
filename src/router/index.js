@@ -65,6 +65,10 @@ export const routes = [{
     path: '/team/register',
     component: () => import('@/views/team/register.vue'),
   },
+  {
+    path: '/team/login',
+    component: () => import('@/views/team/login.vue'),
+  },
   //我的
   {
     path: '/my/info',

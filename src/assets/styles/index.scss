@@ -207,3 +207,38 @@ img{
 .c-primary{
   color:#5db84f;
 }
+
+input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {
+	-webkit-text-fill-color: #ededed !important;
+	-webkit-box-shadow: 0 0 0px 1000px transparent  inset !important;
+  background-color:transparent;
+  background-image: none;
+  transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
+}
+input {
+	 background-color:transparent;
+}
+
+/* 我的页面 */
+/* 复制button样式修改 */
+.my-info .my_vip .my_vip__copy {
+  background-color:transparent;
+  color: #EBEBEB;
+  border: none;
+}
+.my-info .my_vip .my_vip__copy:after{
+  border-radius: 50px;
+}
+.my-main .my__navs .my__navs__auto{
+  background-color: #FFB54C;
+  border: none;
+}
+.my-main .my__navs .my__navs__cash{
+  background-color: #F4F4F4;
+  color: #EC9300;
+  border: none;
+}
+.my-order .van-cell__value,
+.my-order .van-cell__right-icon{
+  font-size: 12px;
+}
