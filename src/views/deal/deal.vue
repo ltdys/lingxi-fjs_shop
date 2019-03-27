@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="交易" slot="header"></com-header>
+    <com-header title="交易" is-back slot="header"></com-header>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="loadBottom">
       <div class="goods" v-for="(item, index) in tradeList" :key="index">
         <div class="good-top">
@@ -45,7 +45,7 @@
         </div>
         <div class="goods-bottom">
           <div class="shop-btn lx-mr" @click="buy(item.id)">买入</div>
-          <div class="shop-btn lx-th" @click="buy(item.id)">提货</div>
+          <div class="shop-btn lx-th" @click="$router.push('/deal/delivery')">提货</div>
         </div>
       </div>
     </van-list>
