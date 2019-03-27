@@ -19,6 +19,7 @@ import {
   RadioGroup,
   Radio,
   Actionsheet,
+  GoodsAction, GoodsActionMiniBtn
 } from 'vant'
 
 const components = [
@@ -40,6 +41,7 @@ const components = [
   Swipe, SwipeItem,
   RadioGroup, Radio,
   Actionsheet,
+  GoodsAction, GoodsActionMiniBtn
 ]
 
 const install = function (Vue) {

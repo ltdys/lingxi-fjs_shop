@@ -4,13 +4,9 @@
 		<div class="my-info">
 			<img class="my__avatar" src="static/images/user.png" @click="$router.push('/my/info')"/>
 			<div>
-				<div>133****2332 <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
+				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
 				<div class="m-t-sm my_vip">
-					<!-- <input class="my_vip__acc" id="account" value="a12312312" readonly> -->
 					<span>会员账号：<span class="my_vip__acc">a12312312</span></span>
-					<!-- <span class="my_vip__copy"
-						@click="copyVip"
-						>复制</span> -->
 					<van-button
 						type="primary"
 						size="mini"
@@ -27,7 +23,7 @@
 			<div class="my_info2">
 				<div class="my_info2__num">
 					<div>余额（元）</div>
-					<div>{{12321321 | number}}</div>
+					<div>{{userInfo.price | number}}</div>
 				</div>
 				<van-row class="my__navs">
 					<van-col span="8">
@@ -44,17 +40,33 @@
 			<van-cell-group class="m-t">
 				<van-cell class="my-order" title="我的订单" icon="records" value="查看全部订单" is-link to="/my/order"></van-cell>
 				<van-row class="my-links">
+					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=0')">
+						<div class="my-order">
+							<img class="my_img__box" src="static/images/icon/all_order.png" alt="">
+							<span class="my_img__num" v-show="userInfo.dingdanqb && userInfo.dingdanqb != 0">{{ userInfo.dingdanqb }}</span>
+						</div>
+						<div>全部</div>
+					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=1')">
-						<img class="my_img__box" src="static/images/icon/all_order.png" alt="">全部
+						<div class="my-order">
+							<img class="my_img__box" src="static/images/icon/pay_order.png" alt="">
+							<span class="my_img__num" v-show="userInfo.dingdandfk && userInfo.dingdandfk != 0">{{ userInfo.dingdandfk }}</span>
+						</div>
+						<div>待付款</div>
 					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=2')">
-						<img class="my_img__box" src="static/images/icon/pay_order.png" alt="">待付款
+						<div class="my-order">
+							<img class="my_img__box" src="static/images/icon/car_order.png" alt="">
+							<span class="my_img__num" v-show="userInfo.dingdanyfk && userInfo.dingdanyfk != 0">{{ userInfo.dingdanyfk }}</span>
+						</div>
+						<div>待收货</div>
 					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
-						<img class="my_img__box" src="static/images/icon/car_order.png" alt="">待收货
-					</van-col>
-					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
-						<img class="my_img__box" src="static/images/icon/finish_order.png" alt="">已完成
+						<div class="my-order">
+							<img class="my_img__box" src="static/images/icon/finish_order.png" alt="">
+							<span class="my_img__num" v-show="userInfo.dingdanywc && userInfo.dingdanywc != 0">{{ userInfo.dingdanywc }}</span>
+						</div>
+						<div>已完成</div>
 					</van-col>
 				</van-row>
 			</van-cell-group>
@@ -71,13 +83,18 @@
 </template>
 
 <script>
+import { Toast, Badge, GoodsAction, GoodsActionMiniBtn } from 'vant';
 import { getUserInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
+	components: {
+    Badge, GoodsAction, GoodsActionMiniBtn
+  },
 	data () {
 		return {
 			id: '', //用户id
 			sysAppIds: 'a12312312', //会员账号
+			userInfo: {}
 		}
 	},
 	created () {
@@ -91,14 +108,19 @@ export default {
 	methods: {
 		//获取用户消息
 		async getUserInfo () {
+			let self = this;
 			let queryParams = paramConvert({ "uId": this.id })
 			let resData = await getUserInfo(queryParams, { "uId": this.id })
       if (resData.status === 200 && resData.data.Success) {
+				self.userInfo = resData.data.Data;
         console.log(resData)
 			}
 		},
 		onCopy () { //复制成功
-			alert('复制成功')
+			Toast({
+				message: '复制成功',
+				duration: 1500
+			})
 		},
 		onError () { //复制失败
 		
@@ -191,11 +213,28 @@ export default {
     flex-direction: column;
     align-items: center;
 		justify-content: center;
+		.my-order{
+			position: relative;
+		}
 		&__box{
 			display: block;
 			// width: 32px;
 			height: 32px;
 			margin-bottom: 12px;
+		}
+		&__num{
+			position: absolute;
+			top: -7px;
+			right: -7px;
+			width: 16px;
+			height: 16px;
+			font-size: 12px;
+			line-height: 16px;
+			text-align: center;
+			border: 1px solid #FFB54C;
+			color: #FFB54C;
+			border-radius: 50%;
+			background: #FFF;
 		}
 	}
 }
