@@ -6,41 +6,41 @@
         <div class="good-top">
           <div class="goods__title">钻石DC元券(代码CEPL)</div>
           <div class="goods__count">
-            <div>
-              <div>总市值（元）</div>
-              <div>130,000</div>
+            <div class="tl-l">
+              <div class="lx-small">总市值(元)</div>
+              <div class="lx-big">130,000</div>
             </div>
-            <div>
-              <div>单价（元/张）</div>
-              <div>1.3</div>
+            <div class="tl-r">
+              <div class="lx-small">单价(元/张)</div>
+              <div>1.30</div>
             </div>
           </div>
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
-            <div>持仓数量</div>
-            <div>详情</div>
+            <div class="lx-small">持仓数量(张)</div>
+            <div>1000</div>
           </div>
-          <div class="goods-middle-bottom">1000</div>
+          <div class="goods-middle-bottom">详情</div>
         </div>
         <div class="goods-content">
           <div>
-            <div class="lx-mr-15">购买数量</div>
-            <div>6000</div>
+            <div class="lx-mr-15 lx-small">购买数量</div>
+            <div class="tl-c lx-middle">6000</div>
           </div>
           <div>
-            <div class="lx-mr-15">提成</div>
-            <div>0</div>
+            <div class="lx-mr-15 lx-small">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成</div>
+            <div class="tl-c lx-middle">0</div>
           </div>
         </div>
         <div class="goods-content">
           <div>
-            <div class="lx-mr-15">系统奖励</div>
-            <div>6000</div>
+            <div class="lx-mr-15 lx-small">系统奖励</div>
+            <div class="tl-c lx-middle">6000</div>
           </div>
           <div>
-            <div class="lx-mr-15">提货数量</div>
-            <div>2000</div>
+            <div class="lx-mr-15 lx-small">提货数量</div>
+            <div class="tl-c lx-middle">2000</div>
           </div>
         </div>
         <div class="goods-bottom">
@@ -55,14 +55,22 @@
 <script>
 import { list_mixins } from "@/mixins";
 import { Button  } from 'vant'
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
-  mixins: [list_mixins]
+  mixins: [list_mixins],
+
+  created () {
+  },
+
+  methods: {
+  }
 };
 </script>
 
 
 <style lang="scss" scoped>
 $defaultColor:#EC9300;
+$otherColor: #3279FF;
 .goods {
   margin: 15px;
   background: #fff;
@@ -80,12 +88,14 @@ $defaultColor:#EC9300;
   }
   .goods-middle {
     padding: 15px;
+    display: flex;
     .goods-middle-top {
-      display: flex;
-      justify-content: center;
+      width: 90%;
+      text-align: center;
+      margin-left: 10%;
     }
     .goods-middle-bottom {
-      text-align: center;
+      width: 10%;
     }
   }
 	.goods__count {
@@ -122,9 +132,21 @@ $defaultColor:#EC9300;
       background: $defaultColor;
     }
     .lx-th {
-      background: #3279FF;
+      background: $otherColor;
       margin-left: 15px;
     }
+  }
+  .lx-small {
+    font-size: 14px;
+    color: #969799;
+  }
+  .lx-big {
+    font-size: 24px;
+    color: $defaultColor;
+  }
+  .lx-middle {
+    font-size: 17px;
+    color: $otherColor;
   }
 }
 </style>
