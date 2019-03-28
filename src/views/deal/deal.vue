@@ -70,14 +70,6 @@ export default {
     this.getTrade()
   },
 
-  computed: {
-    userId: {
-      get: function () {
-        return this.$store.getters.getUserId
-      }
-    }
-  },
-
   methods: {
     async getTrade () {
       let id = this.userId

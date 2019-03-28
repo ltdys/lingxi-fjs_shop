@@ -1,54 +1,131 @@
 <template>
 	<com-page>
 		<com-header title="我的团队" is-back slot="header"></com-header>
+		<div class="myteam-top">
+			<div>
+				<div><com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>133****7887 交易员</div>
+				<div class="fa-color-default">注册下级会员帐户</div>
+			</div>
+			<div class="myteam-padd">姓名:王大锤 帐户:ab123456</div>
+			<div class="myteam-padd">注册时间: 2019-03-05 16:35</div>
+		</div>
 		<div class="myteam">
 			<div>
 				<div class="myteam-title">总业绩(万元)</div>
-				<div class="myteam-num">{{300|number}}</div>
+				<div class="myteam-num">{{myTeamData.price|number}}</div>
 			</div>
-			<div>
+			<div class="tl-r">
 				<div class="myteam-title">团队人数(人)</div>
-				<div class="myteam-num">{{180|number(0)}}</div>
+				<div class="myteam-num">{{myTeamData.num|number(0)}}</div>
 			</div>
 		</div>
-		<div class="team2">
-			<div>直接下属团队（5人）</div>
+		<div class="team-child">
+			<div>直接下属团队（{{myTeamData.zjxj}}人）</div>
 			<div class="a" @click="$router.push('/team/register')">注册会员</div>
 		</div>
-		<van-cell :title="'1331234123'|phone" label="交易员" v-for="i in 20" :key="i">
-			<com-icon name="iconwode" slot="icon"></com-icon>
-			<div class="f333 tc">
-				总业绩<br/>{{10000|number}}元
-			</div>
-		</van-cell>
+
+		<div v-for="(item, index) in myTeamSonData" :key="index" class="myteam-cell">
+			<van-cell :title="item.username|phone" :label="item.level" is-link>
+				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
+				<div class="f333 tc">
+					总业绩<br/>{{item.price|number}}元
+				</div>
+			</van-cell>
+		</div>
 	</com-page>
 </template>
 
 <script>
+	import { paramConvert } from "@/utils/stringUtil.js"
+	import { getMyTeam, getMyTeamSon } from "@/api/index.js"
+	export default {
+		data () {
+			return {
+				myTeamData: {
+					price: 0,
+					num: 0,
+					zjzxj: 0
+				},
+				myTeamSonData: []
+			}
+		},
+
+		computed: {
+      userId: {
+        get: function () {
+          return this.$store.getters.getUserId
+        }
+      }
+    },
+
+		created () {
+			this.getMyTeam()
+		},
+
+		methods: {
+			async getMyTeam () {
+				let id = this.userId
+        let queryParams = paramConvert({
+          id: id
+        })
+        let resData = await getMyTeam(queryParams, { id: id })
+        if (resData.status === 200 && resData.data.Success) {
+					this.myTeamData = resData.data.Data
+					this.getMyTeamSon()
+        }
+			},
+			async getMyTeamSon () {
+				this.myTeamSonList = []
+				let id = this.userId
+        let queryParams = paramConvert({
+          id: id
+        })
+        let resData = await getMyTeamSon(queryParams, { id: id })
+        if (resData.status === 200 && resData.data.Success) {
+					this.myTeamSonData = resData.data.Data.list
+        }
+			}
+		}
+	}
 </script>
 
-<style lang="scss">
-.myteam {
-	background: #fff;
-	text-align: center;
-	padding: 20px;
-	display: flex;
-	justify-content: space-between;
-	.myteam-title{
-		font-size: 14px;
-		color: #666;
+<style lang="scss" scoped>
+	.myteam-top {
+		padding: 10px;
+		div:nth-child(1) {
+			display: flex;
+			justify-content: space-between;
+			height: 26px;
+			line-height: 26px;
+		}
+		.myteam-padd {
+			padding: 5px 28px;
+		}
 	}
-	>div{
-		flex: .4;
+	.myteam {
+		background: #fff;
+		padding: 20px 10px;
+		display: flex;
+		justify-content: space-between;
+		.myteam-title{
+			font-size: 14px;
+			color: #666;
+		}
+		>div{
+			flex: .4;
+		}
+		.myteam-num {
+			font-size: 18px;
+			color: #ff7b27;
+		}
 	}
-	.myteam-num{
-		font-size: 18px;
-		color: #ff7b27;
+	.team-child {
+		padding: 15px 10px;
+		display: flex;
+		justify-content: space-between;
 	}
-}
-.team2{
-	padding: 15px 10px;
-	display: flex;
-	justify-content: space-between;
-}
+	.lx-svg {
+		margin: 5px;
+	}
 </style>
+
