@@ -21,7 +21,7 @@
         </van-cell>
       </van-cell-group>
       <div class="submit_buttons">
-        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfe">确认转账</van-button>
+        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfer">确认转账</van-button>
       </div>
     </template>
 	</com-page>
@@ -30,7 +30,7 @@
 <script>
 import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
-import { getUserByPhone, balanceTransfe } from "@/api/index.js"
+import { getUserByPhone, balanceTransfer } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
@@ -88,7 +88,7 @@ export default {
 				})
 			}
 		},
-    async balanceTransfe(){
+    async balanceTransfer(){
       let self = this;
 			let param = {
         id: self.userId,
@@ -97,11 +97,14 @@ export default {
         price: Number(self.transferNum)
       }
 			let queryParams = paramConvert(param)
-			let resData = await balanceTransfe(queryParams, param)
+			let resData = await balanceTransfer(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
         console.log("转账成功",resData.data.Data)
-        self.realname = resData.data.Data.realname
-				self.step++
+        Toast.success({
+					message: '转账成功',
+					duration: 1500
+        });
+        self.$router.push('/my')
 			} else {
 				Toast({
 					message: resData.data.Msg,

@@ -68,4 +68,4 @@ export const setYECZ = (queryParams, params) => axios.post('/My/YECZ' + queryPar
 export const getUserByPhone = (queryParams, params) => axios.post('/GetUserByPhone' + queryParams, params)
 
 /* 转账 */
-export const balanceTransfe = (queryParams, params) => axios.post('/My/BalanceTransfe' + queryParams, params)
+export const balanceTransfer = (queryParams, params) => axios.post('/My/BalanceTransfer' + queryParams, params)
