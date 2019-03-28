@@ -32,7 +32,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .page-home {
   background: #fff;
   padding: 0.2rem 0.3rem;

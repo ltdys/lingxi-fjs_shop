@@ -2,7 +2,7 @@
   <div class="home-hot_shop">
     <div class="hot-title">热卖商品</div>
     <div class="shop" v-for="(item, index) in shopList" :key="index">
-      <img class="w-100" :src="item.imgurl || imgDefaultUrl">
+      <img class="w-100 h-115" :src="item.imgurl">
       <div class="shop-desc">
         <div class="shop-title">{{item.title}}</div>
         <div>
@@ -19,8 +19,7 @@ import { getHot } from "@/api/index.js"
 export default {
 	data () {
 		return {
-			shopList: [],
-			imgDefaultUrl: 'static/images/home_shop.png'
+			shopList: []
 		}
 	},
 

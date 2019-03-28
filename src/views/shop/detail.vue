@@ -1,7 +1,7 @@
 <template>
   <com-page>
     <com-header title="商品详情" slot="header" is-back></com-header>
-    <img class="w-100" src="static/images/home_shop.png">
+    <img class="w-100 h-115" :src="goods.imgurl">
 
     <van-cell-group class="shop-detail">
       <van-cell title="产品名称">
@@ -18,7 +18,7 @@
       </van-cell>
       <van-cell title="促销说明">
         <van-tag type="danger" plain>赠品</van-tag>
-        <span class="m-l-sm">豪峰整套功夫陶瓷茶具套装XXXXXX四合一电磁炉套装</span>
+        <span class="m-l-sm">{{goods.info}}</span>
       </van-cell>
     </van-cell-group>
 
@@ -101,8 +101,7 @@ export default {
         // picture: "",
         // price: 1
       },
-      id: '',
-      imgDefaultUrl: 'static/images/home_shop.png'
+      id: ''
     };
   },
 

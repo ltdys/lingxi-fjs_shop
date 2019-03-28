@@ -24,6 +24,10 @@ export const routes = [{
         path: '/team',
         component: () => import('@/views/team/team.vue'),
       },
+      {
+        path: '/mycode',
+        component: () => import('@/views/mycode/mycode.vue'),
+      }
     ]
   },
   {

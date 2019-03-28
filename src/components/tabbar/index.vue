@@ -14,9 +14,15 @@ export default {
       menus: [
         { name: "首页", icon: "wap-home",path:'/'  },
         { name: "交易", icon: "gem-o",path:'/deal' },
+        { name: "我的二维码", icon: "scan",path:'/mycode' },
         { name: "团队", icon: "friends-o",path:'/team'  },
         { name: "我的", icon: "user-o", path:'/my' }
-      ]
+      ],
+      active: 0,
+      icon: {
+        normal: 'static/images/icon/all_order.png',
+        active: '//img.yzcdn.cn/icon-active.png'
+      }
     };
   },
   created() {

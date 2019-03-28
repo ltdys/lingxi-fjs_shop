@@ -1,10 +1,10 @@
 <template>
 	<com-page>
 		<com-header title="我的团队" is-back slot="header"></com-header>
-		<div class="myteam-top">
+		<div class="myteam-top" v-show="isChildTeam">
 			<div>
 				<div><com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>133****7887 交易员</div>
-				<div class="fa-color-default">注册下级会员帐户</div>
+				<div class="fa-color-default" @click="$router.push('/team/register')">注册下级会员帐户</div>
 			</div>
 			<div class="myteam-padd">姓名:王大锤 帐户:ab123456</div>
 			<div class="myteam-padd">注册时间: 2019-03-05 16:35</div>
@@ -25,7 +25,7 @@
 		</div>
 
 		<div v-for="(item, index) in myTeamSonData" :key="index" class="myteam-cell">
-			<van-cell :title="item.username|phone" :label="item.level" is-link>
+			<van-cell :title="item.username|phone" :label="item.level" is-link @click="changeTeam">
 				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
 				<div class="f333 tc">
 					总业绩<br/>{{item.price|number}}元
@@ -46,7 +46,8 @@
 					num: 0,
 					zjzxj: 0
 				},
-				myTeamSonData: []
+				myTeamSonData: [],
+				isChildTeam: false
 			}
 		},
 
@@ -56,9 +57,18 @@
           return this.$store.getters.getUserId
         }
       }
-    },
+		},
+		
+		watch: {
+			$route: {
+				handler: function (val, oldVal) {
+					this.isChildTeam = this.$route.query.isChildTeam || false
+				}
+			}
+		},
 
 		created () {
+			this.isChildTeam = this.$route.query.isChildTeam || false
 			this.getMyTeam()
 		},
 
@@ -84,6 +94,9 @@
         if (resData.status === 200 && resData.data.Success) {
 					this.myTeamSonData = resData.data.Data.list
         }
+			},
+			changeTeam () {
+				this.$router.push("/team/myteam?isChildTeam=true")
 			}
 		}
 	}
