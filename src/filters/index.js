@@ -113,3 +113,15 @@ export function vFixedTwo (value) {
   if (!value) { value = 0 }
   return "￥" + parseFloat(value).toFixed(2)
 }
+
+//用户头像
+export function userImg (value) {
+  if (!value) { value = 'static/images/icon/user_defu.png' }
+  return value
+}
+
+//会员等级
+export function vipLevel (value) {
+  if (!value) { value = '资深交易员' }
+  return value
+}

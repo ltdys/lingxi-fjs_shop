@@ -60,3 +60,12 @@ export const getMyTeamSon = (queryParams, params) => axios.post('/Team/GetMyTeam
 
 /* 根据用户id获取团队信息 */
 export const getTeam = (queryParams, params) => axios.post('/Team/GetTeam' + queryParams, params)
+
+/* 余额充值 */
+export const setYECZ = (queryParams, params) => axios.post('/My/YECZ' + queryParams, params)
+
+/* 根据手机号获取用户信息 */
+export const getUserByPhone = (queryParams, params) => axios.post('/GetUserByPhone' + queryParams, params)
+
+/* 转账 */
+export const balanceTransfe = (queryParams, params) => axios.post('/My/BalanceTransfe' + queryParams, params)

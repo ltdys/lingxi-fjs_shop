@@ -1,18 +1,32 @@
+import { getUserInfo } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
 export const list_mixins = {
   data(){
     return {
+      userId: this.$store.getters.getUserId,
       pageIndex:1,
       pageSize:20,
       resultList:[],
       finished:false,
       isEmptyList:false,
       loading:false,
+      userInfo: {},//个人用户信息
     }
   },
   created() {
     // this.init_data()
   },
   methods:{
+    async getUserInfo () { //获取用户消息
+      let self = this;
+      let id = this.$store.getters.getUserId
+			let queryParams = paramConvert({ "uId": id })
+			let resData = await getUserInfo(queryParams, { "uId": id })
+      if (resData.status === 200 && resData.data.Success) {
+				self.userInfo = resData.data.Data;
+        console.log('用户个人信息',self.userInfo)
+			}
+		},
     get_list_data() {
       return new Promise(r => {
         setTimeout(() => {

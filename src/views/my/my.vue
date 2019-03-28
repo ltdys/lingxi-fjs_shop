@@ -2,11 +2,11 @@
 	<com-page>
 		<com-header title="我的" slot="header"></com-header>
 		<div class="my-info">
-			<img class="my__avatar" src="static/images/user.png" @click="$router.push('/my/info')"/>
+			<img class="my__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'" @click="$router.push('/my/info')"/>
 			<div>
-				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">资深交易员</van-tag></div>
+				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">{{ userInfo.userLevel | vipLevel }}</van-tag></div>
 				<div class="m-t-sm my_vip">
-					<span>会员账号：<span class="my_vip__acc">a12312312</span></span>
+					<span>会员账号：<span class="my_vip__acc">{{ userInfo.userName || 'a123123132' }}</span></span>
 					<van-button
 						type="primary"
 						size="mini"
@@ -84,9 +84,9 @@
 
 <script>
 import { Toast, Badge, GoodsAction, GoodsActionMiniBtn } from 'vant';
-import { getUserInfo } from "@/api/index.js"
-import { paramConvert } from "@/utils/stringUtil.js"
+import { list_mixins } from "@/mixins";
 export default {
+	mixins: [list_mixins],
 	components: {
     Badge, GoodsAction, GoodsActionMiniBtn
   },
@@ -94,28 +94,16 @@ export default {
 		return {
 			id: '', //用户id
 			sysAppIds: 'a12312312', //会员账号
-			userInfo: {}
 		}
 	},
 	created () {
 		this.id = this.$store.getters.getUserId
-		console.log('id',this.id)
     this.getUserInfo()
   },
 	mounted () {
 
 	},
 	methods: {
-		//获取用户消息
-		async getUserInfo () {
-			let self = this;
-			let queryParams = paramConvert({ "uId": this.id })
-			let resData = await getUserInfo(queryParams, { "uId": this.id })
-      if (resData.status === 200 && resData.data.Success) {
-				self.userInfo = resData.data.Data;
-        console.log(resData)
-			}
-		},
 		onCopy () { //复制成功
 			Toast({
 				message: '复制成功',

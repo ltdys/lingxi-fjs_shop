@@ -2,14 +2,14 @@
 	<com-page class="myinfo">
 		<com-header title="个人资料" is-back slot="header"></com-header>
 		<van-cell title="头像" is-link class="zl-cell">
-			<img class="myinfo__avatar" src="static/images/user.png"/>
+			<img class="myinfo__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'"/>
 		</van-cell>
-		<van-field label="姓名" value="王大锤" input-align="right"></van-field>
-		<van-cell title="会员账号" value="ab123456"></van-cell>
-		<van-cell title="手机号" value="133****0988" is-link @click.native="$router.push('/my/update_phone')"></van-cell>
-		<van-cell title="会员等级" value="资深交易员"></van-cell>
-		<van-cell title="邀请码" value="a123456"></van-cell>
-		<van-cell title="身份证号" value="43122********093x"></van-cell>
+		<van-field label="姓名" :value="userInfo.userName" input-align="right"></van-field>
+		<van-cell title="会员账号" :value="userInfo.userName"></van-cell>
+		<van-cell title="手机号" :value="userInfo.mobile" is-link @click.native="$router.push('/my/update_phone')"></van-cell>
+		<van-cell title="会员等级" :value="userInfo.userLevel | vipLevel"></van-cell>
+		<van-cell title="邀请码" :value="userInfo.userName"></van-cell>
+		<van-cell title="身份证号" :value="userInfo.card"></van-cell>
 		<van-cell title="银行账号" is-link to="/my/bank"></van-cell>
 		<van-cell title="收货地址" is-link to="/my/address"></van-cell>
 		<!-- <van-field label="支付宝账号" input-align="right"></van-field> -->
@@ -21,6 +21,33 @@
 </template>
 
 <script>
+import { list_mixins } from "@/mixins";
+export default {
+	mixins: [list_mixins],
+	data () {
+		return {
+			id: '', //用户id
+		}
+	},
+	created () {
+		this.id = this.$store.getters.getUserId
+		this.getUserInfo()
+	},
+	mounted () {
+
+	},
+	methods: {
+		onCopy () { //复制成功
+			Toast({
+				message: '复制成功',
+				duration: 1500
+			})
+		},
+		onError () { //复制失败
+		
+		},
+	}
+}
 </script>
 
 <style lang="scss">
