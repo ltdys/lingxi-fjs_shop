@@ -2,13 +2,13 @@
     <div class="com-bank">
       <div class="com-bank-list">
         <van-radio-group v-model="radio" v-if="list.length>0">
-          <div class="com-bankitem" v-for="(bank,i) in list" :key="i" @click="radio = bank.id">
+          <div class="com-bankitem" v-for="(bank,i) in list" :key="i" @click="selectBank(bank)">
             <div class="com-bankitem-content">
               <!-- <div class="com-bankitem-logo"></div> -->
               <div class="com-bankitem-info">
-                <div class="com-bankitem-name">{{bank.name}}</div>
-                <div class="com-bankitem-type">储蓄卡</div>
-                <div class="com-bankitem-idno">{{bank.cardno | card}}</div>
+                <div class="com-bankitem-name">{{bank.BankName}}</div>
+                <div class="com-bankitem-type">{{bank.SubBranch}}</div>
+                <div class="com-bankitem-idno">{{bank.BankCode | card}}</div>
               </div>
               <div class="com-bankitem-action">
                 <van-radio :name="bank.id" v-if="switchable"/>
@@ -45,7 +45,11 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    selectBank (bank) {
+      this.$emit('selectBank', bank)
+    },
+  }
 };
 </script>
 

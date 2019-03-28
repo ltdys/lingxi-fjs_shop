@@ -16,27 +16,45 @@
     </van-cell-group>
     <van-cell-group class="flex5">
       <van-cell title="物流单号">
-        <span>1312312312312312</span>
-        <van-button size="mini">复制</van-button>
+        <span>{{ orderDetail.orderno }}</span>
+        <van-button
+          type="default"
+          size="mini"
+          plain
+          hairline
+          class="order_copy"
+          v-clipboard:copy="orderDetail.orderno"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError">复制</van-button>
       </van-cell>
     </van-cell-group>
     <van-cell-group>
-      <van-card @click.native="$router.push('/my/order/1')"
+      <div v-for="(order, ind) in orderDetail.goodlist" :key="ind">
+        <van-card
+          :num="order.num"
+          :price="order.price | number"
+          desc="描述信息"  
+          :title="order.title"
+          :thumb="order.img"
+        >
+        </van-card>
+      </div>
+      <!-- <van-card @click.native="$router.push('/my/order/1')"
           num="2"
           price="2.00"
           desc="描述信息"  
           title="商品标题"
           :thumb="imageURL"
         >
-      </van-card>
-      <van-card @click.native="$router.push('/my/order/1')"
+      </van-card> -->
+      <!-- <van-card @click.native="$router.push('/my/order/1')"
           num="1"
           tag="赠品"
           desc="描述信息"  
           title="商品标题"
           :thumb="imageURL"
         >
-      </van-card>
+      </van-card> -->
     </van-cell-group>
       <van-panel title="订单信息">
         <ul class="order-detail_info">
@@ -61,10 +79,12 @@
 </template>
 
 <script>
+import { list_mixins } from "@/mixins";
 import { Toast, Card, Panel } from "vant";
 import { getOrderInfo, paymentOrder } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
+  mixins: [list_mixins],
   components: {
     [Card.name]: Card,
     [Panel.name]: Panel
@@ -84,10 +104,16 @@ export default {
     };
   },
   created () {
-    this.id = this.$store.getters.getUserId
     this.orderId = this.$route.params.id,
-    // this.getOrderInfo()
-    this.paymentOrder()
+    this.getOrderInfo()
+    // this.paymentOrder()
+  },
+  computed: {
+    currentOrder: {
+      get: function () {
+        return this.$store.getters.getCurrentOrder
+      }
+    }
   },
   methods: {
     async getOrderInfo () { //获取订单详情
@@ -106,7 +132,7 @@ export default {
     async paymentOrder () { //支付商品订单
       let self = this;
       let param = {
-        id: self.id,
+        id: self.userId,
         orderid: self.orderId,
       }
 			let queryParams = paramConvert(param)
@@ -120,6 +146,18 @@ export default {
         })
       }
     },
+    onCopy () { //复制成功
+			Toast({
+				message: '复制成功',
+				duration: 1500
+			})
+		},
+		onError () { //复制失败
+      Toast({
+				message: '复制失败',
+				duration: 1500
+			})
+		},
     changeItem(item) {}
   }
 };

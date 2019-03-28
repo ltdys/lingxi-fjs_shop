@@ -1,6 +1,6 @@
 <template>
   <van-nav-bar 
-     :title="title"
+    :title="title"
     :left-arrow="isBack"
     @click-left="onClickLeft"
   />
@@ -10,11 +10,16 @@ export default {
   name: "com-header",
   props: {
     title: String,
-    isBack: Boolean
+    isBack: Boolean,
+    isClick: Boolean
   },
   methods: {
     onClickLeft() {
-      this.$router.back();
+      if (this.isClick) {
+        this.$emit('backClick')
+      } else {
+        this.$router.back();
+      }
     }
   }
 };

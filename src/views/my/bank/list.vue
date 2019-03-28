@@ -1,7 +1,6 @@
 <template>
 	<com-page>
 		<com-header title="我的银行卡" is-back slot="header"></com-header>
-    
     <com-bank-list
       v-model="chosenBankId"
       :list="list"
@@ -10,15 +9,20 @@
       @add="onAdd"
       @edit="onEdit"
       @select="$emit('select',$event)"
+      @selectBank="backBank"
     >
     </com-bank-list>
 	</com-page>
 </template>
 
 <script>
+import { Toast } from 'vant';
+import { list_mixins } from "@/mixins";
 import BankList from '@/components/bank/list'
-
+import { getMyBank } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
+  mixins: [list_mixins],
   props:{
     switchable:Boolean
   },
@@ -35,14 +39,65 @@ export default {
       }]
     };
   },
+  created () {
+		this.getMyBank()
+	},
   methods: {
+    async getMyBank () { //查询我的银行卡列表
+      let self = this;
+      let param = {
+        id: self.userId
+      }
+			let queryParams = paramConvert(param)
+			let resData = await getMyBank(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        self.list = resData.data.Data
+        console.log('查询我的银行卡列表',resData.data.Data)
+			} else {
+        Toast({
+					message: resData.data.Msg || '查询我的银行卡列表失败',
+					duration: 1500
+				})
+      }
+		},
     onAdd() {
       this.$router.push("/my/bank_add");
     },
     onEdit(item, index) {
       console.info(item)
-      this.$router.push("/my/bank/" + item.id);
-    }
+      Toast({
+        message: '暂不支持修改银行卡',
+        duration: 1500
+      })
+      // this.$store.dispatch('setCurrentBankMess', item)
+      // this.$router.push("/my/bank/" + item.Mid);
+    },
+    backBank (bank) { //选择当前银行
+      let self = this;
+      let queryId = self.$route.query.id
+      if (queryId == 2) {
+        this.$store.dispatch('setCurrentBankMess', bank)
+        // this.$router.push("/my/withdraw");
+        this.$router.back();
+      }
+    },
+
+    // async getMyBank () { //模板
+    //   let self = this;
+    //   let param = {
+    //     id: self.userId
+    //   }
+		// 	let queryParams = paramConvert(param)
+		// 	let resData = await getMyBank(queryParams, param)
+    //   if (resData.status === 200 && resData.data.Success) {
+    //     console.log('查询我的银行卡列表',resData.data.Data)
+		// 	} else {
+    //     Toast({
+		// 			message: resData.data.Msg || '查询我的银行卡列表失败',
+		// 			duration: 1500
+		// 		})
+    //   }
+		// },
   }
 };
 </script>

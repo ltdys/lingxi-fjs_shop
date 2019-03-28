@@ -4,6 +4,8 @@ import { setLocalStore, getLocalStore } from '@/utils/storage.js'
 const state = {
   userId: '', //用户userId
   deliveryList: '',  //交易提货数据
+  currentBankMess: {}, //当前银行信息
+  currentOrder: {}, //当前订单信息
 }
 
 const actions = {
@@ -12,7 +14,13 @@ const actions = {
   },
   setDeliveryList ( { commit }, boo) {
     commit(types.SET_DELIVERY_LIST, boo)
-  }
+  },
+  setCurrentBankMess ( { commit }, boo) {
+    commit(types.SET_CURRENT_BANK_MESS, boo)
+  },
+  setCurrentOrder ( { commit }, boo) {
+    commit(types.SET_CURRENT_ORDER, boo)
+  },
 }
 
 const getters = {
@@ -25,7 +33,13 @@ const getters = {
   },
   getDeliveryList: state => {
     return state.deliveryList
-  }
+  },
+  getCurrentBankMess: state => {
+    return state.currentBankMess
+  },
+  getCurrentOrder: state => {
+    return state.currentOrder
+  },
 }
 
 const mutations = {
@@ -37,7 +51,15 @@ const mutations = {
   //交易提货数据存储
   ['SET_DELIVERY_LIST'] (state, boo) {
     state.deliveryList = boo
-  }
+  },
+  //当前银行信息
+  ['SET_CURRENT_BANK_MESS'] (state, boo) {
+    state.currentBankMess = boo
+  },
+  //当前银行信息
+  ['SET_CURRENT_ORDER'] (state, boo) {
+    state.currentOrder = boo
+  },
 }
 
 export default {

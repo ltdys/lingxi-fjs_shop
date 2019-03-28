@@ -15,7 +15,7 @@
         :status="item.status"
         class="goods-panel">
         <div v-for="(order, ind) in item.goodlist" :key="ind">
-          <van-card @click.native="jumpDetail(item.id)"
+          <van-card @click.native="jumpDetail(item)"
             :num="order.num"
             :price="order.price | number"
             desc="描述信息"  
@@ -26,7 +26,7 @@
         </div>
         <div slot="footer" v-if="item.state==1">
           <van-button size="small">取消订单</van-button>
-          <van-button size="small" type="danger" plain>支付订单</van-button>
+          <van-button size="small" type="danger" plain @click="paymentOrder(item)">支付订单</van-button>
         </div>
         <div slot="footer" v-if="item.state==2">
           共{{item.num}}件商品 合计: <span class="fs-16">{{ item.price | vFixedTwo }}</span>
@@ -40,10 +40,12 @@
 </template>
 
 <script>
-import { Card, Panel } from "vant";
-import { getMyOrder } from "@/api/index.js"
+import { list_mixins } from "@/mixins";
+import { Toast, Card, Panel } from "vant";
+import { getMyOrder, paymentOrder } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
+  mixins: [list_mixins],
   components: {
     [Card.name]: Card,
     [Panel.name]: Panel
@@ -70,7 +72,6 @@ export default {
     };
   },
   created () {
-    this.id = this.$store.getters.getUserId
     this.getMyOrder()
   },
   methods: {
@@ -86,7 +87,7 @@ export default {
     async getMyOrder () { //获取订单列表
       let self = this;
       let param = {
-        id: self.id,
+        id: self.userId,
         pageIndex: self.pageIndex,
         pageRows: self.pageRows,
         all: self.active
@@ -124,9 +125,36 @@ export default {
       self.pageIndex ++
       self.getMyOrder()
     },
-    jumpDetail (id) {
+    jumpDetail (item) { //跳转订单详情页面
       let self = this;
-      self.$router.push('/my/order/' + id)
+      self.$store.dispatch('setCurrentOrder', item)
+      console.log(item)
+      self.$router.push('/my/order/' + item.id)
+    },
+    async paymentOrder (item) { //支付订单
+      let self = this;
+      console.log(item)
+      let param = {
+        id: self.userId,
+        orderid: item.id
+      }
+			let queryParams = paramConvert(param)
+			let resData = await paymentOrder(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        Toast({
+					message: '支付订单成功',
+					duration: 1500
+        });
+        self.pageIndex = 1;
+        self.orderList = []
+        self.getMyOrder()
+        console.log('支付订单成功',resData.data.Data)
+			} else {
+        Toast({
+					message: resData.data.Msg || '支付订单失败',
+					duration: 1500
+				})
+      }
     },
   }
 };

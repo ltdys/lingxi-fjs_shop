@@ -69,3 +69,18 @@ export const getUserByPhone = (queryParams, params) => axios.post('/GetUserByPho
 
 /* 转账 */
 export const balanceTransfer = (queryParams, params) => axios.post('/My/BalanceTransfer' + queryParams, params)
+
+/* 提现 */
+export const cashWithdrawal = (queryParams, params) => axios.post('/My/CashWithdrawal' + queryParams, params)
+
+/* 查看我的银行页 */
+export const getMyBank = (queryParams, params) => axios.post('/My/MyBank' + queryParams, params)
+
+/* 添加我的银行 */
+export const setAddBank = (queryParams, params) => axios.post('/My/AddBank' + queryParams, params)
+
+/* 查看我的地址页 */
+export const getMyAddress = (queryParams, params) => axios.post('/My/MyAddress' + queryParams, params)
+
+/* 添加我的地址 */
+export const setAddAddress = (queryParams, params) => axios.post('/My/AddAddress' + queryParams, params)

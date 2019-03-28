@@ -10,7 +10,7 @@
 		<van-cell title="会员等级" :value="userInfo.userLevel | vipLevel"></van-cell>
 		<van-cell title="邀请码" :value="userInfo.userName"></van-cell>
 		<van-cell title="身份证号" :value="userInfo.card"></van-cell>
-		<van-cell title="银行账号" is-link to="/my/bank"></van-cell>
+		<van-cell title="银行账号" is-link to="/my/bank?id=1"></van-cell>
 		<van-cell title="收货地址" is-link to="/my/address"></van-cell>
 		<!-- <van-field label="支付宝账号" input-align="right"></van-field> -->
 		<!-- <van-field label="微信账号" input-align="right"></van-field> -->

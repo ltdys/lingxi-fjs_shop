@@ -1,8 +1,10 @@
 <template>
   <div class="bank-edit">
       <van-cell-group>
-        <van-field label="银行名称" placeholder="请输入银行名称" v-model="form.name"></van-field>
-        <van-field label="银行卡号" placeholder="请输入银行卡号" v-model="form.cardNo"></van-field>
+        <van-field label="银行名称" placeholder="请输入银行名称" v-model="form.BankName"></van-field>
+        <van-field label="银行卡号" placeholder="请输入银行卡号" v-model="form.BankCode"></van-field>
+        <van-field label="持有人姓名" placeholder="请输入银行卡持有人" v-model="form.AccountName"></van-field>
+        <van-field label="开户支行名称" placeholder="请输入开户支行名称" v-model="form.SubBranch"></van-field>
       </van-cell-group>
       <h6 class="bank-edit__tip">* 需本人银行卡号</h6>
       <div class="submit_buttons">
@@ -22,8 +24,10 @@ export default {
     bankInfo: {
       type: Object,
       default: () => ({
-        name: "",
-        cardNo: ""
+        BankName: "",
+        BankCode: "",
+        AccountName: '',
+        SubBranch: ''
       })
     },
     // error

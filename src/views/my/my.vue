@@ -111,7 +111,10 @@ export default {
 			})
 		},
 		onError () { //复制失败
-		
+			Toast({
+				message: '复制失败',
+				duration: 1500
+			})
 		},
 	}
 }

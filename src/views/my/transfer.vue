@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <div class="transfer">
-        <img class="transfer__avatar" src="static/images/user.png"/>
+        <img class="transfer__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'"/>
         <div>{{ realname }}</div>
       </div>
       <van-cell-group>
@@ -125,5 +125,8 @@ export default {
     width: 50px;
     border-radius: 50%;
   }
+}
+.f666{
+  font-size: 12px;
 }
 </style>

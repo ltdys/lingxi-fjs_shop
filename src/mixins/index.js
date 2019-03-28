@@ -1,3 +1,4 @@
+import { Toast } from 'vant';
 import { getUserInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export const list_mixins = {
@@ -25,7 +26,12 @@ export const list_mixins = {
       if (resData.status === 200 && resData.data.Success) {
 				self.userInfo = resData.data.Data;
         console.log('用户个人信息',self.userInfo)
-			}
+			} else {
+        Toast({
+					message: resData.data.Msg || '获取用户信息失败',
+					duration: 1500
+				})
+      }
 		},
     get_list_data() {
       return new Promise(r => {
