@@ -81,6 +81,11 @@ export function dateChange (date)   {
   return curTime
 }
 
+export function formatDate (str) {
+  let arr = str.split("-")
+  return arr[0] + "年" + arr[1] + "月"
+}
+
 export function distance(value) {
   if(value>1000){
     return (value/1000).toFixed(1) +'公里'

@@ -47,3 +47,16 @@ export const getOrderInfo = (queryParams, params) => axios.post('/My/GetOrderInf
 
 /* 支付商品订单 */
 export const paymentOrder = (queryParams, params) => axios.post('/My/PaymentOrder' + queryParams, params)
+
+/* 团队 */
+/* 根据用户id获取团队dc明细 */
+export const getMyDcMx = (queryParams, params) => axios.post('/Team/GetMyDcMx' + queryParams, params)
+
+/* 根据用户id获取我的团队信息 */
+export const getMyTeam = (queryParams, params) => axios.post('/Team/GetMyTeam' + queryParams, params)
+
+/* 根据用户id获取子团队信息 */
+export const getMyTeamSon = (queryParams, params) => axios.post('/Team/GetMyTeamSon' + queryParams, params)
+
+/* 根据用户id获取团队信息 */
+export const getTeam = (queryParams, params) => axios.post('/Team/GetTeam' + queryParams, params)
