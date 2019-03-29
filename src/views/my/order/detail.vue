@@ -7,7 +7,7 @@
       <div class="fs-12">剩10小时22分钟自动关闭</div>
     </div>
     <van-cell-group>
-      <van-cell icon="location" class="select-location">
+      <van-cell icon="location" class="select-location" :is-link="orderDetail.status == '待付款'" @click="jumpAddress">
         <div>{{address.name}} 
           <span>{{address.tel | phone}}</span>
         </div>
@@ -157,7 +157,13 @@ export default {
 				message: '复制失败',
 				duration: 1500
 			})
-		},
+    },
+    jumpAddress () {
+      let self = this;
+      if (self.orderDetail.status == '待付款') {
+        self.$router.push('/my/address')
+      }
+    },
     changeItem(item) {}
   }
 };
