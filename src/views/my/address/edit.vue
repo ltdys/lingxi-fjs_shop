@@ -2,11 +2,11 @@
 	<com-page>
 		<com-header :title="addressId?'编辑地址':'新增地址'" is-back slot="header"></com-header>
     <van-address-edit
-      :address-info="addressInfo"
+      :address-info="currentAddress"
       :area-list="areaList"
       :show-delete="!!addressId"
       show-set-default
-      @save="onSave"
+      @save="setAddAddress"
       @delete="onDelete"
       :is-saving="isSaving"
       :is-deleting="isDeleting"
@@ -15,9 +15,11 @@
 </template>
 
 <script>
-import { AddressEdit } from "vant";
+import { Toast, AddressEdit } from "vant";
 import areaList from "./area";
-
+import { list_mixins } from "@/mixins";
+import { setAddAddress } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   components: {
     [AddressEdit.name]: AddressEdit
@@ -28,19 +30,49 @@ export default {
       areaList,
       isSaving:false,
       isDeleting:false,
-      addressInfo:{
-        addressDetail: "匆匆nanian",
-        areaCode: "210102",
-        isDefault: true,
-        name: "匆匆",
-        tel: "15800804609",
-      }
     };
   },
+  computed: {
+    currentAddress: {
+      get: function () {
+        return this.$store.getters.getCurrentAddress
+      }
+    }
+  },
+  mounted() {
+    console.info(this.currentAddress);
+  },
   methods: {
-    onSave(value) {
+    async setAddAddress (value) { //新增银行卡
+      let self = this;
       this.isSaving = true
-      console.info(this.addressInfo,value);
+      let param = {
+        id: self.userId,
+        Mobile: value.tel,
+        AddressName: value.province + ' ' + value.city + ' ' + value.county + ' ' + value.addressDetail,
+        AccountName: value.name
+      }
+			let queryParams = paramConvert(param)
+			let resData = await setAddAddress(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        Toast.success({
+					message: '新增地址成功',
+					duration: 1500
+        });
+        this.isSaving = false
+        // self.$router.back()
+        console.log('新增地址',resData.data.Data)
+			} else {
+        Toast({
+					message: resData.data.Msg || '新增地址失败',
+					duration: 1500
+				})
+      }
+    },
+    onSave(value) {
+      let self = this;
+      console.log(value)
+      this.isSaving = true
       // this.$router.back()
     },
     onDelete() {

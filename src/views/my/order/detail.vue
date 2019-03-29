@@ -8,10 +8,14 @@
     </div>
     <van-cell-group>
       <van-cell icon="location" class="select-location" :is-link="orderDetail.status == '待付款'" @click="jumpAddress">
-        <div>{{address.name}} 
-          <span>{{address.tel | phone}}</span>
+        <div v-if="Object.keys(currentAddress).length != 0">
+          <div>
+            <span>{{currentAddress.name}}</span>
+            <span>{{currentAddress.tel | phone}}</span>
+          </div>
+          <div class="select-location__address">{{currentAddress.address}}</div>
         </div>
-        <div class="select-location__address">{{address.address}}</div>
+        <div v-else>请选择收货地址</div>
       </van-cell>
     </van-cell-group>
     <van-cell-group class="flex5">
@@ -39,38 +43,22 @@
         >
         </van-card>
       </div>
-      <!-- <van-card @click.native="$router.push('/my/order/1')"
-          num="2"
-          price="2.00"
-          desc="描述信息"  
-          title="商品标题"
-          :thumb="imageURL"
-        >
-      </van-card> -->
-      <!-- <van-card @click.native="$router.push('/my/order/1')"
-          num="1"
-          tag="赠品"
-          desc="描述信息"  
-          title="商品标题"
-          :thumb="imageURL"
-        >
-      </van-card> -->
     </van-cell-group>
       <van-panel title="订单信息">
         <ul class="order-detail_info">
-          <li>订单编号 : avasd12321321321321</li>
-          <li>创建时间 : 2018-09-09 09:09</li>
-          <li>付款时间 : 2018-09-09 09:09</li>
+          <li>订单编号 : {{ orderDetail.orderno }}</li>
+          <li>创建时间 : {{ orderDetail.date | date('yyyy-MM-dd hh:mm') }}</li>
+          <li>付款时间 : {{ orderDetail.date | date('yyyy-MM-dd hh:mm') }}</li>
         </ul>
         <template slot="footer">
-          <div class="order-detail__actions" v-if="i==1">
+          <div class="order-detail__actions" v-if="orderDetail.state==1">
             <van-button size="small">取消订单</van-button>
-            <van-button size="small" type="danger" plain>支付订单</van-button>
+            <van-button size="small" type="danger" plain @click="paymentOrder">支付订单</van-button>
           </div>
-          <div class="order-detail__actions" v-if="i==2">
-            共3件商品 合计:¥<span class="fs-16">{{3|number}}</span>
+          <div class="order-detail__actions" v-if="orderDetail.state==2">
+            共{{ orderDetail.num }}件商品 合计: <span class="fs-16">{{ orderDetail.price | vFixedTwo }}</span>
           </div>
-          <div class="order-detail__actions" v-if="i==3">
+          <div class="order-detail__actions" v-if="orderDetail.state==3">
             <van-button size="small">删除订单</van-button>
           </div>
         </template>
@@ -96,7 +84,7 @@ export default {
       orderDetail: {},
       i: 1,
       imageURL: "static/images/banner.png",
-       address:{
+      address:{
         name:'王大锤',
         tel:'12312312',
         address:'XXXXXXXXXX'
@@ -113,6 +101,11 @@ export default {
       get: function () {
         return this.$store.getters.getCurrentOrder
       }
+    },
+    currentAddress: {
+      get: function () {
+        return this.$store.getters.getCurrentAddress
+      }
     }
   },
   methods: {
@@ -125,7 +118,7 @@ export default {
 			let resData = await getOrderInfo(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
         self.orderDetail = resData.data.Data;
-        
+        self.orderDetail.state = self.statusChange(self.orderDetail.status)
         console.log('获取订单详情',resData)
 			}
     },
@@ -138,13 +131,30 @@ export default {
 			let queryParams = paramConvert(param)
 			let resData = await paymentOrder(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
-        console.log('支付商品订单',resData)
+        Toast({
+					message: '支付订单成功',
+					duration: 1500
+        });
+        self.getOrderInfo()
+        console.log('支付订单成功',resData)
 			} else {
         Toast({
           message: resData.data.Msg,
           duration: 1500
         })
       }
+    },
+    statusChange (name) { //状态转化编码
+      let self = this;
+      let state = 0
+      if (name == '待付款') {
+        state = 1
+      } else if (name == '已付款') {
+        state = 2
+      } else if (name == '已完成') {
+        state = 3
+      }
+      return state
     },
     onCopy () { //复制成功
 			Toast({
@@ -161,7 +171,10 @@ export default {
     jumpAddress () {
       let self = this;
       if (self.orderDetail.status == '待付款') {
-        self.$router.push('/my/address')
+        self.$router.push({
+          path: '/my/address',
+          query: { id: 2 }
+        })
       }
     },
     changeItem(item) {}
@@ -196,5 +209,8 @@ export default {
     color: #666;
     line-height: 2;
   }
+}
+.fs-16{
+  color: #ee4442;
 }
 </style>
