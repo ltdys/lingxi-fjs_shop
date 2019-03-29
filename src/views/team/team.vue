@@ -1,6 +1,6 @@
 <template>
 	<com-page>
-		<com-header title="团队" slot="header"></com-header>
+		<com-header title="团队" slot="header" is-back></com-header>
 		<div class="team" v-for="(item, index) in teamList" :key="index">
 			<div class="team__info">
 				<div class="team-title">{{teamList[index].title || '--'}}</div>

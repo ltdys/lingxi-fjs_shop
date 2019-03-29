@@ -1,10 +1,10 @@
 <template>
   <com-page>
     <com-header title="我的二维码" is-back slot="header"></com-header>
-    <div>
-      我的二维码页面
+    <div style="background-image:url('static/images/mycode-bg.png');background-size: 100%"
+      class="mycode-wrap">
+      <div id="qrcode" ref="qrcode" class="mycode-code"></div>
     </div>
-    <div id="qrcode" ref="qrcode"></div>
   </com-page>
 </template>
 
@@ -32,11 +32,26 @@ export default {
       // http://192.19.23.49:8000/#/team/register
       let url = window.location.href.split('#')[0] + '#/team/register'
       let qrcode = new QRCode('qrcode', {  
-          width: 232,  // 设置宽度 
-          height: 232, // 设置高度
+          width: 160,  // 设置宽度 
+          height: 160, // 设置高度
           text: url
       })  
     },
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .mycode-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .mycode-code {
+      transform: skew(0deg, 0deg);
+    }
+  }
+</style>
+
+

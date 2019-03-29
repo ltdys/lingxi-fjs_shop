@@ -36,7 +36,7 @@
               <span class="amount">¥<em>{{ addOrder.price | number}}</em></span>
           </van-cell>
           <van-cell title="当前余额">
-              <span>¥<em>{{item.price  | number}}</em></span>
+              <span>¥<em>{{price}}</em></span>
           </van-cell>
         </van-cell-group>
         <div class="submit_buttons">
@@ -68,6 +68,10 @@ export default {
     [PopupPage.name]: PopupPage
   },
 
+  created () {
+    this.price = JSON.parse(this.userInfo).price
+  },
+
   computed: {
     addOrder: {
       get: function () {
@@ -78,13 +82,10 @@ export default {
 
   data() {
     return {
+      price: 0,
       popupVisible: false,
       num: 1,
       imageURL: "static/images/banner.png",
-      item: {
-        title: "钻石DC元券（代码CEPL）",
-        price: 1.3
-      },
       chosenAddressId: "1",
       address:{
         name:'王大锤',
@@ -103,7 +104,14 @@ export default {
       this.popupVisible = false
     },
     onPay (){
-      this.paymentOrder()
+      if (this.price < this.addOrder.price) {
+        Toast.success({
+					message: '余额不足!',
+					duration: 1500
+        });
+      } else {
+        this.paymentOrder()
+      }
     },
     async paymentOrder () {
       let queryParams = paramConvert({
@@ -115,7 +123,10 @@ export default {
         orderid: this.addOrder.orderId
       })
       if (resData.status === 200 && resData.data.Success) {
-        Toast("支付成功")
+        Toast.success({
+          message: "支付成功",
+          duration: 1500
+        })
         this.$router.push("/")
       } else {
         Toast(resData.data.Msg)

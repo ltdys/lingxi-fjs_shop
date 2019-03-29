@@ -156,7 +156,10 @@ export default {
 			let queryParams = paramConvert(this.formData)
 			let resData = await register(queryParams, this.formData)
 			if (resData.status === 200 && resData.data.Success) {
-				Toast("注册成功")
+        Toast({
+          message: Toast('注册成功'),
+          duration: 1500
+        })
 				this.$router.push('/team/myteam')
 			} else {
 				Toast(resData.data.Msg)

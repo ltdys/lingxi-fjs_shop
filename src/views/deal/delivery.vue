@@ -84,15 +84,24 @@
       submit () {
         if (!this.isCheck) { return } 
         if (this.formData.num === '') {
-          Toast('提货数量不能为空')
+          Toast({
+            message: Toast('提货数量不能为空'),
+            duration: 1500
+          })
           return
         }
         if (this.formData.address === '') {
-          Toast('钱包地址不能为空')
+          Toast({
+            message: Toast('钱包地址不能为空'),
+            duration: 1500
+          })
           return
         }
         if (this.formData.accountName === '') {
-          Toast('帐户姓名不能为空')
+          Toast({
+            message: Toast('帐户姓名不能为空'),
+            duration: 1500
+          })
           return
         }
         this.pickGoods()
@@ -101,7 +110,10 @@
         let queryParams = paramConvert(this.formData)
         let resData = await pickGoods(queryParams, this.formData)
         if (resData.status === 200 && resData.data.Success) {
-          Toast("提交成功")
+          Toast({
+            message: Toast('提交成功'),
+            duration: 1500
+          })
           this.$router.push("/deal")
         } else {
           Toast(resData.data.Msg)
