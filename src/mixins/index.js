@@ -11,7 +11,7 @@ export const list_mixins = {
       finished:false,
       isEmptyList:false,
       loading:false,
-      userInfo: {},//个人用户信息
+      userInfo: this.$store.getters.getUserInfo,//个人用户信息
     }
   },
   created() {
@@ -20,12 +20,12 @@ export const list_mixins = {
   methods:{
     async getUserInfo () { //获取用户消息
       let self = this;
-      let id = this.$store.getters.getUserId
+      let id = self.$store.getters.getUserId
 			let queryParams = paramConvert({ "uId": id })
 			let resData = await getUserInfo(queryParams, { "uId": id })
       if (resData.status === 200 && resData.data.Success) {
-				self.userInfo = resData.data.Data;
-        console.log('用户个人信息',self.userInfo)
+        self.userInfo = resData.data.Data;
+        self.$store.dispatch("setUserInfo", self.userInfo)
 			} else {
         Toast({
 					message: resData.data.Msg || '获取用户信息失败',

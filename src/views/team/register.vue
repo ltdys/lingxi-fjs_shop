@@ -1,8 +1,8 @@
 <template>
   <com-page>
     <com-header title="注册会员" is-back slot="header"></com-header>
-    <van-cell title="推荐人账号" value="ab123445"></van-cell>
-    <van-cell title="推荐人姓名" value="王大锤"></van-cell>
+    <van-cell title="推荐人账号" :value="this.formData.tjrPhone"></van-cell>
+    <van-cell title="推荐人姓名" :value="this.userInfo.userName"></van-cell>
     <van-field
       class="m-t"
       type="tel"
@@ -52,11 +52,14 @@ import { validatePhone, validateIdCard, validatePwd } from "@/utils/validate.js"
 import { Toast } from "vant"
 import { register } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { list_mixins } from "@/mixins";
 export default {
+  mixins: [list_mixins],
+
   data() {
     return {
       formData: {
-        tjrPhone: "123", //推荐人手机号
+        tjrPhone: "", //推荐人手机号
         phone: "", //手机号
         name: "", //名称
         pwd: "", //密码
@@ -116,6 +119,7 @@ export default {
   },
 
   created() {
+    this.formData.tjrPhone = this.userInfo.mobile
     this.validator = validator(this.rules, this.formData)
   },
 

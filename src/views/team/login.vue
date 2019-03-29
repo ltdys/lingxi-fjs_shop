@@ -31,8 +31,9 @@
 </template>
 
 <script>
+  import { list_mixins } from "@/mixins"
   import { Toast } from "vant"
-  import { login } from "@/api/index.js"
+  import { login, getUserInfo } from "@/api/index.js"
   import { paramConvert } from "@/utils/stringUtil.js"
   export default {
     data () {
@@ -48,11 +49,17 @@
     methods: {
       submit () {
         if (this.formData.phone === '') {
-          Toast('手机号/用户名不能为空!')
+          Toast({
+            message: '手机号/用户名不能为空!',
+            duration: 1500
+          })
           return
         }
         if (this.formData.pwd === '') {
-          Toast('登录密码不能为空!')
+          Toast({
+            message: '登录密码不能为空!',
+            duration: 1500
+          })
           return
         }
         this.login()
@@ -61,13 +68,31 @@
         let queryParams = paramConvert(this.formData)
         let resData = await login(queryParams, this.formData)
         if (resData.status === 200 && resData.data.Success === true) {
-          Toast("登录成功")
           this.$store.dispatch('setUserId', resData.data.Data.userId)
+          Toast({
+            message: '登录成功!',
+            duration: 1500
+          })
+          this.getUserInfo(resData.data.Data.userId)
           this.$router.push('/')
         } else {
           Toast(resData.data.Msg)
         }
-      }
+      },
+      async getUserInfo (id) { //获取用户消息
+        let self = this;
+        let queryParams = paramConvert({ "uId": id })
+        let resData = await getUserInfo(queryParams, { "uId": id })
+        if (resData.status === 200 && resData.data.Success) {
+          self.userInfo = resData.data.Data;
+          self.$store.dispatch("setUserInfo", self.userInfo)
+        } else {
+          Toast({
+            message: resData.data.Msg || '获取用户信息失败',
+            duration: 1500
+          })
+        }
+      },
     }
   }
 </script>

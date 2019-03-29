@@ -15,24 +15,39 @@ export const routes = [{
       {
         path: '/deal',
         component: () => import('@/views/deal/deal.vue'),
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/my',
         component: () => import('@/views/my/my.vue'),
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/team',
         component: () => import('@/views/team/team.vue'),
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/mycode',
         component: () => import('@/views/mycode/mycode.vue'),
+        meta: {
+          requireAuth: true
+        }
       }
     ]
   },
   {
     path: '/shop/:id',
     component: () => import('@/views/shop/detail.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/confirm_order/:id',
@@ -77,66 +92,107 @@ export const routes = [{
   {
     path: '/my/info',
     component: () => import('@/views/my/info.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/update_phone',
     component: () => import('@/views/my/update_phone.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/recharge',
     component: () => import('@/views/my/recharge.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/transfer',
     component: () => import('@/views/my/transfer.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/withdraw',
     component: () => import('@/views/my/withdraw.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/yl_list',
     component: () => import('@/views/my/yl_list.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/yl_list2',
     component: () => import('@/views/my/yl_list2.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/order',
     component: () => import('@/views/my/order/list.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/order/:id',
     component: () => import('@/views/my/order/detail.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/address',
     component: () => import('@/views/my/address/list.vue'),
-  },
-  {
-    path: '/my/address',
-    component: () => import('@/views/my/address/list.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/address_add',
     component: () => import('@/views/my/address/edit.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/address/:id',
     component: () => import('@/views/my/address/edit.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/bank',
     component: () => import('@/views/my/bank/list.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/bank_add',
     component: () => import('@/views/my/bank/edit.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/my/bank/:id',
     component: () => import('@/views/my/bank/edit.vue'),
+    meta: {
+      requireAuth: true
+    }
   },
   //更多
   {

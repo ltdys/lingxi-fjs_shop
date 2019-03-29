@@ -12,7 +12,7 @@
         </van-cell-group>
 
         <van-cell-group>
-          <van-card @click.native="$router.push('/my/order/1')"
+          <van-card @click.native="orderDetail"
               :num="addOrder.num"
               :price="addOrder.onePrice"
               :desc="addOrder.info"  
@@ -120,6 +120,9 @@ export default {
       } else {
         Toast(resData.data.Msg)
       }
+    },
+    orderDetail () {
+      this.$router.push('/my/order/' + this.addOrder.orderId)
     }
   }
 };
