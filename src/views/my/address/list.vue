@@ -7,92 +7,88 @@
         :switchable="switchable"
         @add="onAdd"
         @edit="onEdit"
-        @select="$emit('select',$event)"
+        @select="backAddress"
       />
 	</com-page>
 </template>
 
 <script>
-import { AddressList } from "vant";
-
+import { AddressList, Toast } from "vant";
+import { list_mixins } from "@/mixins";
+import { getMyAddress } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
-  props:{
-    switchable:{
-      type:Boolean,
-      default:false
-    }
-  },
+  mixins: [list_mixins],
+  // props:{
+  //   switchable:{
+  //     type:Boolean,
+  //     default:false
+  //   }
+  // },
   components: {
     [AddressList.name]: AddressList
   },
   data() {
     return {
-      chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "2",
-          name: "李四",
-          tel: "1310000000",
-          address: "浙江省杭州市拱墅区莫干山路 50 号"
-        }
-      ],
+      chosenAddressId: "", //当前选中的地址id
+      switchable: false, //是否显示选择按钮
+      list: [],
     };
   },
+  created () {
+    let isShow = this.$route.query.id
+    if (isShow == 1) {
+      this.switchable = false;
+    } else if (isShow == 2) {
+      this.switchable = true
+    }
+    this.getMyAddress()
+  },
   methods: {
+    async getMyAddress () { //获取地址列表
+      let self = this;
+      let param = {
+        id: self.userId,
+      }
+			let queryParams = paramConvert(param)
+			let resData = await getMyAddress(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+        let list = resData.data.Data;
+        self.list = []
+        list.forEach((item, index) => {
+          let obj = {
+            id: item.AddressId,
+            name: item.AccountName,
+            tel: item.Mobile,
+            address: item.AddressName
+          }
+          self.list.push(obj)
+        })
+        console.log('获取订单列表',list)
+        console.log(resData)
+			}
+    },
     onAdd() {
+      // 
       this.$router.push("/my/address_add");
     },
     onEdit(item, index) {
-      this.$router.push("/my/address/" + item.id);
-    }
+      Toast({
+        message: '暂不支持修改地址',
+        duration: 1500
+      })
+      // this.$store.dispatch('setCurrentAddress', item)
+      // this.$router.push("/my/address/" + item.id);
+    },
+    backAddress (Address) { //选择当前地址
+      let self = this;
+      console.log(Address)
+      let queryId = self.$route.query.id
+      if (queryId == 2) {
+        this.$store.dispatch('setCurrentAddress', Address)
+        this.$router.back();
+      }
+    },
   }
 };
 </script>
