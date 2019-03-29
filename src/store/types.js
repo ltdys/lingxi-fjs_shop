@@ -14,6 +14,10 @@ export const GET_CURRENT_BANK_MESS = "GET_CURRENT_BANK_MESS"
 export const SET_CURRENT_ORDER = "SET_CURRENT_ORDER"
 export const GET_CURRENT_ORDER = "GET_CURRENT_ORDER"
 
+//新增订单信息
+export const SET_ADD_ORDER = "SET_ADD_ORDER"
+export const GET_ADD_ORDER = "GET_ADD_ORDER"
+
 //清空数据
 export const SET_CLEAR_ALL = 'SET_CLEAR_ALL'
 export const GET_CLEAR_ALL = 'GET_CLEAR_ALL'

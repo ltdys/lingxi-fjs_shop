@@ -84,3 +84,6 @@ export const getMyAddress = (queryParams, params) => axios.post('/My/MyAddress' 
 
 /* 添加我的地址 */
 export const setAddAddress = (queryParams, params) => axios.post('/My/AddAddress' + queryParams, params)
+
+/* 下商品订单 */
+export const placeShop = (queryParams, params) => axios.post('/Shop/PlaceShop' + queryParams, params)

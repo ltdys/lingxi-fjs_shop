@@ -14,10 +14,11 @@
         </span>
       </van-cell>
       <van-cell title="风险说明">
-        <span class="fred">虚拟商品无法退货，请谨慎操作</span>
+        <!-- <span class="fred">虚拟商品无法退货，请谨慎操作</span> -->
+        <span class="fred">{{goods.tip}}</span>
       </van-cell>
       <van-cell title="促销说明">
-        <van-tag type="danger" plain>赠品</van-tag>
+        <!-- <van-tag type="danger" plain>赠品</van-tag> -->
         <span class="m-l-sm">{{goods.info}}</span>
       </van-cell>
     </van-cell-group>
@@ -29,10 +30,11 @@
       v-model="showCustomAction"
       :sku="sku"
       :goods="goods"
-      :goods-id="goodsId"
+      :goods-id="goods.id"
       :hide-stock="sku.hide_stock"
       :quota="0"
       :quota-used="0"
+      @stepper-change="onStepperChange"
       @buy-clicked="onBuyClicked"
     >
       <!-- 自定义 sku-header-price -->
@@ -47,7 +49,7 @@
         <div class="van-sku-actions">
           <van-submit-bar
             style="position:relative"
-            :price="350"
+            :price="sku.totalPrice"
             button-text="立刻购买"
             his.page
             @submit="props.skuEventBus.$emit('sku:buy')"
@@ -59,11 +61,14 @@
 </template>
 
 <script>
-import { Sku, SubmitBar } from "vant";
+import { list_mixins } from "@/mixins"
+import { Sku, SubmitBar, Toast } from "vant"
 import { paramConvert } from "@/utils/stringUtil.js"
-import { shopInfo } from "@/api/index.js"
+import { shopInfo, placeShop } from "@/api/index.js"
 
 export default {
+  mixins: [list_mixins],
+
   components: {
     [Sku.name]: Sku,
     [SubmitBar.name]: SubmitBar
@@ -80,15 +85,16 @@ export default {
         // 所有 sku 的组合列表，比如红色、M 码为一个 sku 组合，红色、S 码为另一个组合
         list: [
           {
-            id: 2259, // skuId，下单时后端需要
-            price: 100, // 价格（单位分）
-            s1: "1215", // 规格类目 k_s 为 s1 的对应规格值 id
+            id: "", // skuId，下单时后端需要
+            price: "", // 价格（单位分）
+            s1: "12", // 规格类目 k_s 为 s1 的对应规格值 id
             s2: "1193", // 规格类目 k_s 为 s2 的对应规格值 id
             s3: "0", // 最多包含3个规格值，为0表示不存在该规格
             stock_num: 110 // 当前 sku 组合对应的库存
           }
         ],
-        price: "1.00", // 默认价格（单位元）
+        price: "0", // 默认价格（单位元）
+        totalPrice: 0,
         stock_num: 227, // 商品总库存
         collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
         none_sku: true, // 是否无规格商品
@@ -101,12 +107,20 @@ export default {
         // picture: "",
         // price: 1
       },
-      id: ''
+      id: '',
+      formData: {
+        uid: '',  //用户id
+        sid: '',  //商品id
+        num: 1  //商品数量  
+      },
+      orderList: {}  //订单数据
     };
   },
 
   created () {
     this.id = this.$route.params.id
+    this.formData.sid = this.id
+    this.formData.uid = this.userId
     this.shopInfo()
   },
 
@@ -116,6 +130,9 @@ export default {
       let resData = await shopInfo(queryParams, { id: this.id })
       if (resData.status === 200 && resData.data.Success) {
         this.goods = resData.data.Data || {}
+        this.goods.picture = resData.data.Data.imgurl
+        this.sku.price = this.goods.price
+        this.sku.totalPrice = this.goods.price * 100
 			}
     },
     preBuy() {
@@ -123,9 +140,27 @@ export default {
       this.showCustomAction = true;
     },
     onBuyClicked() {
-      this.$router.push("/order/1");
+      this.placeShop()
     },
-    onAddCartClicked() {}
+    onStepperChange (value) {
+      this.formData.num = value
+      this.sku.totalPrice = value * this.goods.price * 100
+    },
+    async placeShop () {
+      let queryParams = paramConvert(this.formData)
+      let resData = await placeShop(queryParams, this.formData)
+      if (resData.status === 200 && resData.data.Success) {
+        Toast("下订单成功")
+        this.orderList = resData.data.Data
+        this.orderList.title = this.goods.title
+        this.orderList.imgurl = this.goods.imgurl
+        this.orderList.info = this.goods.info
+        this.orderList.num = this.formData.num
+        this.orderList.onePrice = this.goods.price
+        this.$store.dispatch("setAddOrder", this.orderList)
+        this.$router.push("/order/" + this.formData.sid);
+      }
+    }
   }
 };
 </script>

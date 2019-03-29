@@ -13,27 +13,27 @@
 
         <van-cell-group>
           <van-card @click.native="$router.push('/my/order/1')"
-              num="2"
-              price="2.00"
-              desc="描述信息"  
-              title="商品标题"
-              :thumb="imageURL"
+              :num="addOrder.num"
+              :price="addOrder.onePrice"
+              :desc="addOrder.info"  
+              :title="addOrder.title"
+              :thumb="addOrder.imgurl"
             >
           </van-card>
-          <van-card @click.native="$router.push('/my/order/1')"
+          <!-- <van-card @click.native="$router.push('/my/order/1')"
               num="1"
               tag="赠品"
               desc="描述信息"  
               title="商品标题"
               :thumb="imageURL"
             >
-          </van-card>
+          </van-card> -->
         </van-cell-group>
         <van-cell-group>
-          <van-cell title="订单编号" value="DC12312312312312"></van-cell>
+          <van-cell title="订单编号" :value="addOrder.orderNo"></van-cell>
           <van-cell title="创建时间" value="2018-09-09 09:09"></van-cell>
           <van-cell title="订单金额">
-              <span class="amount">¥<em>{{item.price  | number}}</em></span>
+              <span class="amount">¥<em>{{ addOrder.price | number}}</em></span>
           </van-cell>
           <van-cell title="当前余额">
               <span>¥<em>{{item.price  | number}}</em></span>
@@ -50,17 +50,32 @@
 </template>
 
 <script>
+import { list_mixins } from "@/mixins"
 import { Card, Panel, } from "vant";
 import AddressList from "../my/address/list";
-import PopupPage from "@/components/popup-page";
+import PopupPage from "@/components/popup-page"
+import { paymentOrder } from "@/api/index.js"
+import { paramConvert } from "@/utils/stringUtil.js"
+import { Toast } from "vant"
 
 export default {
+  mixins: [list_mixins],
+
   components: {
     [Card.name]: Card,
     [Panel.name]: Panel,
     AddressList,
     [PopupPage.name]: PopupPage
   },
+
+  computed: {
+    addOrder: {
+      get: function () {
+        return this.$store.getters.getAddOrder
+      }
+    }
+  },
+
   data() {
     return {
       popupVisible: false,
@@ -78,6 +93,7 @@ export default {
       }
     };
   },
+
   methods: {
     selectAddress() {
       this.popupVisible = true
@@ -86,8 +102,24 @@ export default {
       this.address = v;
       this.popupVisible = false
     },
-    onPay(){
-      this.$router.push('/')
+    onPay (){
+      this.paymentOrder()
+    },
+    async paymentOrder () {
+      let queryParams = paramConvert({
+        id: this.userId,
+        orderid: this.addOrder.orderId
+      })
+      let resData = await paymentOrder(queryParams, {
+        id: this.userId,
+        orderid: this.addOrder.orderId
+      })
+      if (resData.status === 200 && resData.data.Success) {
+        Toast("支付成功")
+        this.$router.push("/")
+      } else {
+        Toast(resData.data.Msg)
+      }
     }
   }
 };
