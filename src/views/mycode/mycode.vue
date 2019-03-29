@@ -49,7 +49,8 @@ export default {
     justify-content: center;
     align-items: center;
     .mycode-code {
-      transform: skew(0deg, 0deg);
+      // transform: rotate3d(45deg, 45deg, 30deg);
+      transform: skew(15deg, 0deg);
     }
   }
 </style>
