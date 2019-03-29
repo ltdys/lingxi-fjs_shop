@@ -19,7 +19,8 @@ import {
   RadioGroup,
   Radio,
   Actionsheet,
-  GoodsAction, GoodsActionMiniBtn
+  GoodsAction, GoodsActionMiniBtn,
+  DatetimePicker
 } from 'vant'
 
 const components = [
@@ -41,7 +42,8 @@ const components = [
   Swipe, SwipeItem,
   RadioGroup, Radio,
   Actionsheet,
-  GoodsAction, GoodsActionMiniBtn
+  GoodsAction, GoodsActionMiniBtn,
+  DatetimePicker
 ]
 
 const install = function (Vue) {

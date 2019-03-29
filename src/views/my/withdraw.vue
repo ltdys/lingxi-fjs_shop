@@ -114,6 +114,7 @@ export default {
 					message: '提现成功',
 					duration: 1500
         });
+				self.$router.back()
 			} else {
 				Toast({
 					message: resData.data.Msg || '提现失败',

@@ -87,3 +87,13 @@ export const setAddAddress = (queryParams, params) => axios.post('/My/AddAddress
 
 /* 下商品订单 */
 export const placeShop = (queryParams, params) => axios.post('/Shop/PlaceShop' + queryParams, params)
+
+/* 根据用户ID获取余额充值明细 */
+export const getMyYECZMx = (queryParams, params) => axios.post('/My/GetMyYECZMx' + queryParams, params)
+
+/* 查看我的提现记录 */
+export const selectCashWithdrawal = (queryParams, params) => axios.post('/My/SelectCashWithdrawal' + queryParams, params)
+
+/* 根据用户ID获取余额明细 */
+export const getMyYEMx = (queryParams, params) => axios.post('/My/GetMyYEMx' + queryParams, params)
+

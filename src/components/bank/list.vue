@@ -78,8 +78,6 @@ export default {
   background: #48bca0;
   padding: 15px 15px;
   border-radius: 5px;
-  .com-bankitem-content {
-  }
   &-content {
     display: flex;
   }

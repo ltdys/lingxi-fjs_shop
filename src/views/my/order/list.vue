@@ -64,7 +64,7 @@ export default {
       ],
       orderList: [], //订单列表
       // 分页操作
-      pageIndex: 1,
+      pageIndex: 0,
       pageRows: 10,
       //加载
       orderLoading: false,
@@ -72,7 +72,6 @@ export default {
     };
   },
   created () {
-    this.getMyOrder()
   },
   methods: {
     changeItem (item) { //切换tabbar状态

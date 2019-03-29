@@ -2,17 +2,18 @@
 	<com-page>
 		<com-header title="收货地址" is-back slot="header"></com-header>
     <van-address-list
-        v-model="chosenAddressId"
-        :list="list"
-        :switchable="switchable"
-        @add="onAdd"
-        @edit="onEdit"
-        @select="backAddress"
-      />
+      v-model="chosenAddressId"
+      :list="list"
+      :switchable="switchable"
+      @add="onAdd"
+      @edit="onEdit"
+      @select="backAddress"
+    />
 	</com-page>
 </template>
 
 <script>
+import areaList from "./area";
 import { AddressList, Toast } from "vant";
 import { list_mixins } from "@/mixins";
 import { getMyAddress } from "@/api/index.js"
@@ -43,6 +44,7 @@ export default {
       this.switchable = true
     }
     this.getMyAddress()
+    console.log(areaList.province_list)
   },
   methods: {
     async getMyAddress () { //获取地址列表
@@ -60,13 +62,30 @@ export default {
             id: item.AddressId,
             name: item.AccountName,
             tel: item.Mobile,
-            address: item.AddressName
+            address: self.buildAddress(item)
           }
           self.list.push(obj)
         })
-        console.log('获取订单列表',list)
+        console.log('获取地址列表',list)
         console.log(resData)
 			}
+    },
+    buildAddress (item) {
+      let province = areaList.province_list
+      let city = areaList.city_list
+      let county = areaList.county_list
+      let address = ''
+      if (item.ProvinceCode != null && province.hasOwnProperty(item.ProvinceCode)) {
+        address += province[item.ProvinceCode]
+      }
+      if (item.CityCode != null && city.hasOwnProperty(item.CityCode)) {
+        address += city[item.CityCode]
+      }
+      if (item.DistrictCode != null && county.hasOwnProperty(item.DistrictCode)) {
+        address += county[item.DistrictCode]
+      }
+      address += item.AddressName
+      return address
     },
     onAdd() {
       // 
