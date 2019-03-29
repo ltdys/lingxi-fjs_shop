@@ -7,6 +7,7 @@ const state = {
   currentBankMess: {}, //当前银行信息
   currentOrder: {}, //当前订单信息
   currentAddress: {}, //当前地址信息
+  addOrder: {},  //新增订单信息
 }
 
 const actions = {
@@ -24,6 +25,9 @@ const actions = {
   },
   setCurrentAddress ( { commit }, boo) {
     commit(types.SET_CURRENT_ADDRESS, boo)
+  },
+  setAddOrder ( { commit }, boo) {
+    commit(types.SET_ADD_ORDER, boo)
   },
 }
 
@@ -46,6 +50,9 @@ const getters = {
   },
   getCurrentAddress: state => {
     return state.currentAddress
+  },
+  getAddOrder: state => {
+    return state.addOrder
   },
 }
 
@@ -70,6 +77,10 @@ const mutations = {
   //当前地址信息
   ['SET_CURRENT_ADDRESS'] (state, boo) {
     state.currentAddress = boo
+  },
+  //新增订单信息
+  ['SET_ADD_ORDER'] (state, boo) {
+    state.addOrder = boo
   },
 }
 
