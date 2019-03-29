@@ -1,10 +1,25 @@
 <template>
   <com-page>
     <com-header title="注册会员" is-back slot="header"></com-header>
-    <van-cell title="推荐人账号" :value="this.formData.tjrPhone"></van-cell>
-    <van-cell title="推荐人姓名" :value="this.userInfo.userName"></van-cell>
+    <!-- <van-cell title="推荐人账号" :value="this.formData.tjrPhone"></van-cell>
+    <van-cell title="推荐人姓名" :value="this.userInfo.userName"></van-cell> -->
     <van-field
       class="m-t"
+      type="tel"
+      label="推荐人手机号"
+      placeholder="请输入推荐人手机号"
+      required
+      clearable
+      v-model="formData.tjrPhone"
+      :error-message="errorMsg.tjrPhone"
+      @blur="getUserByPhone"
+    ></van-field>
+    <van-field
+      label="推荐人姓名"
+      v-model="tjrName"
+      disabled
+    ></van-field>
+    <van-field
       type="tel"
       label="手机号"
       placeholder="请输入手机号"
@@ -50,7 +65,7 @@
 import validator from "@/utils/validator.js"
 import { validatePhone, validateIdCard, validatePwd } from "@/utils/validate.js"
 import { Toast } from "vant"
-import { register } from "@/api/index.js"
+import { register, getUserByPhone } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { list_mixins } from "@/mixins";
 export default {
@@ -65,6 +80,7 @@ export default {
         pwd: "", //密码
         card: "" //身份证号码
       },
+      tjrName: "",  //推荐人姓名
       errorMsg: {
         phone: "",
         pwd: "",
@@ -87,7 +103,20 @@ export default {
               }
             }
           }
-				],
+        ],
+        tjrPhone: [
+          {
+            validator: (rule, value, callback) => {
+              if (!value) {
+                callback("请输入推荐人手机号");
+              } else if (validatePhone(value)) {
+                callback();
+              } else {
+                callback("请输入正确的手机号码");
+              }
+            }
+          }
+        ],
 				card: [
 					{
 						validator: (rule, value, callback) => {
@@ -119,7 +148,6 @@ export default {
   },
 
   created() {
-    this.formData.tjrPhone = this.userInfo.mobile
     this.validator = validator(this.rules, this.formData)
   },
 
@@ -164,7 +192,22 @@ export default {
 			} else {
 				Toast(resData.data.Msg)
 			}
-		}
+    },
+    async getUserByPhone () {
+      let queryParams = paramConvert({ tjrPhone: this.formData.tjrPhone})
+      let resData = await getUserByPhone(queryParams, {
+        tjrPhone: this.formData.tjrPhone
+      })
+      if (resData.status === 200 && resData.data.Success) {
+        this.tjrName = resData.data.Data.realname
+      } else {
+        Toast.success({
+          message: resData.data.Msg,
+          duration: 1500
+        })
+        this.formData.tjrPhone = ''
+      }
+    }
   }
 };
 </script>

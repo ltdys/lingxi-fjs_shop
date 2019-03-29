@@ -1,7 +1,7 @@
 <template>
   <com-page>
     <com-header title="我的二维码" is-back slot="header"></com-header>
-    <div style="background-image:url('static/images/mycode-bg.png');background-size: 100%"
+    <div style="background-image:url('static/images/mycode-bg.jpg');background-size: 100%"
       class="mycode-wrap">
       <div id="qrcode" ref="qrcode" class="mycode-code"></div>
     </div>
