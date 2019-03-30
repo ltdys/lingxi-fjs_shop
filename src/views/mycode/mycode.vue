@@ -32,8 +32,8 @@ export default {
       // http://192.19.23.49:8000/#/team/register
       let url = window.location.href.split('#')[0] + '#/team/register'
       let qrcode = new QRCode('qrcode', {  
-          width: 160,  // 设置宽度 
-          height: 160, // 设置高度
+          width: 213,  // 设置宽度 
+          height: 185, // 设置高度
           text: url
       })  
     },
@@ -49,8 +49,8 @@ export default {
     justify-content: center;
     align-items: center;
     .mycode-code {
-      // transform: rotate3d(45deg, 45deg, 30deg);
-      transform: skew(15deg, 0deg);
+      transform: rotate(-30deg) skew(30deg) scale(0.6) translate(28px);
+      // transform: skew(15deg, 0deg);
     }
   }
 </style>
