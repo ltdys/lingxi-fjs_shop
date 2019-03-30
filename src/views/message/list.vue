@@ -3,13 +3,13 @@
 		<com-header title="消息列表" is-back slot="header"></com-header>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="loadBottom">
       <ul class="message">
-        <li class="message-item" v-for="(item,i) in resultList" :key="i" @click="$router.push('/message/1')">
-          <div class="message__title">电力（代码：CEPL）价格变动</div>
-          <div class="message__date">2019-03-03 21:11</div>
+        <li class="message-item" v-for="(item,i) in messageList" :key="i" @click="$router.push('/message/' + item.id)">
+          <div class="message__title">{{item.title}}</div>
+          <div class="message__date">{{item.addtime}}</div>
           <div class="message__img">
             <img src="static/images/banner.png"/>
           </div>
-          <div class="message__desc">各位朋友们，近期商品价格变动频繁，请小心购买，一旦购买，不能退换</div>
+          <div class="message__desc">{{item.text}}</div>
         </li>
       </ul>
     </van-list>
@@ -18,14 +18,34 @@
 
 <script>
 import { list_mixins } from "@/mixins";
-
+import { getMsgInfo } from "@/api/index"
+import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
   data(){
     return {
+      messageId: '',
+      messageList: []
     }
   },
+  
+  created () {
+    this.messageId = this.$route.query.messageId || ''
+    this.getMsgInfo()
+  },
+
   methods: {
+    async getMsgInfo () {
+      let queryParams = paramConvert({
+        id: this.messageId
+      })
+      let resData = await getMsgInfo(queryParams, {
+        id: this.messageId
+      })
+      if (resData.status === 200 && resData.data.Success) {
+        this.messageList[0] = resData.data.Data
+      }
+    }
   }
 };
 </script>

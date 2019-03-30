@@ -75,6 +75,10 @@
 				</van-cell>
 				<van-cell  icon="balance-pay"  title="余额变动明细" is-link  to="/my/yl_list">
 				</van-cell>
+				<van-cell  icon="exchange"  title="退出登录" is-link @click="loginOut">
+				</van-cell>
+				<van-cell  icon="records"  title="提现纪录" is-link>
+				</van-cell>
 				<van-cell icon="more-o" title="更多" is-link to="/more">
 				</van-cell>
 			</van-cell-group>
@@ -85,6 +89,7 @@
 <script>
 import { Toast, Badge, GoodsAction, GoodsActionMiniBtn } from 'vant';
 import { list_mixins } from "@/mixins";
+import { clearStorage } from "@/utils/storage.js"
 export default {
 	mixins: [list_mixins],
 	components: {
@@ -116,6 +121,11 @@ export default {
 				duration: 1500
 			})
 		},
+		loginOut () {  //退出登录
+			this.$store.dispatch('setClearAll', '')
+			clearStorage()
+			this.$router.push('/team/login')
+		}
 	}
 }
 </script>
@@ -224,6 +234,9 @@ export default {
 			border-radius: 50%;
 			background: #FFF;
 		}
+	}
+	&-main {
+		height: 100%;
 	}
 }
 </style>

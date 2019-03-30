@@ -188,7 +188,7 @@ export default {
           message: Toast('注册成功'),
           duration: 1500
         })
-				this.$router.push('/team/myteam')
+				this.$router.push('/')
 			} else {
 				Toast(resData.data.Msg)
 			}

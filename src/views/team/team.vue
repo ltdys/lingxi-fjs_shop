@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-		<van-cell title="推广二维码" is-link @click.native="$router.push('/team/invite')"></van-cell>
+		<van-cell title="推广二维码" is-link @click.native="$router.push('/mycode')"></van-cell>
 		<van-cell title="我的团队" is-link  @click.native="$router.push('/team/myteam')"></van-cell>
 		<van-cell title="DC明细" is-link  @click.native="$router.push('/team/dc')"></van-cell>
 	</com-page>

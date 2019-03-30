@@ -100,3 +100,12 @@ export const selectCashWithdrawal = (queryParams, params) => axios.post('/My/Sel
 /* 根据用户ID获取余额明细 */
 export const getMyYEMx = (queryParams, params) => axios.post('/My/GetMyYEMx' + queryParams, params)
 
+/* 获取消息 */
+export const getMsg = () => axios.post('/Home/getMsg')
+
+/* 获取消息列表 */
+export const getMsgInfo = (queryParams, params) => axios.post('/Home/GetMsgInfo' + queryParams, params)
+
+/* 获取我的消息详情 */
+export const getMyMsgList = (queryParams, params) => axios.post('/Home/GetMyMsgList' + queryParams, params)
+

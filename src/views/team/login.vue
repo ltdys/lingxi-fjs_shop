@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="用户登录" is-back slot="header"></com-header>
+    <com-header title="用户登录" slot="header"></com-header>
     <div class="lx-header-img">
       <img :src="userHeader" alt="">
     </div>
