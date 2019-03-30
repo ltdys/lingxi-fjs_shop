@@ -28,6 +28,7 @@
       <van-datetime-picker
         v-model="currentDate"
         type="year-month"
+        :max-date="new Date()"
         :formatter="formatter"
         @confirm="confirmDate"
         @cancel="cancelDate"
