@@ -67,6 +67,9 @@ export const setYECZ = (queryParams, params) => axios.post('/My/YECZ' + queryPar
 /* 根据手机号获取用户信息 */
 export const getUserByPhone = (queryParams, params) => axios.post('/GetUserByPhone' + queryParams, params)
 
+/* 修改手机号 */
+export const updatePhone = (queryParams, params) => axios.post('/UpdatePhone' + queryParams, params)
+
 /* 转账 */
 export const balanceTransfer = (queryParams, params) => axios.post('/My/BalanceTransfer' + queryParams, params)
 
