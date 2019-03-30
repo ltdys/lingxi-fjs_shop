@@ -12,6 +12,7 @@
       clearable
       v-model="formData.tjrPhone"
       :error-message="errorMsg.tjrPhone"
+      :disabled="this.$route.query.mobile"
       @blur="getUserByPhone"
     ></van-field>
     <van-field
@@ -148,6 +149,8 @@ export default {
   },
 
   created() {
+    this.formData.tjrPhone = this.$route.query.mobile || ''
+    this.tjrName = this.$route.query.realname || ''
     this.validator = validator(this.rules, this.formData)
   },
 
@@ -201,7 +204,7 @@ export default {
       if (resData.status === 200 && resData.data.Success) {
         this.tjrName = resData.data.Data.realname
       } else {
-        Toast.success({
+        Toast({
           message: resData.data.Msg,
           duration: 1500
         })

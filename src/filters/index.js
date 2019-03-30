@@ -82,7 +82,7 @@ export function dateChange (date)   {
 }
 
 export function formatDate (str) {
-  let arr = str.split("-")
+  let arr = str.split("/")
   return arr[0] + "年" + arr[1] + "月"
 }
 

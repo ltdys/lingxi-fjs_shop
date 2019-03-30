@@ -105,7 +105,7 @@ export default {
     },
     onPay (){
       if (this.price < this.addOrder.price) {
-        Toast.success({
+        Toast({
 					message: '余额不足!',
 					duration: 1500
         });
