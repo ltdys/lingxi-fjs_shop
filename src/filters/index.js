@@ -94,6 +94,27 @@ export function distance(value) {
   }
 }
 
+//时间倒计时 秒转化日期
+export function timeDate1 (value) {
+  let hours = parseInt((value % (60 * 60 * 24)) / (60 * 60));
+  let minutes = parseInt((value % (60 * 60)) / 60);
+  let seconds = (value % 60);
+  return hours + " 时 " + minutes + " 分 " + seconds + " 秒 "
+}
+//时间倒计时 毫秒转化日期
+export function timeDate2 (value) {
+  let hours = parseInt((value % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = parseInt((value % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = (value % (1000 * 60)) / 1000;
+  return hours + " 时 " + minutes + " 分 " + seconds + " 秒 "
+}
+
+function addZero(num){
+  if(num<10)
+      return "0" + num;
+  return num;
+}
+
 export function distance2(value) {
   return (value/1000).toFixed(1)
 }

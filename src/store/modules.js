@@ -33,6 +33,9 @@ const actions = {
   setAddOrder ( { commit }, boo) {
     commit(types.SET_ADD_ORDER, boo)
   },
+  setClearAll  ( { commit }, boo) {
+    commit(types.SET_CLEAR_ALL, boo)
+  },
 }
 
 const getters = {
@@ -97,6 +100,15 @@ const mutations = {
   //新增订单信息
   ['SET_ADD_ORDER'] (state, boo) {
     state.addOrder = boo
+  },
+  ['SET_CLEAR_ALL'] (state, boo) {
+    state.userId = '' //用户userId
+    state.userInfo = {}  //用户信息
+    state.deliveryList = ''  //交易提货数据
+    state.currentBankMess = {} //当前银行信息
+    state.currentOrder = {} //当前订单信息
+    state.currentAddress = {} //当前地址信息
+    state.addOrder = {} //新增订单信息
   },
 }
 

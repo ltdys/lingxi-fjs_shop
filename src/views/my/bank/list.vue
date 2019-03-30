@@ -32,11 +32,7 @@ export default {
   data() {
     return {
       chosenBankId:1,
-      list:[{
-        id:1,
-        name:'农业银行',
-        cardno:'12312321312312312312'
-      }]
+      list:[]
     };
   },
   created () {

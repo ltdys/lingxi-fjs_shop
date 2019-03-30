@@ -31,6 +31,7 @@ import { list_mixins } from "@/mixins";
 import validator from "@/utils/validator.js"
 import { updatePhone } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { clearStorage } from "@/utils/storage.js"
 import { validatePhone, validatePwd } from "@/utils/validate.js"
 export default {
   mixins: [list_mixins],
@@ -108,6 +109,9 @@ export default {
 					message: resData.data.Msg || '修改手机号成功',
 					duration: 1500
 				})
+				
+				self.$store.dispatch('setClearAll', '')
+				clearStorage()
 				self.$router.push('/team/login')
 			} else {
 				Toast({

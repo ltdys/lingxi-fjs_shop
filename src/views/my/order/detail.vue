@@ -4,7 +4,7 @@
 
     <div class="order-detail__status">
       <div>订单状态：{{ orderDetail.status }}</div>
-      <div class="fs-12">剩10小时22分钟自动关闭</div>
+      <div class="fs-12" v-if="orderDetail.state == '1'">剩{{ surplusTime | timeDate1 }}自动关闭</div>
     </div>
     <van-cell-group>
       <van-cell icon="location" class="select-location" :is-link="orderDetail.status == '待付款'" @click="jumpAddress">
@@ -83,18 +83,34 @@ export default {
       orderId: '', //订单id
       orderDetail: {},
       i: 1,
+      surplusTime: 100,
       imageURL: "static/images/banner.png",
       address:{
         name:'王大锤',
         tel:'12312312',
         address:'XXXXXXXXXX'
-      }
+      },
+      timer: null
     };
   },
   created () {
-    this.orderId = this.$route.params.id,
-    this.getOrderInfo()
+    let self = this;
+    self.orderId = this.$route.params.id,
+    self.getOrderInfo()
     // this.paymentOrder()
+    self.timer = setInterval(function () {
+      if (self.surplusTime <= 0) {
+        window.setInterval(self.timer);
+        self.timer = null
+      } else {
+        self.surplusTime --
+      }
+    }, 1000)
+  },
+  destroyed () {
+    let self = this;
+    window.setInterval(self.timer);
+    self.timer = null
   },
   computed: {
     currentOrder: {

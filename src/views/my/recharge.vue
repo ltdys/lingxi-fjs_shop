@@ -81,7 +81,7 @@ export default {
       if (resData.status === 200 && resData.data.Success) {
 				self.getUserInfo()
 				Toast.success({
-					message: '余额充值成功',
+					message: '充值申请成功',
 					duration: 1500
 				});
 			} else {
