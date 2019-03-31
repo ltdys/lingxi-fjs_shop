@@ -74,7 +74,6 @@
             duration: 1500
           })
           this.getUserInfo(resData.data.Data.userId)
-          this.$router.push('/')
         } else {
           Toast(resData.data.Msg)
         }
@@ -86,6 +85,7 @@
         if (resData.status === 200 && resData.data.Success) {
           self.userInfo = resData.data.Data;
           self.$store.dispatch("setUserInfo", self.userInfo)
+          this.$router.push('/')
         } else {
           Toast({
             message: resData.data.Msg || '获取用户信息失败',
