@@ -31,7 +31,7 @@
         </van-cell-group>
         <van-cell-group>
           <van-cell title="订单编号" :value="addOrder.orderNo"></van-cell>
-          <van-cell title="创建时间" value="2018-09-09 09:09"></van-cell>
+          <van-cell title="创建时间" :value="addOrder.createTime"></van-cell>
           <van-cell title="订单金额">
               <span class="amount">¥<em>{{ addOrder.price | number}}</em></span>
           </van-cell>
@@ -54,7 +54,7 @@ import { list_mixins } from "@/mixins"
 import { Card, Panel, } from "vant";
 import AddressList from "../my/address/list";
 import PopupPage from "@/components/popup-page"
-import { paymentOrder } from "@/api/index.js"
+import { paymentOrder, getMyAddress } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { Toast } from "vant"
 
@@ -69,6 +69,7 @@ export default {
   },
 
   created () {
+    this.getMyAddress()
     this.price = JSON.parse(this.userInfo).price
   },
 
@@ -88,9 +89,9 @@ export default {
       imageURL: "static/images/banner.png",
       chosenAddressId: "1",
       address:{
-        name:'王大锤',
-        tel:'12312312',
-        address:'XXXXXXXXXX'
+        name:'',
+        tel:'',
+        address:''
       }
     };
   },
@@ -130,6 +131,19 @@ export default {
         this.$router.push("/")
       } else {
         Toast(resData.data.Msg)
+      }
+    },
+    async getMyAddress () {
+      let id = this.userId
+      let queryParams = paramConvert({
+        id: id
+      })
+      let resData = await getMyAddress(queryParams, { id: id })
+      if (resData.status === 200 && resData.data.Success) {
+        let list = resData.data.Data[0] || []
+        this.address.name = list.AccountName
+        this.address.tel = list.Mobile
+        this.address.address = list.AddressName
       }
     },
     orderDetail () {
