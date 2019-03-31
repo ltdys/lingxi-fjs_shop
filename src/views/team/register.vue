@@ -154,12 +154,11 @@ export default {
 
   methods: {
     submit () {
-      this.register()
-      // this.validate(error => {
-			// 	if (!error) {
-			// 		this.register()
-			// 	}
-      // }, this.formData)
+      this.validate(error => {
+				if (!error) {
+					this.register()
+				}
+      }, this.formData)
     },
     validate(callback, data) {
       this.validator.validate((errors, fields) => {
