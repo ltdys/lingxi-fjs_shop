@@ -113,7 +113,8 @@ export default {
         Toast.success({
 					message: '提现成功',
 					duration: 1500
-        });
+				});
+				self.$store.dispatch('setCurrentBankMess', {})
 				self.$router.back()
 			} else {
 				Toast({

@@ -19,6 +19,10 @@ export function card(str){
   return str ? '**** **** **** ' + str.substr(str.length-4):''
 }
 
+export function cardBlank(str){
+  return str ? str.replace(/(.{4})/g,'$1 '):''
+}
+
 export function last(str,num){
   return str ? str.substr(str.length-num):''
 }

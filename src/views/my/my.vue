@@ -77,7 +77,7 @@
 				</van-cell>
 				<van-cell  icon="exchange"  title="退出登录" is-link @click="loginOut">
 				</van-cell>
-				<van-cell  icon="records"  title="提现纪录" is-link>
+				<van-cell  icon="records"  title="提现纪录" is-link to="/my/yl_list3">
 				</van-cell>
 				<van-cell icon="more-o" title="更多" is-link to="/more">
 				</van-cell>

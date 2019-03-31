@@ -139,6 +139,13 @@ export const routes = [{
     }
   },
   {
+    path: '/my/yl_list3',
+    component: () => import('@/views/my/yl_list3.vue'),
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
     path: '/my/order',
     component: () => import('@/views/my/order/list.vue'),
     meta: {

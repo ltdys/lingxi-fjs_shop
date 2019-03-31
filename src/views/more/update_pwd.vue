@@ -4,6 +4,7 @@
 		<van-cell-group>
 			<van-field
 				label="旧密码"
+        type="password"
 				placeholder="请输入旧密码"
 				v-model="formData.oldPwd"
 				required
@@ -36,7 +37,7 @@
 import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
 import validator from "@/utils/validator.js"
-import { updatePhone } from "@/api/index.js"
+import { updatePwd } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { clearStorage } from "@/utils/storage.js"
 import { validatePhone, validatePwd } from "@/utils/validate.js"
@@ -123,29 +124,29 @@ export default {
     async updatePassWork () { //修改密码
 			let self = this;
 			console.log('需要提供修改密码接口')
-			// let param = {
-			// 	id: self.userId,
-			// 	newPhone: self.formData.newPhone,
-			// 	pwd: self.formData.password
-			// }
-			// console.log(param)
-			// let queryParams = paramConvert(param)
-			// let resData = await updatePhone(queryParams, param)
-      // if (resData.status === 200 && resData.data.Success) {
-			// 	Toast({
-			// 		message: resData.data.Msg || '修改密码成功',
-			// 		duration: 1500
-			// 	})
+			let param = {
+				id: self.userId,
+				newpwd: self.formData.newPwd,
+				pwd: self.formData.oldPwd
+			}
+			console.log(param)
+			let queryParams = paramConvert(param)
+			let resData = await updatePwd(queryParams, param)
+      if (resData.status === 200 && resData.data.Success) {
+				Toast({
+					message: resData.data.Msg || '修改密码成功',
+					duration: 1500
+				})
 				
-			// 	self.$store.dispatch('setClearAll', '')
-			// 	clearStorage()
-			// 	self.$router.push('/team/login')
-			// } else {
-			// 	Toast({
-			// 		message: resData.data.Msg || '修改密码失败',
-			// 		duration: 1500
-			// 	})
-			// }
+				self.$store.dispatch('setClearAll', '')
+				clearStorage()
+				self.$router.push('/team/login')
+			} else {
+				Toast({
+					message: resData.data.Msg || '修改密码失败',
+					duration: 1500
+				})
+			}
 		},
 		validate(callback, data) {
       this.validator.validate((errors, fields) => {

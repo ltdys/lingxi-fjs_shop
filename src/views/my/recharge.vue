@@ -84,6 +84,7 @@ export default {
 					message: '充值申请成功',
 					duration: 1500
 				});
+				self.$router.push('/my/yl_list2')
 			} else {
 				Toast({
 					message: '余额充值失败',
