@@ -19,12 +19,16 @@
     <div class="submit_buttons">
       <van-button type="primary" block :disabled="isBtnShow" @click="confireBtn">保存</van-button>
     </div>
+
+		<div class="myinfo__load" v-show="isLoading">
+		  <van-loading type="spinner"/>
+		</div>
 	</com-page>
 </template>
 
 <script>
 import { list_mixins } from "@/mixins";
-import { Toast } from "vant";
+import { Toast, Loading } from "vant";
 import { updInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
@@ -37,13 +41,13 @@ export default {
 			oldName: '', //旧的名称
 			isBtnShow: true,
 			cardError: true,
-			cardErrorMessage: '请输入身份证号'
+			cardErrorMessage: '请输入身份证号',
+			isLoading: false
 		}
 	},
 	created () {
 		this.id = this.$store.getters.getUserId
 		this.getUserInfo()
-		console.log(JSON.parse(this.userInfo))
 		this.oldCard = JSON.parse(this.userInfo).card
 		this.oldIcon = JSON.parse(this.userInfo).icon
 		this.oldName = JSON.parse(this.userInfo).realname
@@ -90,6 +94,7 @@ export default {
 		},
 		async confireBtn () { // 保存个人用户信息
 			let self = this;
+			self.isLoading = true
 			let param = {
         // id: self.userId,
         // realname: self.userInfo.realname,
@@ -117,8 +122,18 @@ export default {
 			let queryParams = paramConvert(params)
 			let resData = await updInfo(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
-        
-        console.log('保存个人用户信息',resData)
+        Toast.success({
+					message: '修改个人资料成功',
+					duration: 1500
+				})
+				self.isLoading = false
+        // console.log('保存个人用户信息',resData)
+			} else {
+				Toast({
+					message: resData.data.Msg,
+					duration: 1500
+				})
+				self.isLoading = true
 			}
 		},
 	}
@@ -136,6 +151,12 @@ export default {
 	.zl-cell{
 		display: flex;
     align-items: center;
+	}
+	&__load {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
 </style>
