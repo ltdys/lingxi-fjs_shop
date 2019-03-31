@@ -219,6 +219,10 @@ export const routes = [{
   {
     path: '/deal/delivery',
     component: () => import('@/views/deal/delivery.vue')
+  },
+  {
+    path: '/deal/detail',
+    component: () => import('@/views/deal/detail.vue')
   }
 ]
 

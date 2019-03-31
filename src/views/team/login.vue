@@ -21,7 +21,7 @@
     >
 		</van-field>
     <div class="lx-wrap">
-      <span>忘记密码?</span>
+      <!-- <span>忘记密码?</span> -->
       <span @click="$router.push('/team/register')">立即注册</span>
     </div>
     <div class="lx-btn">

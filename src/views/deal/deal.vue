@@ -21,7 +21,7 @@
             <div class="fa-stack-14x fa-color-969">持仓数量(张)</div>
             <div class="fa-stack-24x fa-color-323">{{item.CCSL}}</div>
           </div>
-          <div class="goods-middle-bottom fa-stack-14x fa-color-default">详情</div>
+          <div class="goods-middle-bottom fa-stack-14x fa-color-default" @click="$router.push('/deal/detail')">详情</div>
         </div>
         <div class="goods-content">
           <div>
