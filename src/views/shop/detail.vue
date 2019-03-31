@@ -64,6 +64,7 @@
 import { list_mixins } from "@/mixins"
 import { Sku, SubmitBar, Toast } from "vant"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { formatTime } from "@/utils/dateUtil"
 import { shopInfo, placeShop } from "@/api/index.js"
 
 export default {
@@ -157,10 +158,17 @@ export default {
         this.orderList.info = this.goods.info
         this.orderList.num = this.formData.num
         this.orderList.onePrice = this.goods.price
+        this.orderList.createTime = this.formatStr(this.orderList.orderNo)
         this.$store.dispatch("setAddOrder", this.orderList)
         this.$router.push("/order/" + this.formData.sid);
       }
-    }
+    },
+    formatStr(str) {
+      if (!str) { 
+        return formatTime(new Date(), "{y}/{m}/{d} {h}:{i}:{s}")
+      } 
+      return str.substring(0, 4) + "/" + str.substring(4, 6) + "/" + str.substring(6, 8) + " " + str.substring(8, 10) + ":" + str.substring(10, 12) + ":" + str.substring(12, 14)
+    } 
   }
 };
 </script>

@@ -116,9 +116,10 @@ $otherColor: #3279FF;
     padding: 15px;
     display: flex;
     .goods-middle-top {
-      width: 90%;
+      box-sizing: border-box;
+      width: 85%;
       text-align: center;
-      margin-left: 10%;
+      margin-left: 15%;
       div:nth-child(1) {
         margin-bottom: 15px;
       }
@@ -128,7 +129,8 @@ $otherColor: #3279FF;
       }
     }
     .goods-middle-bottom {
-      width: 10%;
+      width: 15%;
+      text-align: right;
     }
   }
 	.goods__count {
