@@ -66,11 +66,9 @@
 import validator from "@/utils/validator.js"
 import { validatePhone, validateIdCard, validatePwd } from "@/utils/validate.js"
 import { Toast } from "vant"
-import { register, getUserByPhone } from "@/api/index.js"
+import { register, getUserByPhone, getUserInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
-import { list_mixins } from "@/mixins";
 export default {
-  mixins: [list_mixins],
 
   data() {
     return {
@@ -156,11 +154,12 @@ export default {
 
   methods: {
     submit () {
-      this.validate(error => {
-				if (!error) {
-					this.register()
-				}
-      }, this.formData)
+      this.register()
+      // this.validate(error => {
+			// 	if (!error) {
+			// 		this.register()
+			// 	}
+      // }, this.formData)
     },
     validate(callback, data) {
       this.validator.validate((errors, fields) => {
@@ -187,11 +186,12 @@ export default {
 			let queryParams = paramConvert(this.formData)
 			let resData = await register(queryParams, this.formData)
 			if (resData.status === 200 && resData.data.Success) {
-        Toast({
-          message: Toast('注册成功'),
+        Toast.success({
+          message: '注册成功',
           duration: 1500
         })
-				this.$router.push('/')
+        this.$store.dispatch('setUserId', resData.data.Data.userId)
+        this.getUserInfo(resData.data.Data.userId)
 			} else {
 				Toast(resData.data.Msg)
 			}
@@ -210,7 +210,22 @@ export default {
         })
         this.formData.tjrPhone = ''
       }
-    }
+    },
+    async getUserInfo (id) { //获取用户消息
+      let self = this;
+      let queryParams = paramConvert({ "uId": id })
+      let resData = await getUserInfo(queryParams, { "uId": id })
+      if (resData.status === 200 && resData.data.Success) {
+        self.userInfo = resData.data.Data;
+        self.$store.dispatch("setUserInfo", self.userInfo)
+        this.$router.push('/')
+      } else {
+        Toast({
+          message: resData.data.Msg || '获取用户信息失败',
+          duration: 1500
+        })
+      }
+    },
   }
 };
 </script>

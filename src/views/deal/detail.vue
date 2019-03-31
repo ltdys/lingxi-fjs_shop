@@ -9,13 +9,16 @@
           <div class="deal_detail__reason" v-if="v.state == 2">{{ v.Info }}</div>
         </div>
         <div class="deal_detail__right">
-          <div>{{ v.Num }}</div>
-          <div
+          <div>
+            <span v-show="v.Num > 0">+</span>
+            {{ v.Num }} 张
+          </div>
+          <!-- <div
             class="deal_detail__status"
             :class="[{
               'deal_detail__status__success': v.Type == 1,
               'deal_detail__status__error': v.Type == 2
-            }]">{{ v.Type }}</div>
+            }]">{{ v.Type }}</div> -->
         </div> 
       </van-cell>
     </van-list>
