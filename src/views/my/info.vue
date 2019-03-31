@@ -9,7 +9,7 @@
 		<van-field label="姓名" v-model="userInfo.realname" input-align="right" placeholder="请输入姓名"></van-field>
 		<van-cell title="会员账号" :value="userInfo.userName"></van-cell>
 		<van-cell title="手机号" :value="userInfo.mobile" is-link @click.native="$router.push('/my/update_phone')"></van-cell>
-		<van-cell title="会员等级" :value="userInfo.userLevel | vipLevel"></van-cell>
+		<van-cell title="会员等级" :value="userInfo.userLevel | vipLevel"></van-cell> 
 		<van-cell title="邀请码" :value="userInfo.userName"></van-cell>
 		<van-field label="身份证号" v-model="userInfo.card" input-align="right" :error="cardError" placeholder="请输入身份证号"></van-field>
 		<van-cell title="银行账号" is-link to="/my/bank?id=1"></van-cell>
