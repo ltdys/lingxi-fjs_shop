@@ -8,7 +8,7 @@
           <div class="yllist2_list__title">{{ v.BankName }}</div>
           <div class="yllist2_list__title">{{ v.SubBranch }}</div>
           <div class="yllist2_list__title">{{ v.BankCode | card }}</div>
-          <div class="yllist2_list__date">{{ v.AddTime | date('yyyy-MM-dd hh:mm') }}</div>
+          <div class="yllist2_list__date">{{ v.AddTime }}</div>
           <!-- <div class="yllist2_list__reason" v-if="v.Status == 2">{{ v.info }}</div> -->
         </div>
         <div class="yllist2_list__right">

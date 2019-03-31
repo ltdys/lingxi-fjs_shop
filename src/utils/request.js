@@ -40,7 +40,7 @@ service.interceptors.response.use(
   e => {
     Toast({
       message: "数据异常,请稍后重试~",
-      duration: 1500
+      duration: 2000
     })
     return Promise.reject({
       status:-1,
