@@ -68,8 +68,7 @@ export const setYECZ = (queryParams, params) => axios.post('/My/YECZ' + queryPar
 export const getUserByPhone = (queryParams, params) => axios.post('/GetUserByPhone' + queryParams, params)
 
 /* 修改个人信息 */
-// export const updInfo = (queryParams, params) => axios.post('/UpdInfo' + queryParams, params)
-export const updInfo = (params) => axios.post('/UpdInfo', params)
+export const updInfo = (queryParams, params) => axios.post('/UpdInfo' + queryParams, params)
 
 /* 修改手机号 */
 export const updatePhone = (queryParams, params) => axios.post('/UpdatePhone' + queryParams, params)

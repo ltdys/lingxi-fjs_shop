@@ -91,13 +91,31 @@ export default {
 		async confireBtn () { // 保存个人用户信息
 			let self = this;
 			let param = {
+        // id: self.userId,
+        // realname: self.userInfo.realname,
+        icon: encodeURIComponent(self.userInfo.icon),
+        // card: self.userInfo.card,
+			}
+			let params = {
         id: self.userId,
         realname: self.userInfo.realname,
-        icon: self.userInfo.icon,
         card: self.userInfo.card,
-      }
-			// let queryParams = paramConvert(param)
-			let resData = await updInfo(param)
+			}
+			// self.$axios({
+			// 	method: 'post',
+			// 	url: '/UpdInfo' + paramConvert(params),
+			// 	data: {
+			// 		icon: self.userInfo.icon
+			// 	},
+			// 	headers: {
+			// 		'Content-Type':'application/x-www-form-urlencoded'
+			// 	}
+			// })
+			// .then((res)=>{
+			// 	console.log(res)
+			// })
+			let queryParams = paramConvert(params)
+			let resData = await updInfo(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
         
         console.log('保存个人用户信息',resData)
