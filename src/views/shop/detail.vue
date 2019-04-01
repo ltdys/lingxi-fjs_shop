@@ -66,10 +66,8 @@ import { Sku, SubmitBar, Toast } from "vant"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { formatTime } from "@/utils/dateUtil"
 import { shopInfo, placeShop } from "@/api/index.js"
-
 export default {
   mixins: [list_mixins],
-
   components: {
     [Sku.name]: Sku,
     [SubmitBar.name]: SubmitBar
@@ -117,14 +115,12 @@ export default {
       orderList: {}  //订单数据
     };
   },
-
   created () {
     this.id = this.$route.params.id
     this.formData.sid = this.id
     this.formData.uid = this.userId
     this.shopInfo()
   },
-
   methods: {
     async shopInfo () {
       let queryParams = paramConvert({ id: this.id })
@@ -178,5 +174,18 @@ export default {
   .van-cell__title {
     flex: 0.5;
   }
+}
+.shop-detail {
+  .van-cell__title {
+    flex: 0.5;
+  }
+}
+.van-stepper__input {
+  width: 3.6rem;
+  height: 0.75rem;
+  font-size: 0.38rem;
+}
+.van-stepper__minus, .van-stepper__plus {
+  display: none;
 }
 </style>

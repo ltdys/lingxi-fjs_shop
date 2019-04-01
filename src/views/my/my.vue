@@ -205,10 +205,10 @@ export default {
 			border: none;
 		}
 		&__copy {
-			width: 27px;
-			height: 15px;
+			// width: 27px;
+			// height: 15px;
+			// line-height: 15px;
 			text-align: center;
-			line-height: 15px;
 			border-radius: 50px;
 			font-size: 10px;
 			margin-left: 10px;
@@ -233,8 +233,8 @@ export default {
 			position: absolute;
 			top: -7px;
 			right: -7px;
-			width: 16px;
-			height: 16px;
+			width: 18px;
+			height: 18px;
 			font-size: 12px;
 			line-height: 16px;
 			text-align: center;

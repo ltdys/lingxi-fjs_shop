@@ -24,21 +24,21 @@
           <div class="goods-middle-bottom fa-stack-14x fa-color-default" @click="$router.push('/deal/detail')">详情</div>
         </div>
         <div class="goods-content">
-          <div>
+          <div class="div-center">
             <div class="lx-mr-15 fa-stack-14x fa-color-969">购买数量</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.GMSL}}</div>
           </div>
-          <div>
+          <div class="div-center">
             <div class="lx-mr-15 fa-stack-14x fa-color-969">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.TC}}</div>
           </div>
         </div>
         <div class="goods-content">
-          <div>
+          <div class="div-center">
             <div class="lx-mr-15 fa-stack-14x fa-color-969">系统奖励</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.XTJL}}</div>
           </div>
-          <div>
+          <div class="div-center">
             <div class="lx-mr-15 fa-stack-14x fa-color-969">提货数量</div>
           <div class="tl-c fa-stack-17x fa-color-327">{{item.THSL}}</div>
           </div>
@@ -150,8 +150,11 @@ $otherColor: #3279FF;
   .goods-content {
     display: flex;
     justify-content: space-around;
-    text-align: center;
     padding-bottom: 30px;
+    .div-center {
+      width: 50%;
+      text-align: center;
+    }
     .lx-mr-15 {
       margin-bottom: 15px;
     }
@@ -162,7 +165,6 @@ $otherColor: #3279FF;
     padding: 15px;
     .shop-btn {
       width: 158px;
-      height: 38px;
       border-radius: 19px;
       color: #fff;
       padding: 0.15rem 0.4rem;

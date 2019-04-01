@@ -140,7 +140,14 @@
     }
   }
   .delivery-bottom {
+    vertical-align: middle;
     padding: 30px 15px 0 15px;
+    font-size: 15px;
+    input {
+      width: 15px;
+      height: 15px;
+      vertical-align: middle;
+    }
   }
   .delivery-btn-checked {
     background-color: #ec9300;
