@@ -150,6 +150,7 @@ $otherColor: #3279FF;
   .goods-content {
     display: flex;
     justify-content: space-around;
+    text-align: center;
     padding-bottom: 30px;
     .lx-mr-15 {
       margin-bottom: 15px;
