@@ -22,7 +22,7 @@
 				<span>说明:</span>
 			</van-cell>
 			<van-cell>
-				<span>1.提现手续费10.0%。系统直接扣除。</span>
+				<span>1.提现手续费{{payMentFee}}%。系统直接扣除。</span>
 			</van-cell>
 			<van-cell>
 				<span>2.提现必须为100.0的整数倍。</span>
@@ -43,7 +43,7 @@
 <script>
 import { Toast, Dialog } from 'vant';
 import { list_mixins } from "@/mixins";
-import { cashWithdrawal } from "@/api/index.js"
+import { cashWithdrawal, getPaymentFee } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
@@ -51,10 +51,12 @@ export default {
     return {
       step:1,
       withdrawrNum: null, //提现金额
-      autoWithdrawr: true, //确认提现显示状态
+			autoWithdrawr: true, //确认提现显示状态
+			payMentFee: '0.00'  //提现手续费
     }
   },
   created () {
+		this.getPaymentFee()
     this.getUserInfo()
 	},
 	computed: {
@@ -139,7 +141,13 @@ export default {
 					duration: 1500
 				})
 			}
-    }
+		},
+		async getPaymentFee () {
+			let resData = await getPaymentFee()
+			if (resData.status === 200 && resData.data.Success) {
+				this.payMentFee = resData.data.Data.TXSXF
+			}
+		}
   },
 }
 </script>

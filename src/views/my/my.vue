@@ -33,7 +33,7 @@
 						<van-button type="primary" class="my__navs__auto" round size="small" @click="$router.push('/my/transfer')">转账</van-button>
 					</van-col>
 					<van-col span="8">
-						<van-button type="primary" class="my__navs__cash" plain round size="small" @click="$router.push('/my/withdraw')">提现</van-button>
+						<van-button type="primary" class="my__navs__cash" plain round size="small" @click="$router.push('/my/withdraw')" :disabled="isPay !== '1'">提现</van-button>
 					</van-col>
 				</van-row>
 			</div>
@@ -90,6 +90,7 @@
 import { Toast, Badge, GoodsAction, GoodsActionMiniBtn } from 'vant';
 import { list_mixins } from "@/mixins";
 import { clearStorage } from "@/utils/storage.js"
+import { getPaymentFee } from "@/api/index.js"
 export default {
 	mixins: [list_mixins],
 	components: {
@@ -99,10 +100,12 @@ export default {
 		return {
 			id: '', //用户id
 			sysAppIds: 'a12312312', //会员账号
+			isPay: '0',  //是否可提现,1为可以提现
 		}
 	},
 	created () {
 		this.id = this.$store.getters.getUserId
+		this.getPaymentFee()
     this.getUserInfo()
   },
 	mounted () {
@@ -125,6 +128,12 @@ export default {
 			this.$store.dispatch('setClearAll', '')
 			clearStorage()
 			this.$router.push('/team/login')
+		},
+		async getPaymentFee () {
+			let resData = await getPaymentFee()
+			if (resData.status === 200 && resData.data.Success) {
+				this.isPay = resData.data.Data.SFKTX
+			}
 		}
 	}
 }

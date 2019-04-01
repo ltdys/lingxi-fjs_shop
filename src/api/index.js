@@ -115,3 +115,6 @@ export const getMsgInfo = (queryParams, params) => axios.post('/Home/GetMsgInfo'
 /* 获取我的消息详情 */
 export const getMyMsgList = (queryParams, params) => axios.post('/Home/GetMyMsgList' + queryParams, params)
 
+/* 获取提现手续费 */
+export const getPaymentFee = () => axios.post('/My/GetPaymentFee')
+
