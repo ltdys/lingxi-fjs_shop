@@ -17,6 +17,23 @@
 				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
 			</van-cell>
 		</van-cell-group>
+		<div class="m-t withraw-info">
+			<van-cell>
+				<span>说明:</span>
+			</van-cell>
+			<van-cell>
+				<span>1.提现手续费10.0%。系统直接扣除。</span>
+			</van-cell>
+			<van-cell>
+				<span>2.提现必须为100.0的整数倍。</span>
+			</van-cell>
+			<van-cell>
+				<span>3.提现申请72小时（3个工作日，遇节假日顺延）内处理。到帐时间以收款方银行为准。</span>
+			</van-cell>
+			<van-cell>
+				<span>4.提现方式：目前仅支持银行转帐。</span>
+			</van-cell>
+		</div>
 		<div class="submit_buttons">
 			<van-button type="primary" block :disabled="autoWithdrawr" @click="cashDeposit">确认提现</van-button>
 		</div>
@@ -127,7 +144,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .withdraw{
   text-align: center; 
   margin: 10px;
@@ -151,8 +168,5 @@ export default {
 		margin-top: 10px;
 		font-size: 14px;
 	}
-}
-.f666{
-  font-size: 12px;
 }
 </style>

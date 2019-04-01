@@ -1,19 +1,26 @@
 <template>
 	<com-page>
 		<com-header title="我的团队" is-back slot="header"></com-header>
+		<div class="myteam-top">
+			<div>
+				<div><com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>{{myTeamSonData.username}} {{myTeamSonData.level}}</div>
+				<div class="fa-color-default" @click="jumpChildRegister">注册下级会员帐户</div>
+			</div>
+			<div class="myteam-padd">姓名:{{currentUserInfo.realname}} 帐户:{{myTeamSonData.zhanghu}}</div>
+			<div class="myteam-padd">注册时间: {{myTeamSonData.time}}</div>
+		</div>
 		<div class="myteam">
 			<div>
 				<div class="myteam-title">总业绩(万元)</div>
-				<div class="myteam-num">{{myTeamData.price|number}}</div>
+        <div class="myteam-num">{{myTeamSonData.price|number}}</div>
 			</div>
 			<div class="tl-r">
 				<div class="myteam-title">团队人数(人)</div>
-				<div class="myteam-num">{{myTeamData.num|number(0)}}</div>
+        <div class="myteam-num">{{myTeamSonData.num|number(0)}}</div>
 			</div>
 		</div>
 		<div class="team-child">
-			<div>直接下属团队（{{myTeamData.zjxj}}人）</div>
-			<div class="a" @click="jumpRegister">注册会员</div>
+      <div>直接下属团队（{{myTeamSonData.zjxj}}人）</div>
 		</div>
 
 		<div v-for="(item, index) in myTeamSonData.list" :key="index" class="myteam-cell">
@@ -28,20 +35,28 @@
 </template>
 
 <script>
+  import { Toast } from "vant"
 	import { paramConvert } from "@/utils/stringUtil.js"
-	import { getMyTeam, getMyTeamSon } from "@/api/index.js"
+	import { getMyTeam, getMyTeamSon, getUserInfo } from "@/api/index.js"
 	import { formatTime } from "@/utils/dateUtil"
 	export default {
 		data () {
 			return {
-				myTeamData: {
-					price: 0,
-					num: 0,
-					zjzxj: 0
-				},
-				myTeamSonData: {},
+        myTeamSonData: {},
+        id: '',
+				currentUserInfo: {},
 			}
-		},
+    },
+    
+    watch: {
+      $route: {
+        handler: function (val, oldVal) {
+          this.id = this.$route.params.id
+          this.getUserInfo()
+        }
+      },
+      deep: true
+    },
 
 		computed: {
       userId: {
@@ -52,24 +67,13 @@
 		},
 
 		created () {
-			this.getMyTeam()
+      this.id = this.$route.params.id
+			this.getUserInfo()
 		},
 
 		methods: {
-			async getMyTeam () {
-				let id = this.userId
-        let queryParams = paramConvert({
-          id: id
-        })
-        let resData = await getMyTeam(queryParams, { id: id })
-        if (resData.status === 200 && resData.data.Success) {
-					this.myTeamData = resData.data.Data
-					this.getMyTeamSon()
-        }
-			},
 			async getMyTeamSon () {
-				this.myTeamSonList = []
-				let id = this.userId
+				let id = this.id
         let queryParams = paramConvert({
           id: id
         })
@@ -82,12 +86,24 @@
 			changeTeam (item) {
 				this.$router.push('/team/childteam/' + item.id)
 			},
-			jumpRegister () {  //注册会员
-				let userInfo = JSON.parse(this.$store.getters.getUserInfo) || ''
+			jumpChildRegister () {  //注册下级会员
 			  this.$router.push({path:'/team/register',query:{
-					mobile: userInfo.mobile,
-					realname: userInfo.realname || ''
+					mobile: this.currentUserInfo.mobile,
+					realname: this.currentUserInfo.realname || ''
 				}})
+			},
+			async getUserInfo () {
+				let queryParams = paramConvert({ "uId": this.id })
+				let resData = await getUserInfo(queryParams, { "uId": this.id })
+				if (resData.status === 200 && resData.data.Success) {
+					this.currentUserInfo = resData.data.Data
+					this.getMyTeamSon()
+				} else {
+					Toast({
+						message: resData.data.Msg || '获取用户信息失败',
+						duration: 1500
+					})
+				}
 			}
 		}
 	}
