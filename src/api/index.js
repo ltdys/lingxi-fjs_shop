@@ -118,3 +118,6 @@ export const getMyMsgList = (queryParams, params) => axios.post('/Home/GetMyMsgL
 /* 获取提现手续费 */
 export const getPaymentFee = () => axios.post('/My/GetPaymentFee')
 
+/* 取消订单 */
+export const CancelOrder = (queryParams, params) => axios.post('/My/CancelOrder' + queryParams, params)
+

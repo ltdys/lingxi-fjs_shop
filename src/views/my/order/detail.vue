@@ -52,7 +52,7 @@
         </ul>
         <template slot="footer">
           <div class="order-detail__actions" v-if="orderDetail.state==1">
-            <van-button size="small">取消订单</van-button>
+            <van-button size="small" @click="cancelOrder(orderDetail)">取消订单</van-button>
             <van-button size="small" type="danger" plain @click="paymentOrder">支付订单</van-button>
           </div>
           <div class="order-detail__actions" v-if="orderDetail.state==2">
@@ -69,7 +69,7 @@
 <script>
 import { list_mixins } from "@/mixins";
 import { Toast, Card, Panel } from "vant";
-import { getOrderInfo, paymentOrder } from "@/api/index.js"
+import { getOrderInfo, paymentOrder, CancelOrder } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
@@ -158,6 +158,26 @@ export default {
           message: resData.data.Msg,
           duration: 1500
         })
+      }
+    },
+    async cancelOrder (item) {
+      console.log("item", item)
+      let param = {
+        orderid: item.id
+      }
+      let queryParams = paramConvert(param)
+      let resData = await CancelOrder(queryParams, param)
+      if (resData.status === 200&& resData.data.Success) {
+        Toast({
+          message: '取消订单成功',
+          duration: 1500
+        })
+        this.$router.back()
+      } else {
+        Toast({
+					message: resData.data.Msg || '取消订单失败',
+					duration: 1500
+				})
       }
     },
     statusChange (name) { //状态转化编码

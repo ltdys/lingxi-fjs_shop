@@ -6,9 +6,9 @@
         <li class="message-item" v-for="(item,i) in messageList" :key="i" @click="$router.push('/message/' + item.id)">
           <div class="message__title">{{item.title}}</div>
           <div class="message__date">{{item.addtime}}</div>
-          <div class="message__img">
+          <!-- <div class="message__img">
             <img src="static/images/banner.png"/>
-          </div>
+          </div> -->
           <div class="message__desc">{{item.text}}</div>
         </li>
       </ul>

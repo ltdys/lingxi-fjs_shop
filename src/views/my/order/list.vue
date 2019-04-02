@@ -25,7 +25,7 @@
           </van-card>
         </div>
         <div slot="footer" v-if="item.state==1">
-          <van-button size="small">取消订单</van-button>
+          <van-button size="small" @click="cancelOrder(item)">取消订单</van-button>
           <van-button size="small" type="danger" plain @click="paymentOrder(item)">支付订单</van-button>
         </div>
         <div slot="footer" v-if="item.state==2">
@@ -42,7 +42,7 @@
 <script>
 import { list_mixins } from "@/mixins";
 import { Toast, Card, Panel } from "vant";
-import { getMyOrder, paymentOrder } from "@/api/index.js"
+import { getMyOrder, paymentOrder, CancelOrder } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
@@ -99,7 +99,7 @@ export default {
           item.state = self.statusChange(item.status)
           self.orderList.push(item)
         })
-        self.orderLoading = false;
+        self.orderLoading = false
         if (list.length == 0) {
           self.orderFinished = true;
         }
@@ -155,6 +155,27 @@ export default {
 				})
       }
     },
+    async cancelOrder (item) {
+      let param = {
+        orderid: item.id
+      }
+      let queryParams = paramConvert(param)
+      let resData = await CancelOrder(queryParams, param)
+      if (resData.status === 200&& resData.data.Success) {
+        Toast({
+          message: '取消订单成功',
+          duration: 1500
+        })
+        this.pageIndex = 1
+        this.orderList = []
+        this.getMyOrder()
+      } else {
+        Toast({
+					message: resData.data.Msg || '取消订单失败',
+					duration: 1500
+				})
+      }
+    }
   }
 };
 </script>
