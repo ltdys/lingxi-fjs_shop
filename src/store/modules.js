@@ -1,5 +1,5 @@
 import * as types from './types'
-import { setLocalStore, getLocalStore } from '@/utils/storage.js'
+import { setLocalStore, getLocalStore, setSesStorage, getSesStore } from '@/utils/storage.js'
 
 const state = {
   userId: '', //用户userId
@@ -54,18 +54,38 @@ const getters = {
     return state.userInfo
   },
   getDeliveryList: state => {
+    let status = JSON.parse(getSesStore('DELIVERY_LIST'))
+    if (status) {
+      state.deliveryList = status
+    }
     return state.deliveryList
   },
   getCurrentBankMess: state => {
+    let status = JSON.parse(getSesStore('CURRENT_BANK_MESS'))
+    if (status) {
+      state.currentBankMess = status
+    }
     return state.currentBankMess
   },
   getCurrentOrder: state => {
+    let status = JSON.parse(getSesStore('CURRENT_ORDER'))
+    if (status) {
+      state.currentOrder = status
+    }
     return state.currentOrder
   },
   getCurrentAddress: state => {
+    let status = JSON.parse(getSesStore('CURRENT_ADDRESS'))
+    if (status) {
+      state.currentAddress = status
+    }
     return state.currentAddress
   },
   getAddOrder: state => {
+    let status = JSON.parse(getSesStore('ADD_ORDER'))
+    if (status) {
+      state.addOrder = status
+    }
     return state.addOrder
   },
 }
@@ -84,22 +104,27 @@ const mutations = {
   //交易提货数据存储
   ['SET_DELIVERY_LIST'] (state, boo) {
     state.deliveryList = boo
+    setSesStorage('DELIVERY_LIST', boo)
   },
   //当前银行信息
   ['SET_CURRENT_BANK_MESS'] (state, boo) {
     state.currentBankMess = boo
+    setSesStorage('CURRENT_BANK_MESS', boo)
   },
   //当前银行信息
   ['SET_CURRENT_ORDER'] (state, boo) {
     state.currentOrder = boo
+    setSesStorage('CURRENT_ORDER', boo)
   },
   //当前地址信息
   ['SET_CURRENT_ADDRESS'] (state, boo) {
     state.currentAddress = boo
+    setSesStorage('CURRENT_ADDRESS', boo)
   },
   //新增订单信息
   ['SET_ADD_ORDER'] (state, boo) {
     state.addOrder = boo
+    setSesStorage('ADD_ORDER', boo)
   },
   ['SET_CLEAR_ALL'] (state, boo) {
     state.userId = '' //用户userId

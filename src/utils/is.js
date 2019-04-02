@@ -52,6 +52,25 @@ export function isFloat(inputNumber) {
 }
 
 /**
+ * 输入的值是不是正整数型
+ * @param inputNumber   
+ */
+export function isPositiveInteger(inputNumber) {
+  var re = /(^[1-9]\d*$)/ 
+  return re.test(inputNumber)
+}
+
+/**
+ * 输入的值是不是自然数
+ * @param inputNumber   
+ */
+export function isNaturalNumber (inputNumber) {
+  if (s == 0) { return true }
+  var re = /(^[1-9]\d*$)/
+  return re.test(s)
+}
+
+/**
 * 输入的Email格式是否正确
 * @param strInput
 */

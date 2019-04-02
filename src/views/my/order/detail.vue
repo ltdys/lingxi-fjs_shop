@@ -4,7 +4,7 @@
 
     <div class="order-detail__status">
       <div>订单状态：{{ orderDetail.status }}</div>
-      <div class="fs-12" v-if="orderDetail.state == '1'">剩{{ surplusTime | timeDate1 }}自动关闭</div>
+      <!-- <div class="fs-12" v-if="orderDetail.state == '1'">剩{{ surplusTime | timeDate1 }}自动关闭</div> -->
     </div>
     <van-cell-group>
       <van-cell icon="location" class="select-location" :is-link="orderDetail.status == '待付款'" @click="jumpAddress">

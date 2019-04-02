@@ -32,6 +32,7 @@ import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
 import { setYECZ } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { isPositiveInteger } from "@/utils/is"
 export default {
 	mixins: [list_mixins],
 	data(){
@@ -71,7 +72,21 @@ export default {
 	},
 	methods: {
 		async setYECZ () { //余额充值
-      let self = this;
+			let self = this;
+			if (!isPositiveInteger(this.form.amount)) {
+				Toast({
+					message: '充值金额必须为正整数型',
+					duration: 1500
+				})
+				return
+			}
+			if (!this.channelName) {
+				Toast({
+					message: '请选择付款途径',
+					duration: 1500
+				})
+				return
+			}
 			let param = {
 				id: this.id,
 				price: self.form.amount

@@ -27,6 +27,7 @@
       required
       clearable
       v-model="formData.phone"
+      @blur="oneValidate('phone')"
       :error-message="errorMsg.phone"
     ></van-field>
     <van-field
@@ -36,12 +37,14 @@
       required
       clearable
       v-model="formData.pwd"
+      @blur="oneValidate('pwd')"
 			:error-message="errorMsg.pwd"
     >
 		</van-field>
     <van-field
       label="姓名"
       placeholder="请输入姓名"
+      @blur="oneValidate('name')"
       required
       clearable
       v-model="formData.name"
@@ -53,6 +56,7 @@
 			required
 			clearable
 			placeholder="请输入身份证号"
+      @blur="oneValidate('card')"
 			v-model="formData.card"
 			:error-message="errorMsg.card">
 		</van-field>
@@ -81,6 +85,7 @@ export default {
       },
       tjrName: "",  //推荐人姓名
       errorMsg: {
+        tjrPhone: "",
         phone: "",
         pwd: "",
         name: "",
@@ -169,6 +174,16 @@ export default {
           });
         }
         callback && callback(errors, fields);
+      }, data);
+    },
+    oneValidate (data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
       }, data);
     },
     resetField(attrs) {

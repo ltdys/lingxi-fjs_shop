@@ -10,7 +10,15 @@
         <div class="dc-item" :key="'d'+index">
           <div>
             {{item.list[0].tclx}}
-            <span class="amount fr">+{{item.list[0].price}}</span>
+            <span class="amount fr">
+              <template v-if="item.list[0].price > 0">
+                +
+              </template>
+              <template v-else>
+                -
+              </template>
+              {{item.list[0].price}}
+            </span>
           </div>
           <div class="dc-item__desc">
             <div>下单用户：{{item.list[0].xdyh}}</div>

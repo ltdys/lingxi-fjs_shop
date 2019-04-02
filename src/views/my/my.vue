@@ -4,9 +4,9 @@
 		<div class="my-info">
 			<img class="my__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'" @click="$router.push('/my/info')"/>
 			<div>
-				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">{{ userInfo.userLevel | vipLevel }}</van-tag></div>
+				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">{{ userInfo.userLevel }}</van-tag></div>
 				<div class="m-t-sm my_vip">
-					<span>会员账号：<span class="my_vip__acc">{{ userInfo.userName || 'a123123132' }}</span></span>
+					<span>会员账号：<span class="my_vip__acc">{{ userInfo.userName }}</span></span>
 					<van-button
 						type="primary"
 						size="mini"

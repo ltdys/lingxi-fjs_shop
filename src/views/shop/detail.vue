@@ -66,6 +66,7 @@ import { Sku, SubmitBar, Toast } from "vant"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { formatTime } from "@/utils/dateUtil"
 import { shopInfo, placeShop } from "@/api/index.js"
+import { isPositiveInteger } from "@/utils/is"
 export default {
   mixins: [list_mixins],
   components: {
@@ -94,7 +95,7 @@ export default {
         ],
         price: "0", // 默认价格（单位元）
         totalPrice: 0,
-        stock_num: 227, // 商品总库存
+        stock_num: 1000000000, // 商品总库存
         collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
         none_sku: true, // 是否无规格商品
         hide_stock: true // 是否隐藏剩余库存
@@ -110,7 +111,7 @@ export default {
       formData: {
         uid: '',  //用户id
         sid: '',  //商品id
-        num: 1  //商品数量  
+        num: '1'  //商品数量  
       },
       orderList: {}  //订单数据
     };
@@ -144,6 +145,13 @@ export default {
       this.sku.totalPrice = value * this.goods.price * 100
     },
     async placeShop () {
+      if (!isPositiveInteger(this.formData.num)) {
+        Toast({
+          message: "购买数量必须为正整数型",
+          duration: 1500
+        })
+        return
+      }
       let queryParams = paramConvert(this.formData)
       let resData = await placeShop(queryParams, this.formData)
       if (resData.status === 200 && resData.data.Success) {
