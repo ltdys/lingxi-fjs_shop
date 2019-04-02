@@ -23,6 +23,7 @@
     <div class="lx-wrap">
       <!-- <span>忘记密码?</span> -->
       <span @click="$router.push('/team/register')">立即注册</span>
+      <span @click="$router.push('/team/forgetPwd')">忘记密码</span>
     </div>
     <div class="lx-btn">
       <van-button type="primary" block @click="submit">登录</van-button>

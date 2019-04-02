@@ -92,6 +92,10 @@ export const routes = [{
     path: '/team/login',
     component: () => import('@/views/team/login.vue'),
   },
+  {
+    path: '/team/forgetPwd',
+    component: () => import('@/views/team/forgetPwd.vue'),
+  },
   //我的
   {
     path: '/my/info',

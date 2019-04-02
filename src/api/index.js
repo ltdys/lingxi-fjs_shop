@@ -121,3 +121,8 @@ export const getPaymentFee = () => axios.post('/My/GetPaymentFee')
 /* 取消订单 */
 export const CancelOrder = (queryParams, params) => axios.post('/My/CancelOrder' + queryParams, params)
 
+/* 获取验证码 */
+export const GetSmsCode = (queryParams, params) => axios.post('/GetSmsCode' + queryParams, params)
+
+/* 忘记密码 */
+export const UpdatePwdByCode = (queryParams, params) => axios.post('/UpdatePwdByCode' + queryParams, params)
