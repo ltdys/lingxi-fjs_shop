@@ -19,11 +19,9 @@ export default {
 			messageId: ''
 		}
 	},
-
 	created () {
 		this.getMsg()
 	},
-
 	methods: {
 		async getMsg () {
 			let resData = await getMsg()

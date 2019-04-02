@@ -22,11 +22,9 @@ export default {
 			shopList: []
 		}
 	},
-
 	created () {
 		this.getHot()
 	},
-
   methods: {
     buy(id) {
       this.$router.push("/shop/" + id);

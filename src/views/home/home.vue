@@ -15,7 +15,6 @@
 import homeNavs from "./components/navs";
 import homeMessage from "./components/message";
 import homeHotShop from "./components/hotShop";
-
 export default {
   components: {
     homeNavs,
@@ -43,4 +42,3 @@ export default {
   }
 }
 </style>
-
