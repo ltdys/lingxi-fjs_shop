@@ -1,40 +1,46 @@
 <template>
   <com-page>
     <com-header title="DC明细" is-back slot="header"></com-header>
-    <div class="dc-list" v-for="(item, index) in myDcMxList" :key="index">
-      <template>
-        <div class="dc-count" :key="'c'+index">
-          <div class="fs-16">{{item.list[0].date | formatDate}}</div>
-          <div class="f666">收入 ¥{{item.sr}}</div>
+    <div class="dc-list">
+      <div class="dc-count">
+        <div class="fs-16">{{showDate}}</div>
+        <div class="f666">收入 ¥{{myDcMxList.sr}}</div>
+      </div>
+      <div class="dc-item" v-for="(item, index) in myDcMxList.list" :key="'d'+index">
+        <div>
+          {{item.tclx}}
+          <span class="amount fr">
+            <template v-if="item.price > 0">
+              +
+            </template>
+            <template v-else>
+              -
+            </template>
+            {{item.price}}
+          </span>
         </div>
-        <div class="dc-item" :key="'d'+index">
-          <div>
-            {{item.list[0].tclx}}
-            <span class="amount fr">
-              <template v-if="item.list[0].price > 0">
-                +
-              </template>
-              <template v-else>
-                -
-              </template>
-              {{item.list[0].price}}
-            </span>
-          </div>
-          <div class="dc-item__desc">
-            <div>下单用户：{{item.list[0].xdyh}}</div>
-            <div>订单金额：{{item.list[0].ddje}}</div>
-            <div>提成比例：{{item.list[0].tcbl}}</div>
-            <div class="lx-margin-bottom-10">下单时间：{{item.list[0].date}}</div>
-          </div>
-          <div class="lx-margin-top-10">
-            {{item.list[1].tclx}}
-            <span class="amount fr">+{{item.list[1].price}}</span>
-          </div>
-          <div class="dc-item__desc1">
-            <div>赠送时间: {{item.list[1].date}}</div>
-          </div>
+        <div class="dc-item__desc">
+          <div>下单用户：{{item.xdyh}}</div>
+          <div>订单金额：{{item.ddje}}</div>
+          <div>提成比例：{{item.tcbl}}</div>
+          <div class="lx-margin-bottom-10">下单时间：{{item.date}}</div>
         </div>
-      </template>
+        <div class="lx-margin-top-10">
+          {{item.tclx}}
+          <span class="amount fr">
+            <template v-if="item.price > 0">
+              +
+            </template>
+            <template v-else>
+              -
+            </template>
+            {{item.price}}
+          </span>
+        </div>
+        <div class="dc-item__desc1">
+          <div>赠送时间: {{item.date}}</div>
+        </div>
+      </div>
     </div>
   </com-page>
 </template>
@@ -46,8 +52,9 @@ import { formatTime } from "@/utils/dateUtil"
 export default {
   data() {
     return {
-			myDcMxList: [],
-			nowDate: ''
+			myDcMxList: {},
+      nowDate: '',
+      showDate: ''
     };
   },
 
@@ -61,7 +68,9 @@ export default {
 
   created() {
 		let date = new Date()
-		this.nowDate = formatTime(date, '{y}-{m}')
+    this.nowDate = formatTime(date, '{y}-{m}')
+    let fd = this.nowDate.split("-")
+    this.showDate = fd[0] + "年" + fd[1] + "月"
     this.getMyDcMx()
   },
 
@@ -77,7 +86,7 @@ export default {
 				date: this.nowDate 
 			});
       if (resData.status === 200 && resData.data.Success) {
-				this.myDcMxList.push(resData.data.Data);
+        this.myDcMxList = resData.data.Data
       }
     }
   }
