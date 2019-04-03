@@ -75,7 +75,7 @@ export default {
 			let self = this;
 			if (!isPositiveInteger(this.form.amount)) {
 				Toast({
-					message: '充值金额必须为正整数型',
+					message: '充值金额必须为正整数',
 					duration: 1500
 				})
 				return

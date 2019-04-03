@@ -15,7 +15,7 @@
         <div>{{ realname }}</div>
       </div>
       <van-cell-group>
-        <van-field label="转账金额" input-align="right" placeholder="请输入转账金额" v-model="transferNum"></van-field>
+        <van-field label="转账金额" input-align="right" type="number" placeholder="请输入转账金额" v-model="transferNum"></van-field>
         <van-cell>
           <span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
         </van-cell>

@@ -32,7 +32,7 @@ export default {
     qrcode () {
       // http://192.19.23.49:8000/#/team/register
       let url = window.location.href.split('#')[0] + '#/team/register?mobile='
-        + this.userInfo + '&realname=' + this.userInfo.realname
+        + this.userInfo.mobile + '&realname=' + this.userInfo.realname
       let qrcode = new QRCode('qrcode', {  
           width: 213,  // 设置宽度 
           height: 185, // 设置高度

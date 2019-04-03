@@ -12,7 +12,7 @@
 		</div>
 		<div class="text-prompt">输入提现金额</div>
 		<van-cell-group>
-			<van-field label="提现金额" input-align="right" placeholder="请输入提现金额" v-model="withdrawrNum"></van-field>
+			<van-field label="提现金额" type="number" input-align="right" placeholder="请输入提现金额" v-model="withdrawrNum"></van-field>
 			<van-cell>
 				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
 			</van-cell>
@@ -45,6 +45,7 @@ import { Toast, Dialog } from 'vant';
 import { list_mixins } from "@/mixins";
 import { cashWithdrawal, getPaymentFee } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { isPositiveInteger } from "@/utils/is"
 export default {
   mixins: [list_mixins],
   data(){
@@ -115,11 +116,18 @@ export default {
 					duration: 1500
         })
         return
+			} else if (Number(self.withdrawrNum) % 100 != 0) {
+				Toast({
+					message: '提现金额必须为100的整数倍',
+					duration: 1500
+				})
+				return
 			}
 			self.cashWithdrawal()
 		},
     async cashWithdrawal(){
-      let self = this;
+			let self = this;
+			console.log(self.withdrawrNum)
 			let param = {
         id: self.userId,
         BankId: self.currentBankMess.BanklId,

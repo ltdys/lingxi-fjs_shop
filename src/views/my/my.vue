@@ -57,14 +57,14 @@
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=2')">
 						<div class="my-order">
 							<img class="my_img__box" src="static/images/icon/car_order.png" alt="">
-							<span class="my_img__num" v-show="userInfo.dingdanyfk && userInfo.dingdanyfk != 0">{{ userInfo.dingdanyfk }}</span>
+							<!-- <span class="my_img__num" v-show="userInfo.dingdanyfk && userInfo.dingdanyfk != 0">{{ userInfo.dingdanyfk }}</span> -->
 						</div>
 						<div>待收货</div>
 					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
 						<div class="my-order">
 							<img class="my_img__box" src="static/images/icon/finish_order.png" alt="">
-							<span class="my_img__num" v-show="userInfo.dingdanywc && userInfo.dingdanywc != 0">{{ userInfo.dingdanywc }}</span>
+							<span class="my_img__num" v-show="userInfo.dingdanyfk && userInfo.dingdanyfk != 0">{{ userInfo.dingdanyfk }}</span>
 						</div>
 						<div>已完成</div>
 					</van-col>

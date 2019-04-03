@@ -12,7 +12,7 @@
         v-for="(item, index) in orderList"
         :key="index" 
         :title="item.date | date('yyyy-MM-dd hh:mm')"
-        :status="item.status"
+        :status="item.status | orderTitle(active)"
         class="goods-panel">
         <div v-for="(order, ind) in item.goodlist" :key="ind">
           <van-card @click.native="jumpDetail(item)"

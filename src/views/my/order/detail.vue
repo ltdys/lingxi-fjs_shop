@@ -6,7 +6,7 @@
       <div>订单状态：{{ orderDetail.status }}</div>
       <!-- <div class="fs-12" v-if="orderDetail.state == '1'">剩{{ surplusTime | timeDate1 }}自动关闭</div> -->
     </div>
-    <van-cell-group>
+    <!-- <van-cell-group>
       <van-cell icon="location" class="select-location" :is-link="orderDetail.status == '待付款'" @click="jumpAddress">
         <div v-if="Object.keys(currentAddress).length != 0">
           <div>
@@ -17,9 +17,9 @@
         </div>
         <div v-else>请选择收货地址</div>
       </van-cell>
-    </van-cell-group>
+    </van-cell-group> -->
     <van-cell-group class="flex5">
-      <van-cell title="物流单号">
+      <van-cell title="订单编号">
         <span>{{ orderDetail.orderno }}</span>
         <van-button
           type="default"

@@ -150,3 +150,11 @@ export function vipLevel (value) {
   if (!value) { value = '资深交易员' }
   return value
 }
+
+//已完成状态更改
+export function orderTitle (value, index) {
+  if (index == 3) {
+    value = '已完成'
+  }
+  return value
+}
