@@ -5,9 +5,9 @@
     <div class="message_detail">
       <div class="message_detail__title">{{messageObject.title}}</div>
       <div class="message_detail__date">{{messageObject.addtime}}</div>
-      <div class="message_detail__img">
+      <!-- <div class="message_detail__img">
         <img src="static/images/banner.png"/>
-      </div>
+      </div> -->
       <!-- <div class="message_detail__desc">
          <p>价格股票公示</p>
           <p v-for="i in 9" :key="i">1月{{i}}号 1.{{i}}元/股</p>
