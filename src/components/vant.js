@@ -22,7 +22,8 @@ import {
   GoodsAction, GoodsActionMiniBtn,
   DatetimePicker,
   Uploader,
-  Loading
+  Loading,
+  Picker
 } from 'vant'
 
 const components = [
@@ -47,7 +48,8 @@ const components = [
   GoodsAction, GoodsActionMiniBtn,
   DatetimePicker,
   Uploader,
-  Loading
+  Loading,
+  Picker
 ]
 
 const install = function (Vue) {

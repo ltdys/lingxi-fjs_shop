@@ -2,33 +2,43 @@
   <com-page>
     <com-header title="我要提货" is-back slot="header"></com-header>
     <div class="delivery-top">
-      <div>{{this.deliveryList.title}}</div>
-      <div>
-        <span class="fa-stack-14x fa-color-333">套餐数量</span>
-        <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.CCSL}} </span>
-        <span class="fa-stack-14x fa-color-333">张</span>
+      <div class="delivery-left">
+        <div>{{this.deliveryList.title}}</div>
+        <div>
+          <span class="fa-stack-14x fa-color-333">套餐数量</span>
+          <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.CCSL}} </span>
+          <span class="fa-stack-14x fa-color-333">张</span>
+        </div>
+        <div class="tip-color">注意: 兑换功能不能反向操作</div>
       </div>
-      <div class="tip-color">注意: 兑换功能不能反向操作</div>
+      <div class="delivery-right">
+        <van-button round size="small" type="default" @click="selectType">
+          <div class="yu_e_btn">
+            <span class="yu_e_btn__span">{{ currentType }}</span>
+            <van-icon :name="iconName" />
+          </div>
+        </van-button>
+      </div>
     </div>
     <div class="delivery-middle">
-      <div>本次提货数量</div>
+      <div>{{currentObj.numTitle}}</div>
       <van-field
         type="number"
-        placeholder="您本次提货数量"
+        :placeholder="currentObj.numPlace"
         clearable
         v-model="formData.num"
       >
       </van-field>
-      <div>您的收货地址</div>
+      <div>{{currentObj.addTitle}}</div>
       <van-field
-        placeholder="您的收货地址"
+        :placeholder="currentObj.addPlace"
         clearable
         v-model="formData.address"
       >
       </van-field>
-      <div>您的帐户姓名</div>
+      <div>{{currentObj.nameTitle}}</div>
       <van-field
-        placeholder="您的帐户姓名"
+        :placeholder="currentObj.namePlace"
         clearable
         v-model="formData.accountName"
       >
@@ -36,11 +46,20 @@
     </div>
     <div class="delivery-bottom">
       <input type="checkbox" accountName="xieyi" value="" v-model="isCheck">
-      我同意提货协议
+      {{currentObj.deal}}
     </div>
     <div class="submit_buttons">
       <van-button type="primary" block @click="submit" :disabled="!isCheck">提交审核</van-button>
     </div>
+    <van-popup v-model="datePopShow" position="bottom">
+      <!-- <van-picker :columns="types" @change="typeChange" /> -->
+      <van-picker
+        show-toolbar
+        :columns="types"
+        @cancel="typeCancel"
+        @confirm="typeChange"
+      />
+    </van-popup>
   </com-page>
 </template>
 
@@ -58,7 +77,20 @@
           accountName: '',  //帐户姓名
           shopId: ''  //钱包地址
         },
-        isCheck: false
+        isCheck: false,
+        currentType: '提货',
+        iconName: 'arrow-down', //选择图标
+        types: ['提货', '寄卖'],
+        datePopShow: false,
+        currentObj: {
+          numTitle: '您本次提货数量',
+          numPlace: '您本次提货数量',
+          addTitle: '您的收货地址',
+          addPlace: '您的收货地址',
+          nameTitle: '您的帐户姓名',
+          namePlace: '您的帐户姓名',
+          deal: '我同意提货协议'
+        }
       }
     },
 
@@ -80,7 +112,44 @@
       }
     },
 
+    watch: {
+      currentType: {
+        handler: function (val, old) {
+          if (val == '提货') {
+            this.currentObj.numTitle = '您本次提货数量'
+            this.currentObj.numPlace = '您本次提货数量'
+            this.currentObj.addTitle = '您的收货地址'
+            this.currentObj.addPlace = '您的收货地址'
+            this.currentObj.nameTitle = '您的帐户姓名'
+            this.currentObj.namePlace = '您的帐户姓名'
+            this.currentObj.deal = '我同意提货协议'
+          } else if (val == '寄卖') {
+            this.currentObj.numTitle = '您本次寄卖数量'
+            this.currentObj.numPlace = '您本次寄卖数量'
+            this.currentObj.addTitle = '您的寄卖地址'
+            this.currentObj.addPlace = '您的寄卖地址'
+            this.currentObj.nameTitle = '您的寄卖账号姓名'
+            this.currentObj.namePlace = '您的寄卖账号姓名'
+            this.currentObj.deal = '我同意寄卖协议'
+          }
+        },
+        deep: true
+      }
+    },
+
     methods: {
+      typeCancel () { //取消
+        this.datePopShow = false
+      },
+      typeChange (value, index) { //方式切换
+        let self = this;
+        self.currentType = value
+        self.datePopShow = false
+      },
+      selectType () { // 提货方式
+        let self = this;
+        self.datePopShow = true
+      },
       submit () {
         if (!this.isCheck) { return } 
         if (this.formData.num === '') {
@@ -128,9 +197,18 @@
 
 <style lang="scss" scoped>
   .delivery-top {
+    display: flex;
+    justify-content: center;
     padding: 15px;
     div:nth-child(1),div:nth-child(2) {
       padding-bottom: 15px;
+    }
+    .delivery-left{
+      width: 60%;
+    }
+    .delivery-right{
+      width: 40%;
+      text-align: right;
     }
   }
   .delivery-middle {
@@ -156,6 +234,11 @@
   .delivery-not-checked {
     background-color: #ccc;
     border: 0.02rem solid #ccc;
+  }
+  .yu_e_btn{
+    display: flex;
+    align-items: center;
+    align-content: center;
   }
 </style>
   

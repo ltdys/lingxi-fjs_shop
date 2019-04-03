@@ -36,8 +36,8 @@ export default {
 
 <style lang="scss">
 .home-message {
-  background: #fef9f2;
-  border-radius: 1rem;
+  background: #F7F2EB;
+  border-radius: 4px;
   height: 1rem;
   padding: 0 0.4rem;
   display: flex;

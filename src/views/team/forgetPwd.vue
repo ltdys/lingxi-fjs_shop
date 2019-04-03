@@ -93,7 +93,6 @@ export default {
       },
       isBtnShow: true,
       codeText: '获取验证码',
-      isBtnShow: true,
       times: 90,
       timeCell: null
     }
@@ -104,8 +103,7 @@ export default {
   watch: {
     formData: {
 			handler: function (val, old) {
-        console.log(validatePhone(val.newPhone))
-				if (val.newPhone != '' && validatePhone(val.newPhone)) {
+        if (val.newPhone != '' && validatePhone(val.newPhone)) {
           this.isBtnShow = false
         }
 			},

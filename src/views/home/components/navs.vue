@@ -27,9 +27,14 @@ export default {
 <style lang="scss">
 .home-navs {
   display: flex;
-  padding: .3rem 0;
+  padding: 15px 11px;
+  border-radius: 4px;
+  background: #fff;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  justify-content: space-between;
   > a {
-    flex: 1;
+    // flex: 1;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -42,14 +47,14 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: .8rem;
-      width: .8rem;
+      height: 44px;
+      width: 44px;
       font-size: 24px
     }
     .nav-label{
       color: #333;
-      line-height: .6rem;
       font-size:.28rem;
+      margin-top: 8px;
     }
   }
 }

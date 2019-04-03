@@ -42,10 +42,15 @@ export default {
 
 <style lang="scss">
 .home-hot_shop {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 4px;
   .hot-title {
-    font-size: 0.34rem;
+    height: 57px;
+    line-height: 57px;
+    font-size: 17px;
     color: #333;
-    line-height: 1rem;
+    padding-left: 15px;
   }
   .shop {
     + .shop {
