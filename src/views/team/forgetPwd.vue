@@ -36,14 +36,12 @@
 
 <script>
 import { Toast } from 'vant';
-import { list_mixins } from "@/mixins";
 import validator from "@/utils/validator.js"
 import { GetSmsCode, UpdatePwdByCode } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { clearStorage } from "@/utils/storage.js"
 import { validatePhone, validatePwd } from "@/utils/validate.js"
 export default {
-  mixins: [list_mixins],
   data(){
     return {
 			formData: {
