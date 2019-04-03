@@ -32,7 +32,6 @@
 </template>
 
 <script>
-  import { list_mixins } from "@/mixins"
   import { Toast } from "vant"
   import { login, getUserInfo } from "@/api/index.js"
   import { paramConvert } from "@/utils/stringUtil.js"
