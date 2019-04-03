@@ -4,7 +4,7 @@
     <div class="delivery-top">
       <div>{{this.deliveryList.title}}</div>
       <div>
-        <span class="fa-stack-14x fa-color-333">当前数量</span>
+        <span class="fa-stack-14x fa-color-333">套餐数量</span>
         <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.CCSL}} </span>
         <span class="fa-stack-14x fa-color-333">张</span>
       </div>
@@ -19,9 +19,9 @@
         v-model="formData.num"
       >
       </van-field>
-      <div>您的钱包地址</div>
+      <div>您的收货地址</div>
       <van-field
-        placeholder="您的钱包地址"
+        placeholder="您的收货地址"
         clearable
         v-model="formData.address"
       >

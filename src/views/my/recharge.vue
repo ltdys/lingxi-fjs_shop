@@ -1,12 +1,12 @@
 <template>
 	<com-page class="recharge">
-		<com-header title="余额充值" is-back slot="header"></com-header>
+		<com-header title="购买钻石券" is-back slot="header"></com-header>
 		<van-cell-group>
-			<van-cell title="账号" :value="userInfo.mobile"></van-cell>
-			<van-cell title="余额" :value="userInfo.price | number"></van-cell>
+			<van-cell title="会员号" :value="userInfo.mobile"></van-cell>
+			<van-cell title="当前钻石券数量" :value="userInfo.price | number"></van-cell>
 		</van-cell-group>
 		<van-cell-group>
-			<van-field v-model="form.amount" label="充值金额" type="number" input-align="right" placeholder="请输入充值金额"></van-field>
+			<van-field v-model="form.amount" label="购买数量" type="number" input-align="right" placeholder="请输入购买数量"></van-field>
 			<van-cell title="付款途径" is-link clickable @click="show=true">
 				<span v-if="channelName" class="f333">{{channelName}}</span>
 				<span v-else>请选择</span>
@@ -16,7 +16,7 @@
 			</van-cell>
 		</van-cell-group>
     <div class="submit_buttons">
-      <van-button type="primary" block :disabled="rechargeShow" @click="setYECZ">提交充值申请</van-button>
+      <van-button type="primary" block :disabled="rechargeShow" @click="setYECZ">提交购买申请</van-button>
     </div>
 		<van-actionsheet slot="popup"
 			v-model="show"

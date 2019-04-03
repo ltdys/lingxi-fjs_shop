@@ -22,18 +22,18 @@
 		<div class="my-main">
 			<div class="my_info2">
 				<div class="my_info2__num">
-					<div>余额（元）</div>
+					<div>余额（钻石币）</div>
 					<div>{{userInfo.price | number}}</div>
 				</div>
 				<van-row class="my__navs">
 					<van-col span="8">
-						<van-button type="primary" class="my__navs__topup" round size="small" @click="$router.push('/my/recharge')">充值</van-button>
+						<van-button type="primary" class="my__navs__topup" round size="small" @click="$router.push('/my/recharge')">购买</van-button>
 					</van-col>
 					<van-col span="8">
-						<van-button type="primary" class="my__navs__auto" round size="small" @click="$router.push('/my/transfer')">转账</van-button>
+						<van-button type="primary" class="my__navs__auto" round size="small" @click="$router.push('/my/transfer')">转让</van-button>
 					</van-col>
 					<van-col span="8">
-						<van-button type="primary" class="my__navs__cash" plain round size="small" @click="$router.push('/my/withdraw')" :disabled="isPay !== '1'">提现</van-button>
+						<van-button type="primary" class="my__navs__cash" plain round size="small" @click="$router.push('/my/withdraw')" :disabled="isPay !== '1'">回购</van-button>
 					</van-col>
 				</van-row>
 			</div>
@@ -52,14 +52,14 @@
 							<img class="my_img__box" src="static/images/icon/pay_order.png" alt="">
 							<span class="my_img__num" v-show="userInfo.dingdandfk && userInfo.dingdandfk != 0">{{ userInfo.dingdandfk }}</span>
 						</div>
-						<div>待付款</div>
+						<div>待支付</div>
 					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=2')">
 						<div class="my-order">
 							<img class="my_img__box" src="static/images/icon/car_order.png" alt="">
 							<!-- <span class="my_img__num" v-show="userInfo.dingdanyfk && userInfo.dingdanyfk != 0">{{ userInfo.dingdanyfk }}</span> -->
 						</div>
-						<div>待收货</div>
+						<div>已支付</div>
 					</van-col>
 					<van-col class="my_img" span="6" @click.native="$router.push('/my/order?tab=3')">
 						<div class="my-order">
@@ -71,13 +71,13 @@
 				</van-row>
 			</van-cell-group>
 			<van-cell-group>
-				<van-cell icon="balance-o" title="余额充值申请记录" is-link to="/my/yl_list2">
+				<van-cell icon="balance-o" title="购买申请记录" is-link to="/my/yl_list2">
 				</van-cell>
-				<van-cell  icon="balance-pay"  title="余额变动明细" is-link  to="/my/yl_list">
+				<van-cell  icon="balance-pay"  title="变动明细" is-link  to="/my/yl_list">
 				</van-cell>
 				<van-cell  icon="exchange"  title="退出登录" is-link @click="loginOut">
 				</van-cell>
-				<van-cell  icon="records"  title="提现纪录" is-link to="/my/yl_list3">
+				<van-cell  icon="records"  title="回购记录" is-link to="/my/yl_list3">
 				</van-cell>
 				<van-cell icon="more-o" title="更多" is-link to="/more">
 				</van-cell>

@@ -1,9 +1,9 @@
 <template>
 	<com-page>
-		<com-header title="余额转账" is-back slot="header"></com-header>
+		<com-header title="钻石券转让" is-back slot="header"></com-header>
      <template  v-if="step==1">
       <van-cell-group>
-        <van-field label="收款人" input-align="right" placeholder="账号/手机号" v-model="accountPhone"></van-field>
+        <van-field label="受让人" input-align="right" placeholder="账号/手机号" v-model="accountPhone"></van-field>
       </van-cell-group>
       <div class="submit_buttons">
         <van-button type="primary" block :disabled="rechargeShow" @click="getUserByPhone">下一步</van-button>
@@ -15,13 +15,13 @@
         <div>{{ realname }}</div>
       </div>
       <van-cell-group>
-        <van-field label="转账金额" input-align="right" type="number" placeholder="请输入转账金额" v-model="transferNum"></van-field>
+        <van-field label="转让钻石券" input-align="right" type="number" placeholder="请输入转让钻石券" v-model="transferNum"></van-field>
         <van-cell>
-          <span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
+          <span class="f666">您的当前钻石券 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
         </van-cell>
       </van-cell-group>
       <div class="submit_buttons">
-        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfer">确认转账</van-button>
+        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfer">确认转让</van-button>
       </div>
     </template>
 	</com-page>

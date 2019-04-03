@@ -1,25 +1,25 @@
 <template>
 	<com-page>
-		<com-header title="团队" slot="header" is-back></com-header>
+		<com-header title="钻友圈" slot="header" is-back></com-header>
 		<div class="team" v-for="(item, index) in teamList" :key="index">
 			<div class="team__info">
 				<div class="team-title">{{teamList[index].title || '--'}}</div>
-				<div class="team-num">{{teamList[index].price | number}}</div>
+				<div class="team-num"><span class="zs-text">总拥有钻石套餐：</span>{{teamList[index].price | number}}</div>
 			</div>
 			<div class="team__info2">
 				<div>
-					<div class="team-title">本月DC(元)</div>
+					<div class="team-title">本月收获</div>
 					<div class="team-num">{{teamList[index].mprice | number}}</div>
 				</div>
 				<div>
-					<div class="team-title">近七日DC(元)</div>
+					<div class="team-title">近七日收获</div>
 					<div class="team-num">{{teamList[index].dprice | number}}</div>
 				</div>
 			</div>
 		</div>
 		<van-cell title="推广二维码" is-link @click.native="$router.push('/mycode')"></van-cell>
-		<van-cell title="我的团队" is-link  @click.native="$router.push('/team/myteam')"></van-cell>
-		<van-cell title="DC明细" is-link  @click.native="$router.push('/team/dc')"></van-cell>
+		<van-cell title="我的钻友圈" is-link  @click.native="$router.push('/team/myteam')"></van-cell>
+		<van-cell title="兑换明细" is-link  @click.native="$router.push('/team/dc')"></van-cell>
 	</com-page>
 </template>
 
@@ -72,7 +72,13 @@
   }
   &__info {
     .team-num {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 28px;
+      .zs-text{
+        font-size: 16px;
+      }
     }
   }
   &__info2 {

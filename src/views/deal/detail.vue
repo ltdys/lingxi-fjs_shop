@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="商品数量变动记录" is-back slot="header"></com-header>
+    <com-header title="购买数量变动记录" is-back slot="header"></com-header>
     <van-list v-model="reLoading" :finished="reFinished" finished-text="没有更多了" @load="reLoadBottom">
       <van-cell v-for="(v,i) in tradeRecordList" :key="'d'+i">
         <div slot="title">

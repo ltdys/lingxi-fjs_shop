@@ -48,7 +48,7 @@
         <ul class="order-detail_info">
           <li>订单编号 : {{ orderDetail.orderno }}</li>
           <li>创建时间 : {{ orderDetail.date | date('yyyy-MM-dd hh:mm') }}</li>
-          <li>付款时间 : {{ orderDetail.date | date('yyyy-MM-dd hh:mm') }}</li>
+          <li>支付时间 : {{ orderDetail.date | date('yyyy-MM-dd hh:mm') }}</li>
         </ul>
         <template slot="footer">
           <div class="order-detail__actions" v-if="orderDetail.state==1">

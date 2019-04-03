@@ -1,26 +1,26 @@
 <template>
 	<com-page>
-		<com-header title="我的团队" is-back slot="header"></com-header>
+		<com-header title="我的钻友圈" is-back slot="header"></com-header>
 		<div class="myteam">
 			<div>
-				<div class="myteam-title">总业绩(万元)</div>
+				<div class="myteam-title">拥有钻石券(套)</div>
 				<div class="myteam-num">{{myTeamData.price|number}}</div>
 			</div>
 			<div class="tl-r">
-				<div class="myteam-title">团队人数(人)</div>
+				<div class="myteam-title">钻友人数(人)</div>
 				<div class="myteam-num">{{myTeamData.num|number(0)}}</div>
 			</div>
 		</div>
 		<div class="team-child">
-			<div>直接下属团队（{{myTeamData.zjxj}}人）</div>
-			<div class="a" @click="jumpRegister">注册会员</div>
+			<div>我的钻友（{{myTeamData.zjxj}}人）</div>
+			<div class="a" @click="jumpRegister">注册钻友</div>
 		</div>
 
 		<div v-for="(item, index) in myTeamSonData.list" :key="index" class="myteam-cell">
 			<van-cell :title="item.username|phone" :label="item.level" is-link @click="changeTeam(item)">
 				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
 				<div class="f333 tc">
-					总业绩<br/>{{item.price|number}}元
+					拥有钻石<br/>{{item.price|number}}元
 				</div>
 			</van-cell>
 		</div>

@@ -57,8 +57,8 @@ export default {
       imageURL: "static/images/banner.png",
       tabs: [
         { title: "全部", value: 0 },
-        { title: "待付款", value: 1 },
-        { title: "已付款", value: 2 },
+        { title: "待支付", value: 1 },
+        { title: "已支付", value: 2 },
         // { title: "待收货", value: 2 },
         { title: "已完成", value: 3 }
       ],

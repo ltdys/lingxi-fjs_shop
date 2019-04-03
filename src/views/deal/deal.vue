@@ -7,18 +7,18 @@
           <div class="goods__title">{{item.title}}</div>
           <div class="goods__count">
             <div class="tl-l">
-              <div class="fa-stack-14x fa-color-969">总市值(元)</div>
+              <div class="fa-stack-14x fa-color-969">总价值(元)</div>
               <div class="fa-stack-24x fa-color-default h24x">{{item.ZSZ}}</div>
             </div>
             <div class="tl-r">
-              <div class="fa-stack-14x fa-color-969">单价(元/张)</div>
+              <div class="fa-stack-14x fa-color-969">当前价格(元/张)</div>
               <div class="fa-stack-17x fa-color-323 h24x">{{item.danjia}}</div>
             </div>
           </div>
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
-            <div class="fa-stack-14x fa-color-969">持仓数量(张)</div>
+            <div class="fa-stack-14x fa-color-969">钻石券(张)</div>
             <div class="fa-stack-24x fa-color-323">{{item.CCSL}}</div>
           </div>
           <div class="goods-middle-bottom fa-stack-14x fa-color-default" @click="$router.push('/deal/detail')">详情</div>
@@ -29,17 +29,17 @@
             <div class="tl-c fa-stack-17x fa-color-327">{{item.GMSL}}</div>
           </div>
           <div class="div-center">
-            <div class="lx-mr-15 fa-stack-14x fa-color-969">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">红&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.TC}}</div>
           </div>
         </div>
         <div class="goods-content">
           <div class="div-center">
-            <div class="lx-mr-15 fa-stack-14x fa-color-969">系统奖励</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">历史提货</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.XTJL}}</div>
           </div>
           <div class="div-center">
-            <div class="lx-mr-15 fa-stack-14x fa-color-969">提货数量</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">提&nbsp;&nbsp;货&nbsp;&nbsp;中</div>
           <div class="tl-c fa-stack-17x fa-color-327">{{item.THSL}}</div>
           </div>
         </div>
