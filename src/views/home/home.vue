@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       images: [
-        'static/images/banner.jpg',
+        'static/images/banner.png',
         'static/images/banner1.jpg',
       ]
     };
