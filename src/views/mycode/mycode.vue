@@ -16,10 +16,11 @@ export default {
   },
   data() {
     return {
-      
+      userInfo: ''
     };
   },
   created () {
+    this.userInfo = JSON.parse(this.$store.getters.getUserInfo) || ''
     this.$nextTick (function () {
       this.qrcode();
     })
@@ -30,7 +31,8 @@ export default {
   methods: {
     qrcode () {
       // http://192.19.23.49:8000/#/team/register
-      let url = window.location.href.split('#')[0] + '#/team/register'
+      let url = window.location.href.split('#')[0] + '#/team/register?mobile='
+        + this.userInfo + '&realname=' + this.userInfo.realname
       let qrcode = new QRCode('qrcode', {  
           width: 213,  // 设置宽度 
           height: 185, // 设置高度

@@ -10,7 +10,7 @@
       	clearable
 				:error-message="errorMsg.newPhone"
         @blur="oneValidate('newPhone')">
-        <van-button slot="button" size="small" type="primary" :disabled="isBtnShow" @click="getAccCode">获取验证码</van-button>
+        <van-button slot="button" size="small" type="primary" :disabled="isBtnShow" @click="getAccCode">{{codeText}}</van-button>
       </van-field>
 			<van-field
 				label="验证码"
@@ -91,7 +91,11 @@ export default {
 					}
 				]
       },
-      isBtnShow: true
+      isBtnShow: true,
+      codeText: '获取验证码',
+      isBtnShow: true,
+      times: 90,
+      timeCell: null
     }
   },
   created () {
@@ -152,7 +156,22 @@ export default {
 				Toast({
 					message: resData.data.Msg || '获取验证码成功',
 					duration: 1500
-				})
+        })
+        self.codeText = self.times + 's后重新获取'
+        self.isBtnShow = true
+        self.timeCell = setInterval(function () {
+          if (self.times <= 0) {
+            window.clearInterval(self.timeCell)
+            self.timeCell = null
+            self.codeText = '重新获取'
+            self.times = 90
+            self.isBtnShow = false
+          } else {
+            self.times --
+            self.codeText = self.times + 's后重新获取'
+            self.isBtnShow = true
+          }
+        },1000)
 			} else {
 				Toast({
 					message: resData.data.Msg || '获取验证码失败',
