@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="注册会员" is-back slot="header"></com-header>
+    <com-header title="注册钻友" is-back slot="header"></com-header>
     <!-- <van-cell title="推荐人账号" :value="this.formData.tjrPhone"></van-cell>
     <van-cell title="推荐人姓名" :value="this.userInfo.userName"></van-cell> -->
     <van-field

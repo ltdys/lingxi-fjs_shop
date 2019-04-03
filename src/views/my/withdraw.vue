@@ -136,16 +136,16 @@ export default {
 			let queryParams = paramConvert(param)
 			let resData = await cashWithdrawal(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
-        console.log("提现成功",resData.data.Data)
+        console.log("提现申请成功",resData.data.Data)
         Toast.success({
-					message: '提现成功',
+					message: '提现申请成功',
 					duration: 1500
 				});
 				self.$store.dispatch('setCurrentBankMess', {})
 				self.$router.back()
 			} else {
 				Toast({
-					message: resData.data.Msg || '提现失败',
+					message: resData.data.Msg || '提现申请失败',
 					duration: 1500
 				})
 			}
