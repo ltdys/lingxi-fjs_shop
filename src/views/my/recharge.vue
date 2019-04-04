@@ -41,7 +41,7 @@ export default {
 			radio:1,
 			show:false,
 			actions:[
-				{ name : '现金/POST机',value:1},
+				{ name : '现金/POS机',value:1},
 				{ name : '微信',value:2},
 				{ name : '支付宝',value:3},
 				{ name : '银行卡',value:4}

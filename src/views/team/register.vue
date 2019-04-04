@@ -71,6 +71,7 @@ import { validatePhone, validateIdCard, validatePwd } from "@/utils/validate.js"
 import { Toast } from "vant"
 import { register, getUserByPhone, getUserInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
+import { clearStorage } from "@/utils/storage.js"
 export default {
 
   data() {
@@ -203,6 +204,9 @@ export default {
           message: '注册成功',
           duration: 1500
         })
+        this.$store.dispatch('setClearAll', '')
+				clearStorage()
+
         this.$store.dispatch('setUserId', resData.data.Data.userId)
         this.getUserInfo(resData.data.Data.userId)
 			} else {
