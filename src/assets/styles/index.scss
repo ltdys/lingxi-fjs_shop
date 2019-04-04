@@ -275,3 +275,28 @@ input {
 .delivery-right .van-button--small .van-icon{
   margin-left: 5px;
 }
+.zy-item{
+  position: relative;
+  background: #FFF;
+}
+.zy-item::before{
+  content: '';
+  position:absolute;
+  top: -5vw;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: calc(100vw / 5);
+  background: #FFF;
+  border-radius: 50%;
+}
+.van-hairline--top-bottom::after{
+  border-width: 0;
+}
+.zy-item .van-tabbar-item__icon .van-icon{
+  border: 1px solid #7d7e80;
+  border-radius: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: -21px;
+}

@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 .home-navs {
   display: flex;
-  padding: 15px 15px;
+  padding: 10px 15px;
   border-radius: 4px;
   background: #fff;
   margin-top: 10px;

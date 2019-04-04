@@ -75,9 +75,9 @@
 				</van-cell>
 				<van-cell  icon="balance-pay"  title="变动明细" is-link  to="/my/yl_list">
 				</van-cell>
-				<van-cell  icon="exchange"  title="退出登录" is-link @click="loginOut">
-				</van-cell>
 				<van-cell  icon="records"  title="回购记录" is-link to="/my/yl_list3">
+				</van-cell>
+				<van-cell  icon="exchange"  title="退出登录" is-link @click="loginOut">
 				</van-cell>
 				<van-cell icon="more-o" title="更多" is-link to="/more">
 				</van-cell>

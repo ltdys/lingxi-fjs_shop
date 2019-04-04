@@ -98,19 +98,19 @@ export default {
     self.orderId = this.$route.params.id,
     self.getOrderInfo()
     // this.paymentOrder()
-    self.timer = setInterval(function () {
-      if (self.surplusTime <= 0) {
-        window.setInterval(self.timer);
-        self.timer = null
-      } else {
-        self.surplusTime --
-      }
-    }, 1000)
+    // self.timer = setInterval(function () {
+    //   if (self.surplusTime <= 0) {
+    //     window.setInterval(self.timer);
+    //     self.timer = null
+    //   } else {
+    //     self.surplusTime --
+    //   }
+    // }, 1000)
   },
   destroyed () {
     let self = this;
-    window.setInterval(self.timer);
-    self.timer = null
+    // window.setInterval(self.timer);
+    // self.timer = null
   },
   computed: {
     currentOrder: {

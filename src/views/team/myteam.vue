@@ -20,7 +20,7 @@
 			<van-cell :title="item.username|phone" :label="item.level" is-link @click="changeTeam(item)">
 				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
 				<div class="f333 tc">
-					拥有钻石<br/>{{item.price|number}}元
+					拥有钻石<br/>{{item.price}}
 				</div>
 			</van-cell>
 		</div>

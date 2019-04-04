@@ -51,14 +51,14 @@
       :error-message="errorMsg.name"
     >
 		</van-field>
-    <van-field
+    <!-- <van-field
 		  label="身份证号"
 			clearable
 			placeholder="请输入身份证号"
       @blur="oneValidate('card')"
 			v-model="formData.card"
 			:error-message="errorMsg.card">
-		</van-field>
+		</van-field> -->
     <div class="submit_buttons">
       <van-button type="primary" block @click="submit">立即注册</van-button>
     </div>

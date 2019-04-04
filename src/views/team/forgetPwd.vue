@@ -7,6 +7,7 @@
 				placeholder="请输入手机号"
 				v-model="formData.newPhone"
         class='icon-phone'
+        required
       	clearable
 				:error-message="errorMsg.newPhone"
         @input="phoneChange"
@@ -17,6 +18,7 @@
 				label="验证码"
 				placeholder="请输入验证码"
 				v-model="formData.code"
+        required
       	clearable
 				:error-message="errorMsg.code"
         @blur="oneValidate('code')"></van-field>
@@ -25,6 +27,7 @@
 				type="password"
 				placeholder="请输入登录密码"
 				v-model="formData.password"
+        required
       	clearable
 				:error-message="errorMsg.password"
         @blur="oneValidate('password')"></van-field>
@@ -87,6 +90,8 @@ export default {
                 callback("请输入密码");
               } else if (validatePwd(value)) {
                 callback();
+              } else {
+                callback("密码以字母开头，只能包含字母、数字和下划线,长度在6-18之间");
               }
             }
 					}
@@ -100,17 +105,6 @@ export default {
   },
   created () {
 		this.validator = validator(this.rules, this.formData)
-  },
-  watch: {
-    // formData: {
-		// 	handler: function (val, old) {
-    //     debugger
-    //     if (val.newPhone != '' && validatePhone(val.newPhone)) {
-    //       this.isBtnShow = false
-    //     }
-		// 	},
-		// 	deep: true
-		// }
   },
   methods: {
     validate(callback, data) {
@@ -236,6 +230,11 @@ export default {
         this.isBtnShow = false
       }
     }
+  },
+  destroyed () {
+    let self = this;
+    window.setInterval(self.timeCell);
+    self.timeCell = null
   },
 }
 </script>
