@@ -9,6 +9,7 @@
         class='icon-phone'
       	clearable
 				:error-message="errorMsg.newPhone"
+        @input="phoneChange"
         @blur="oneValidate('newPhone')">
         <van-button slot="button" size="small" type="primary" :disabled="isBtnShow" @click="getAccCode">{{codeText}}</van-button>
       </van-field>
@@ -101,14 +102,15 @@ export default {
 		this.validator = validator(this.rules, this.formData)
   },
   watch: {
-    formData: {
-			handler: function (val, old) {
-        if (val.newPhone != '' && validatePhone(val.newPhone)) {
-          this.isBtnShow = false
-        }
-			},
-			deep: true
-		}
+    // formData: {
+		// 	handler: function (val, old) {
+    //     debugger
+    //     if (val.newPhone != '' && validatePhone(val.newPhone)) {
+    //       this.isBtnShow = false
+    //     }
+		// 	},
+		// 	deep: true
+		// }
   },
   methods: {
     validate(callback, data) {
@@ -228,7 +230,12 @@ export default {
       attrs.forEach(attr => {
         this.errorMsg[attr] = "";
       });
-		},
+    },
+    phoneChange () {
+      if (this.formData.newPhone != '' && validatePhone(this.formData.newPhone)) {
+        this.isBtnShow = false
+      }
+    }
   },
 }
 </script>
