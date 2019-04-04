@@ -4,15 +4,19 @@
 		<div class="team" v-for="(item, index) in teamList" :key="index">
 			<div class="team__info">
 				<div class="team-title">{{teamList[index].title || '--'}}</div>
-				<div class="team-num"><span class="zs-text">总拥有钻石套餐：</span>{{teamList[index].price | number}}</div>
+				<div class="team-num">
+          <span class="zs-text">奖励红包数量：</span>
+          {{teamList[index].price}}&nbsp; 
+          <span class="zs-text">钻石卷</span>
+        </div>
 			</div>
 			<div class="team__info2">
 				<div>
-					<div class="team-title">本月收获</div>
+					<div class="team-title">本月奖励</div>
 					<div class="team-num">{{teamList[index].mprice | number}}</div>
 				</div>
 				<div>
-					<div class="team-title">近七日收获</div>
+					<div class="team-title">近七日奖励</div>
 					<div class="team-num">{{teamList[index].dprice | number}}</div>
 				</div>
 			</div>

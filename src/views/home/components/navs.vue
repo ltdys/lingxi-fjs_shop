@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 .home-navs {
   display: flex;
-  padding: 15px 11px;
+  padding: 15px 15px;
   border-radius: 4px;
   background: #fff;
   margin-top: 10px;
@@ -52,7 +52,8 @@ export default {
       font-size: 24px
     }
     .nav-label{
-      color: #333;
+      color: #131313;
+      font-weight: 500;
       font-size:.28rem;
       margin-top: 8px;
     }

@@ -49,15 +49,16 @@ export default {
     height: 57px;
     line-height: 57px;
     font-size: 17px;
-    color: #333;
+    color: #131313;
+    font-weight: 500;
     padding-left: 15px;
   }
   .shop {
     + .shop {
       margin-top: 15px;
     }
-    border-radius: 0.15rem;
-    box-shadow: 1px 1px 8px #ccc;
+    border-radius: 4px;
+    // box-shadow: 1px 1px 8px #ccc;
     .shop-title {
       font-size: 0.28rem;
       color: #333;

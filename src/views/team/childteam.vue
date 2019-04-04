@@ -1,6 +1,6 @@
 <template>
 	<com-page>
-		<com-header title="我的团队" is-back slot="header"></com-header>
+		<com-header title="我的钻友圈" is-back slot="header"></com-header>
 		<div class="myteam-top">
 			<div>
 				<div><com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>{{myTeamSonData.username}} {{myTeamSonData.level}}</div>
@@ -11,16 +11,16 @@
 		</div>
 		<div class="myteam">
 			<div>
-				<div class="myteam-title">总业绩(万元)</div>
+				<div class="myteam-title">钻石套餐(万元)</div>
         <div class="myteam-num">{{myTeamSonData.price|number}}</div>
 			</div>
 			<div class="tl-r">
-				<div class="myteam-title">团队人数(人)</div>
+				<div class="myteam-title">钻友人数(人)</div>
         <div class="myteam-num">{{myTeamSonData.num|number(0)}}</div>
 			</div>
 		</div>
 		<div class="team-child">
-      <div>直接下属团队（{{myTeamSonData.zjxj}}人）</div>
+      <div>我的钻友团队（{{myTeamSonData.zjxj}}人）</div>
 		</div>
 
 		<div v-for="(item, index) in myTeamSonData.list" :key="index" class="myteam-cell">
