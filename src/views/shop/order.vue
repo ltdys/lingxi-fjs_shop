@@ -2,14 +2,14 @@
     <com-page>
         <com-header title="订单支付" slot="header" is-back></com-header>
 
-        <van-cell-group>
+        <!-- <van-cell-group>
           <van-cell icon="location" class="select-location" is-link @click.native="selectAddress">
             <div>{{address.name}} 
               <span>{{address.tel | phone}}</span>
             </div>
             <div class="select-location__address">{{address.address}}</div>
           </van-cell>
-        </van-cell-group>
+        </van-cell-group> -->
 
         <van-cell-group>
           <van-card @click.native="orderDetail"
@@ -54,7 +54,7 @@ import { list_mixins } from "@/mixins"
 import { Card, Panel, } from "vant";
 import AddressList from "../my/address/list";
 import PopupPage from "@/components/popup-page"
-import { paymentOrder, getMyAddress } from "@/api/index.js"
+import { paymentOrder, getMyAddress, getUserInfo } from "@/api/index.js"
 import { paramConvert } from "@/utils/stringUtil.js"
 import { Toast } from "vant"
 
@@ -69,8 +69,7 @@ export default {
   },
 
   created () {
-    this.getMyAddress()
-    this.price = JSON.parse(this.userInfo).price
+    this.getUserInfoPrice()
   },
 
   computed: {
@@ -104,6 +103,22 @@ export default {
       this.address = v;
       this.popupVisible = false
     },
+    async getUserInfoPrice () { //获取用户消息
+      let self = this;
+      let id = self.$store.getters.getUserId
+			let queryParams = paramConvert({ "uId": id })
+      let resData = await getUserInfo(queryParams, { "uId": id })
+      if (resData.status === 200 && resData.data.Success) {
+        let userInfo = resData.data.Data
+        self.price = userInfo.price
+        self.$store.dispatch("setUserInfo", userInfo)
+			} else {
+        Toast({
+					message: resData.data.Msg || '获取用户信息失败',
+					duration: 1500
+				})
+      }
+		},
     onPay (){
       if (this.price < this.addOrder.price) {
         Toast({

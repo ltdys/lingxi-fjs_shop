@@ -3,7 +3,7 @@
 		<com-header title="我的钻友圈" is-back slot="header"></com-header>
 		<div class="myteam">
 			<div>
-				<div class="myteam-title">拥有钻石券(套)</div>
+				<div class="myteam-title">钻石套餐(个)</div>
 				<div class="myteam-num">{{myTeamData.price|number}}</div>
 			</div>
 			<div class="tl-r">

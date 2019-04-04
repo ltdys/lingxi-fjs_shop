@@ -11,7 +11,7 @@
 		<van-cell title="手机号" :value="userInfo.mobile" is-link @click.native="$router.push('/my/update_phone')"></van-cell>
 		<van-cell title="会员等级" :value="userInfo.userLevel | vipLevel"></van-cell> 
 		<van-cell title="邀请码" :value="userInfo.userName"></van-cell>
-		<van-field label="身份证号" v-model="userInfo.card" input-align="right" :error="cardError" placeholder="请输入身份证号"></van-field>
+		<van-field label="身份证号" v-model="userInfo.card" input-align="right" placeholder="请输入身份证号"></van-field>
 		<van-cell title="银行账号" is-link to="/my/bank?id=1"></van-cell>
 		<van-cell title="收货地址" is-link to="/my/address?id=1"></van-cell>
 		<!-- <van-field label="支付宝账号" input-align="right"></van-field> -->
@@ -59,19 +59,24 @@ export default {
 		userInfo: {
 			handler: function (val, old) {
 				let self = this;
-				let card = val.card.toUpperCase()
-				if (val.card == '') {
-					self.cardError = true;
-				} else if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(card))) {
-					self.cardError = true;
+				if (val.icon != self.oldIcon || val.card != self.oldCard || val.realname != self.oldName) {
+					self.isBtnShow = false;
 				} else {
-					self.cardError = false;
-					if (val.icon != self.oldIcon || val.card != self.oldCard || val.realname != self.oldName) {
-						self.isBtnShow = false;
-					} else {
-						self.isBtnShow = true;
-					}
+					self.isBtnShow = true;
 				}
+				// let card = val.card === null ? '' : val.card.toUpperCase()
+				// if (val.card == '') {
+				// 	self.cardError = true;
+				// } else if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(card))) {
+				// 	self.cardError = true;
+				// } else {
+				// 	self.cardError = false;
+				// 	if (val.icon != self.oldIcon || val.card != self.oldCard || val.realname != self.oldName) {
+				// 		self.isBtnShow = false;
+				// 	} else {
+				// 		self.isBtnShow = true;
+				// 	}
+				// }
 			},
 			deep: true
 		}

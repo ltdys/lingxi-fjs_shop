@@ -11,6 +11,9 @@ export const routes = [{
       {
         path: '',
         component: () => import('@/views/home/home.vue'),
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/deal',

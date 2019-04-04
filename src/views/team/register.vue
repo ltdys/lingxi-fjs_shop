@@ -53,7 +53,6 @@
 		</van-field>
     <van-field
 		  label="身份证号"
-			required
 			clearable
 			placeholder="请输入身份证号"
       @blur="oneValidate('card')"
@@ -121,19 +120,19 @@ export default {
             }
           }
         ],
-				card: [
-					{
-						validator: (rule, value, callback) => {
-              if (!value) {
-                callback("请输入身份证号");
-              } else if (validateIdCard(value)) {
-                callback();
-              } else {
-                callback("请输入正确的身份证号");
-              }
-            }
-					}
-				],
+				// card: [
+				// 	{
+				// 		validator: (rule, value, callback) => {
+        //       if (!value) {
+        //         callback("请输入身份证号");
+        //       } else if (validateIdCard(value)) {
+        //         callback();
+        //       } else {
+        //         callback("请输入正确的身份证号");
+        //       }
+        //     }
+				// 	}
+				// ],
 				pwd: [
 					{
 						validator: (rule, value, callback) => {

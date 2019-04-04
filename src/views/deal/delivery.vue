@@ -6,7 +6,7 @@
         <div>{{this.deliveryList.title}}</div>
         <div>
           <span class="fa-stack-14x fa-color-333">套餐数量</span>
-          <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.CCSL}} </span>
+          <span class="fa-stack-17x fa-color-222"> {{this.deliveryList.GMSL}} </span>
           <span class="fa-stack-14x fa-color-333">张</span>
         </div>
         <div class="tip-color">注意: 兑换功能不能反向操作</div>

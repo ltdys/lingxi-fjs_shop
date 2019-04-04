@@ -1,9 +1,13 @@
 <template>
   <com-page>
     <com-header title="我的二维码" is-back slot="header"></com-header>
-    <div style="background-image:url('static/images/mycode-bg.jpg');background-size: 100%;background-repeat:no-repeat"
-      class="mycode-wrap">
-      <div id="qrcode" ref="qrcode" class="mycode-code"></div>
+    <div class="wrap">
+      <div>
+        <img src="static/images/mycode-bg.jpg" alt="" class="mocode-bg">
+      </div>
+      <div class="mycode-wrap">
+        <div id="qrcode" ref="qrcode" class="mycode-code"></div>
+      </div>
     </div>
   </com-page>
 </template>
@@ -34,8 +38,8 @@ export default {
       let url = window.location.href.split('#')[0] + '#/team/register?mobile='
         + this.userInfo.mobile + '&realname=' + this.userInfo.realname
       let qrcode = new QRCode('qrcode', {  
-          width: 213,  // 设置宽度 
-          height: 185, // 设置高度
+          width: 122,  // 设置宽度 
+          height: 122, // 设置高度
           text: url
       })  
     },
@@ -44,17 +48,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .wrap {
+    height: 100%;
+    background: #87D0F3;
+  }
   .mycode-wrap {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     .mycode-code {
       position: absolute;
-      top: 217px;
-      transform: rotate(-30deg) skew(30deg) scale(0.6) translate(28px);
+      top: 380px;
+      // transform: rotate(-30deg) skew(30deg) scale(0.6) translate(28px);
       // transform: skew(15deg, 0deg);
     }
+  }
+  .mocode-bg {
+    width: 100%;
+    // height: calc(100vh - 0.92rem - 1rem);
   }
 </style>

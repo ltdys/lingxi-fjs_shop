@@ -89,7 +89,8 @@ export default {
 			}
 			let param = {
 				id: this.id,
-				price: self.form.amount
+				price: self.form.amount,
+				FeeChannel: this.form.channel
 			}
 			let queryParams = paramConvert(param)
 			let resData = await setYECZ(queryParams, param)
