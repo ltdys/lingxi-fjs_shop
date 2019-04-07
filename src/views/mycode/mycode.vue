@@ -7,7 +7,7 @@
       </div>
       <div class="mycode-wrap">
         <div id="qrcode" ref="qrcode"></div>
-        <div ref="qrcodeInfo">[&nbsp;扫码加入{{this.userInfo.userName || ''}}钻石圈&nbsp;]</div>
+        <div ref="qrcodeInfo">[&nbsp;扫码加入{{this.userInfo.userName || ''}}钻友圈&nbsp;]</div>
       </div>
     </div>
   </com-page>
