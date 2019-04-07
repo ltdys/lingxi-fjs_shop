@@ -9,7 +9,7 @@
           <!-- <div class="message__img">
             <img src="static/images/banner.png"/>
           </div> -->
-          <div class="message__desc">{{item.text}}</div>
+          <div v-html="item.text"></div>
         </li>
       </ul>
     </van-list>

@@ -46,6 +46,15 @@
       }
     },
 
+    created () {
+      //todo 通过id直接登录,给开发人员用
+      let id = this.$route.query.id
+      if (id) {
+        this.$store.dispatch('setUserId', id)
+        this.getUserInfo(id)
+      }
+    },
+
     methods: {
       submit () {
         if (this.formData.phone === '') {
