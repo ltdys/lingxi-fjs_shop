@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="交易" is-back slot="header"></com-header>
+    <com-header title="库存" is-back slot="header"></com-header>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="loadBottom">
       <div class="goods" v-for="(item, index) in tradeList" :key="index">
         <div class="good-top">
@@ -97,8 +97,8 @@ export default {
 $defaultColor:#EC9300;
 $otherColor: #3279FF;
 .goods {
-  margin: 15px;
-  background: #fff;
+  padding: 15px;
+  box-sizing: border-box;
   .good-top {
     .goods__title {
       width: 345px;
@@ -115,6 +115,7 @@ $otherColor: #3279FF;
   .goods-middle {
     padding: 15px;
     display: flex;
+    background: #fff;
     .goods-middle-top {
       box-sizing: border-box;
       width: 85%;
@@ -139,6 +140,7 @@ $otherColor: #3279FF;
 		height: 93px;
 		border-radius: 4px;
     display: flex;
+    box-sizing: border-box;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     .h24x {
@@ -149,7 +151,9 @@ $otherColor: #3279FF;
 	}
   .goods-content {
     display: flex;
+    box-sizing: border-box;
     justify-content: space-around;
+    background: #fff;
     padding-bottom: 30px;
     .div-center {
       width: 50%;
@@ -161,7 +165,9 @@ $otherColor: #3279FF;
   }
   .goods-bottom {
     display: flex;
+    box-sizing: border-box;
     justify-content: space-around;
+    background: #fff;
     padding: 15px;
     .shop-btn {
       width: 158px;

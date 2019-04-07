@@ -44,7 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-hot_shop {
-  margin-top: 20px;
+  margin-top: 0.16rem;
   background: #fff;
   border-radius: 4px;
   .hot-title {

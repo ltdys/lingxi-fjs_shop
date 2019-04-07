@@ -5,7 +5,6 @@
       <img :src="userHeader" alt="">
     </div>
     <van-field
-      type="tel"
       label="帐户"
       placeholder="请输入手机号/用户名"
       clearable

@@ -24,11 +24,11 @@
 				<div class="my_info2__num">
 					<div>
 						<div class="fontsize-14">购买余额(钻石券)</div>
-						<div class="fontsize-24">{{userInfo.price | number}}</div>
+						<div class="fontsize-22">{{userInfo.price | number}}</div>
 					</div>
 					<div>
-						<div class="fontsize-14">奖励红包余额(钻石券)</div>
-						<div class="fontsize-24">{{userInfo.commission | number}}</div>
+						<div class="fontsize-14">红包余额(钻石券)</div>
+						<div class="fontsize-22">{{userInfo.commission | number}}</div>
 					</div>
 				</div>
 				<van-row class="my__navs">
@@ -172,8 +172,8 @@ export default {
 				font-size: 14px;
 				color: #666;
 			}
-			.fontsize-24 {
-				font-size: 24px;
+			.fontsize-22 {
+				font-size: 22px;
 				color: #ff7b27;
 			}
     }
