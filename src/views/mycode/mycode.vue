@@ -3,10 +3,11 @@
     <com-header title="我的二维码" is-back slot="header"></com-header>
     <div class="wrap">
       <div>
-        <img src="static/images/mycode-bg.jpg" alt="" class="mocode-bg">
+        <img src="static/images/mycode-bg.png" alt="" class="mocode-bg">
       </div>
       <div class="mycode-wrap">
-        <div id="qrcode" ref="qrcode" class="mycode-code"></div>
+        <div id="qrcode" ref="qrcode"></div>
+        <div ref="qrcodeInfo">[&nbsp;扫码加入{{this.userInfo.userName || ''}}钻石圈&nbsp;]</div>
       </div>
     </div>
   </com-page>
@@ -20,12 +21,32 @@ export default {
   },
   data() {
     return {
-      userInfo: ''
+      userInfo: '',
+      qrcodeWidth: 122,
+      qrcodeHeight: 122
     };
   },
-  created () {
+  mounted () {
     this.userInfo = JSON.parse(this.$store.getters.getUserInfo) || ''
+    //获得网页可见区域宽高
+    let cw = document.body.clientWidth
+    let ch = document.body.clientHeight
+
+    let qrcodeRefs = this.$refs.qrcode
+    qrcodeRefs.style.position = 'absolute'
+    qrcodeRefs.style.top = '50%'
+    qrcodeRefs.style.border = '10px solid #fff'
+    
+    let qrcodeInfoRefs = this.$refs.qrcodeInfo
+    qrcodeInfoRefs.style.position = 'absolute'
+    qrcodeInfoRefs.style.color = '#CDC093'
+    qrcodeInfoRefs.style.top = '80%'
+    qrcodeInfoRefs.style.fontSize = '17px'
+    qrcodeInfoRefs.style.letterSpacing = '3px'
+
     this.$nextTick (function () {
+      this.qrcodeWidth = cw * 0.3288
+      this.qrcodeHeight = this.qrcodeWidth
       this.qrcode();
     })
   },
@@ -38,8 +59,8 @@ export default {
       let url = window.location.href.split('#')[0] + '#/team/register?mobile='
         + this.userInfo.mobile + '&realname=' + this.userInfo.realname
       let qrcode = new QRCode('qrcode', {  
-          width: 122,  // 设置宽度 
-          height: 122, // 设置高度
+          width: this.qrcodeWidth,  // 设置宽度 
+          height: this.qrcodeHeight, // 设置高度
           text: url
       })  
     },
@@ -50,23 +71,16 @@ export default {
 <style lang="scss" scoped>
   .wrap {
     height: 100%;
-    background: #87D0F3;
+    background: #000;
   }
   .mycode-wrap {
     width: 100%;
-    // height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .mycode-code {
-      position: absolute;
-      top: 380px;
-      // transform: rotate(-30deg) skew(30deg) scale(0.6) translate(28px);
-      // transform: skew(15deg, 0deg);
-    }
   }
   .mocode-bg {
     width: 100%;
-    // height: calc(100vh - 0.92rem - 1rem);
+    height: calc(100vh - 0.92rem - 1rem);
   }
 </style>
