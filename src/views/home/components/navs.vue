@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       navs: [
-        { name: "购买", icon: "balance-o", path: "/my/recharge" },
+        { name: "购买", icon: "balance-o", path: "/commoditylist" },
         { name: "提货", icon: "gem-o", path: "/deal" },
         { name: "转让", icon: "peer-pay", path: "/my/transfer" },
         { name: "明细", icon: "balance-pay", path: "/my/yl_list" }

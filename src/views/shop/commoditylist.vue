@@ -1,18 +1,20 @@
 <template>
-  <div class="home-hot_shop">
-    <div class="hot-title">热卖商品</div>
-    <div class="shop" v-for="(item, index) in shopList" :key="index">
-      <img class="w-100 h-115" :src="item.imgurl">
-      <div class="shop-desc">
-        <div class="shop-title">{{item.title}}</div>
-        <div>
-          <!-- <div class="shop-price">￥{{item.price | number}}</div> -->
-          <div class="shop-price">{{item.price | number}}钻石券</div>
-          <div class="shop-btn" @click="buy(item.id)">立刻购买</div>
+  <com-page>
+    <com-header title="商品列表" slot="header" is-back></com-header>
+    <div class="home-hot_shop">
+      <div class="shop" v-for="(item, index) in shopList" :key="index">
+        <img class="w-100 h-115" :src="item.imgurl">
+        <div class="shop-desc">
+          <div class="shop-title">{{item.title}}</div>
+          <div>
+            <!-- <div class="shop-price">￥{{item.price | number}}</div> -->
+            <div class="shop-price">{{item.price | number}}钻石券</div>
+            <div class="shop-btn" @click="buy(item.id)">立刻购买</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </com-page>
 </template>
 
 <script>
@@ -35,7 +37,7 @@ export default {
       let resData = await getHot()
       this.shopList = []
 			if (resData.status === 200 && resData.data.Success) {
-        this.shopList.push(resData.data.Data[0])
+        this.shopList = resData.data.Data || []
 			}
 		}
   }
@@ -44,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-hot_shop {
-  margin-top: 20px;
+  margin-bottom: 20px;
   background: #fff;
   border-radius: 4px;
   .hot-title {

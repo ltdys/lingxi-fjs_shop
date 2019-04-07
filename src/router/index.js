@@ -53,6 +53,13 @@ export const routes = [{
     }
   },
   {
+    path: '/commoditylist',
+    component: () => import('@/views/shop/commoditylist.vue'),
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
     path: '/confirm_order/:id',
     component: () => import('@/views/shop/detail.vue'),
   },
