@@ -22,8 +22,14 @@
 		<div class="my-main">
 			<div class="my_info2">
 				<div class="my_info2__num">
-					<div>余额（钻石币）</div>
-					<div>{{userInfo.price | number}}</div>
+					<div>
+						<div class="fontsize-14">购买余额(钻石币)</div>
+						<div class="fontsize-24">{{userInfo.price | number}}</div>
+					</div>
+					<div>
+						<div class="fontsize-14">奖励红包余额(钻石币)</div>
+						<div class="fontsize-24">{{userInfo.commission | number}}</div>
+					</div>
 				</div>
 				<van-row class="my__navs">
 					<van-col span="8">
@@ -159,16 +165,17 @@ export default {
     padding: 15px 20px;
     margin-top: -1rem;
     &__num {
+			display: flex;
+			justify-content: space-between;
       margin-bottom: 10px;
-      > :nth-child(1) {
-        font-size: 14px;
-        color: #666;
-      }
-      > :nth-child(2) {
-        margin-top: 5px;
-        font-size: 28px;
-        color: #ff7b27;
-      }
+			.fontsize-14 {
+				font-size: 14px;
+				color: #666;
+			}
+			.fontsize-24 {
+				font-size: 24px;
+				color: #ff7b27;
+			}
     }
   }
   &__navs {

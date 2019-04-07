@@ -9,8 +9,8 @@
       </van-cell>
       <van-cell title="产品价格">
         <span class="amount">
-          ¥
-          <em>{{goods.price | number}}</em>
+          <!-- ¥<em>{{goods.price | number}}</em> -->
+          <em>{{goods.price | number}}钻石币</em>
         </span>
       </van-cell>
       <van-cell title="风险说明">
@@ -40,8 +40,9 @@
       <!-- 自定义 sku-header-price -->
       <template slot="sku-header-price" slot-scope="props">
         <div class="van-sku__goods-price">
-          <span class="van-sku__price-symbol">￥</span>
+          <!-- <span class="van-sku__price-symbol">￥</span> -->
           <span class="van-sku__price-num">{{ props.price }}</span>
+          <span>钻石币</span>
         </div>
       </template>
       <!-- 自定义 sku actions -->
@@ -51,6 +52,7 @@
             style="position:relative"
             :price="sku.totalPrice"
             button-text="立刻购买"
+            currency="钻石币"
             his.page
             @submit="props.skuEventBus.$emit('sku:buy')"
           />

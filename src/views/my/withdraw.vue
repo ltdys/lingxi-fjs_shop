@@ -14,7 +14,7 @@
 		<van-cell-group>
 			<van-field label="提现金额" type="number" input-align="right" placeholder="请输入提现金额" v-model="withdrawrNum"></van-field>
 			<van-cell>
-				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
+				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 钻石币</span>
 			</van-cell>
 		</van-cell-group>
 		<div class="m-t withraw-info">

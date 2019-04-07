@@ -13,7 +13,8 @@
         </div>
         <div class="dc-count">
           <div class="fs-16">{{showDate}}</div>
-          <div class="f666">收获 ¥{{myDcMxList.sr}}</div>
+          <!-- <div class="f666">收获 ¥{{myDcMxList.sr}}</div> -->
+          <div class="f666">收获 {{myDcMxList.sr}}钻石币</div>
         </div>
       </div>
       <div class="dc-item" v-for="(item, index) in myDcMxList.list" :key="'d'+index">
@@ -150,10 +151,12 @@ export default {
   .dc-top {
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
     .dc-top-btn {
       display: flex;
       justify-content: center;
       align-items: center;
+
     }
   }
 	.dc-item {

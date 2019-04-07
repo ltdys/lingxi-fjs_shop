@@ -32,7 +32,6 @@
     ></van-field>
     <van-field
       label="密码"
-      type="password"
       placeholder="请输入密码"
       required
       clearable
@@ -80,7 +79,7 @@ export default {
         tjrPhone: "", //推荐人手机号
         phone: "", //手机号
         name: "", //名称
-        pwd: "", //密码
+        pwd: "a000000", //密码
         card: "" //身份证号码
       },
       tjrName: "",  //推荐人姓名

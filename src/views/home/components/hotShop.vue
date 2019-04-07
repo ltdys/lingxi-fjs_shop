@@ -6,7 +6,8 @@
       <div class="shop-desc">
         <div class="shop-title">{{item.title}}</div>
         <div>
-          <div class="shop-price">￥{{item.price | number}}</div>
+          <!-- <div class="shop-price">￥{{item.price | number}}</div> -->
+          <div class="shop-price">{{item.price | number}}钻石币</div>
           <div class="shop-btn" @click="buy(item.id)">立刻购买</div>
         </div>
       </div>

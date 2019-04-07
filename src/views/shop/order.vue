@@ -18,6 +18,7 @@
               :desc="addOrder.info"  
               :title="addOrder.title"
               :thumb="addOrder.imgurl"
+              currency="钻石币"
             >
           </van-card>
           <!-- <van-card @click.native="$router.push('/my/order/1')"
@@ -33,10 +34,12 @@
           <van-cell title="订单编号" :value="addOrder.orderNo"></van-cell>
           <van-cell title="创建时间" :value="addOrder.createTime"></van-cell>
           <van-cell title="订单金额">
-              <span class="amount">¥<em>{{ addOrder.price | number}}</em></span>
+              <!-- <span class="amount">¥<em>{{ addOrder.price | number}}</em></span> -->
+              <span class="amount"><em>{{ addOrder.price | number}}钻石币</em></span>
           </van-cell>
           <van-cell title="当前余额">
-              <span>¥<em>{{price}}</em></span>
+              <!-- <span>¥<em>{{price}}</em></span> -->
+              <span><em>{{price | number}}</em>钻石币</span>
           </van-cell>
         </van-cell-group>
         <div class="submit_buttons">

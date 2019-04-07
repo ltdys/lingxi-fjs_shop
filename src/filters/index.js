@@ -136,7 +136,8 @@ export function toThousandslsFilter(num) {
 //保留两位小数
 export function vFixedTwo (value) {
   if (!value) { value = 0 }
-  return "￥" + parseFloat(value).toFixed(2)
+  return parseFloat(value).toFixed(2) + "钻石币"
+  // return "￥" + parseFloat(value).toFixed(2)
 }
 
 //用户头像
