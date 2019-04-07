@@ -1,20 +1,20 @@
 <template>
 	<com-page>
-		<com-header title="提现" is-back is-click v-on:backClick="backClick" slot="header"></com-header>
+		<com-header title="回购" is-back is-click v-on:backClick="backClick" slot="header"></com-header>
 		<div class="withdraw" @click="addBankCard" v-if="Object.keys(currentBankMess).length == 0">
 			<!-- <img class="withdraw__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'"/> -->
 			<van-icon name="add" color="#ec9300" size="2em" />
-			<div>添加到提现银行卡</div>
+			<div>添加到回购银行卡</div>
 		</div>
 		<div class="withdraw with_bank" @click="addBankCard" v-else>
 			<div class="with_bank__name">{{ currentBankMess.BankName }}</div>
 			<div class="with_bank__acco">{{ currentBankMess.AccountName }}</div>
 		</div>
-		<div class="text-prompt">输入提现金额</div>
+		<div class="text-prompt">输入回购金额</div>
 		<van-cell-group>
-			<van-field label="提现金额" type="number" input-align="right" placeholder="请输入提现金额" v-model="withdrawrNum"></van-field>
+			<van-field label="回购金额" type="number" input-align="right" placeholder="请输入回购金额" v-model="withdrawrNum"></van-field>
 			<van-cell>
-				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 钻石币</span>
+				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 钻石券</span>
 			</van-cell>
 		</van-cell-group>
 		<div class="m-t withraw-info">
@@ -22,20 +22,20 @@
 				<span>说明:</span>
 			</van-cell>
 			<van-cell>
-				<span>1.提现手续费{{payMentFee}}%。系统直接扣除。</span>
+				<span>1.回购手续费{{payMentFee}}%。系统直接扣除。</span>
 			</van-cell>
 			<van-cell>
-				<span>2.提现必须为100.0的整数倍。</span>
+				<span>2.回购必须为100.0的整数倍。</span>
 			</van-cell>
 			<van-cell>
-				<span>3.提现申请72小时（3个工作日，遇节假日顺延）内处理。到帐时间以收款方银行为准。</span>
+				<span>3.回购申请72小时（3个工作日，遇节假日顺延）内处理。到帐时间以收款方银行为准。</span>
 			</van-cell>
 			<van-cell>
-				<span>4.提现方式：目前仅支持银行转帐。</span>
+				<span>4.回购方式：目前仅支持银行转帐。</span>
 			</van-cell>
 		</div>
 		<div class="submit_buttons">
-			<van-button type="primary" block :disabled="autoWithdrawr" @click="cashDeposit">确认提现</van-button>
+			<van-button type="primary" block :disabled="autoWithdrawr" @click="cashDeposit">确认回购</van-button>
 		</div>
 	</com-page>
 </template>
@@ -51,9 +51,9 @@ export default {
   data(){
     return {
       step:1,
-      withdrawrNum: null, //提现金额
-			autoWithdrawr: true, //确认提现显示状态
-			payMentFee: '0.00'  //提现手续费
+      withdrawrNum: null, //回购金额
+			autoWithdrawr: true, //确认回购显示状态
+			payMentFee: '0.00'  //回购手续费
     }
   },
   created () {
@@ -76,7 +76,7 @@ export default {
 					if (val > this.userInfo.price) {
 						this.autoWithdrawr = true;
 						Dialog.alert({
-							message: '您最多可提现 '+ this.userInfo.price + ' 元'
+							message: '您最多可回购 '+ this.userInfo.price + ' 元'
 						}).then(() => {
 							// this.withdrawrNum = ''
 						});
@@ -112,13 +112,13 @@ export default {
         return
 			} else if (self.withdrawrNum == '') {
 				Toast({
-					message: '请输入提现金额',
+					message: '请输入回购金额',
 					duration: 1500
         })
         return
 			} else if (Number(self.withdrawrNum) % 100 != 0) {
 				Toast({
-					message: '提现金额必须为100的整数倍',
+					message: '回购金额必须为100的整数倍',
 					duration: 1500
 				})
 				return
@@ -136,16 +136,16 @@ export default {
 			let queryParams = paramConvert(param)
 			let resData = await cashWithdrawal(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
-        console.log("提现申请成功",resData.data.Data)
+        console.log("回购申请成功",resData.data.Data)
         Toast.success({
-					message: '提现申请成功',
+					message: '回购申请成功',
 					duration: 1500
 				});
 				self.$store.dispatch('setCurrentBankMess', {})
 				self.$router.back()
 			} else {
 				Toast({
-					message: resData.data.Msg || '提现申请失败',
+					message: resData.data.Msg || '回购申请失败',
 					duration: 1500
 				})
 			}

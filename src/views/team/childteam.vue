@@ -11,7 +11,7 @@
 		</div>
 		<div class="myteam">
 			<div>
-				<div class="myteam-title">钻石套餐(万元)</div>
+				<div class="myteam-title">共收获奖励红包(钻石券)</div>
         <div class="myteam-num">{{myTeamSonData.price|number}}</div>
 			</div>
 			<div class="tl-r">
@@ -132,7 +132,7 @@
 			color: #666;
 		}
 		>div{
-			flex: .4;
+			flex: .5;
 		}
 		.myteam-num {
 			font-size: 18px;

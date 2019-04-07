@@ -18,7 +18,7 @@
               desc="描述信息"  
               title="商品标题"
               :thumb="imageURL"
-              currency="钻石币"
+              currency="钻石券"
             >
           </van-card>
           <van-card @click.native="$router.push('/my/order/1')"
@@ -27,7 +27,7 @@
               desc="描述信息"  
               title="商品标题"
               :thumb="imageURL"
-              currency="钻石币"
+              currency="钻石券"
             >
           </van-card>
         </van-cell-group>
@@ -36,11 +36,11 @@
           <van-cell title="创建时间" value="2018-09-09 09:09"></van-cell>
           <van-cell title="订单金额">
               <!-- <span class="amount">¥<em>{{item.price  | number}}</em></span> -->
-              <span class="amount"><em>{{item.price  | number}}钻石币</em></span>
+              <span class="amount"><em>{{item.price  | number}}钻石券</em></span>
           </van-cell>
           <van-cell title="当前余额">
               <!-- <span>¥<em>{{item.price  | number}}</em></span> -->
-              <span><em>{{item.price  | number}}钻石币</em></span>
+              <span><em>{{item.price  | number}}钻石券</em></span>
           </van-cell>
         </van-cell-group>
         <div class="submit_buttons">

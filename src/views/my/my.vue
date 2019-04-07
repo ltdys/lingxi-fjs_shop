@@ -23,11 +23,11 @@
 			<div class="my_info2">
 				<div class="my_info2__num">
 					<div>
-						<div class="fontsize-14">购买余额(钻石币)</div>
+						<div class="fontsize-14">购买余额(钻石券)</div>
 						<div class="fontsize-24">{{userInfo.price | number}}</div>
 					</div>
 					<div>
-						<div class="fontsize-14">奖励红包余额(钻石币)</div>
+						<div class="fontsize-14">奖励红包余额(钻石券)</div>
 						<div class="fontsize-24">{{userInfo.commission | number}}</div>
 					</div>
 				</div>

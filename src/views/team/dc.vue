@@ -14,7 +14,7 @@
         <div class="dc-count">
           <div class="fs-16">{{showDate}}</div>
           <!-- <div class="f666">收获 ¥{{myDcMxList.sr}}</div> -->
-          <div class="f666">收获 {{myDcMxList.sr}}钻石币</div>
+          <div class="f666">收获奖励红包 {{myDcMxList.sr}}钻石券</div>
         </div>
       </div>
       <div class="dc-item" v-for="(item, index) in myDcMxList.list" :key="'d'+index">
@@ -26,7 +26,7 @@
         </div>
         <div class="dc-item__desc">
           <div>兑换用户：{{item.xdyh}}</div>
-          <div>兑换金额：{{item.ddje}}</div>
+          <div>收获红包：{{item.ddje}}</div>
           <div v-show="item.tcbl">提成比例：{{item.tcbl}}</div>
           <div class="lx-margin-bottom-10">兑换时间：{{item.date}}</div>
         </div>

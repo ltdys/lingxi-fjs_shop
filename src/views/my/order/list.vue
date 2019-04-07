@@ -21,7 +21,7 @@
             desc="描述信息"  
             :title="order.title"
             :thumb="order.img"
-            currency="钻石币"
+            currency="钻石券"
           >
           </van-card>
         </div>

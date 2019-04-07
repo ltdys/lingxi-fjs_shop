@@ -3,7 +3,7 @@
 		<com-header title="我的钻友圈" is-back slot="header"></com-header>
 		<div class="myteam">
 			<div>
-				<div class="myteam-title">钻石套餐(个)</div>
+				<div class="myteam-title">共收获奖励红包(钻石券)</div>
 				<div class="myteam-num">{{myTeamData.price|number}}</div>
 			</div>
 			<div class="tl-r">
@@ -20,7 +20,7 @@
 			<van-cell :title="item.username|phone" :label="item.level" is-link @click="changeTeam(item)">
 				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
 				<div class="f333 tc">
-					拥有钻石<br/>{{item.price}}
+					收获红包(钻石券)<br/>{{item.price}}
 				</div>
 			</van-cell>
 		</div>
@@ -116,7 +116,7 @@
 			color: #666;
 		}
 		>div{
-			flex: .4;
+			flex: .5;
 		}
 		.myteam-num {
 			font-size: 18px;

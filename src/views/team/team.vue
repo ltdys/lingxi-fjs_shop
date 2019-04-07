@@ -3,11 +3,12 @@
 		<com-header title="钻友圈" slot="header" is-back></com-header>
 		<div class="team" v-for="(item, index) in teamList" :key="index">
 			<div class="team__info">
-				<div class="team-title">{{teamList[index].title || '--'}}</div>
+				<!-- <div class="team-title">{{teamList[index].title || '--'}}</div> -->
+        <div class="team-title">奖励红包数量</div>
 				<div class="team-num">
-          <span class="zs-text">奖励红包数量：</span>
+          <!-- <span class="zs-text">奖励红包数量：</span> -->
           {{teamList[index].price}}&nbsp; 
-          <span class="zs-text">钻石卷</span>
+          <span class="zs-text">钻石券</span>
         </div>
 			</div>
 			<div class="team__info2">

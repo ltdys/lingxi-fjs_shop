@@ -18,7 +18,7 @@
         </div>
         <div class="goods-middle">
           <div class="goods-middle-top">
-            <div class="fa-stack-14x fa-color-969">总价值</div>
+            <div class="fa-stack-14x fa-color-969">总价值(钻石券)</div>
             <div class="fa-stack-24x fa-color-323">{{item.ZSZ}}</div>
           </div>
           <div class="goods-middle-bottom fa-stack-14x fa-color-default" @click="$router.push('/deal/detail')">详情</div>
@@ -29,7 +29,7 @@
             <div class="tl-c fa-stack-17x fa-color-327">{{item.GMSL}}</div>
           </div>
           <div class="div-center">
-            <div class="lx-mr-15 fa-stack-14x fa-color-969">当前价格(元/张)</div>
+            <div class="lx-mr-15 fa-stack-14x fa-color-969">当前单价(钻石券)</div>
             <div class="tl-c fa-stack-17x fa-color-327">{{item.danjia}}</div>
           </div>
         </div>
