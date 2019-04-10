@@ -1,18 +1,14 @@
 
 
-import storage from './storage'
+import { setLocalStore, getLocalStore } from './storage'
 
 const TokenKey = 'token'
 
 export function getToken() {
-  return storage.get(TokenKey)
+  return getLocalStore(TokenKey)
 }
 
 export function setToken(token) {
-  return storage.set(TokenKey, token)
-}
-
-export function removeToken() {
-  return storage.remove(TokenKey)
+  return setLocalStore(TokenKey, token)
 }
 

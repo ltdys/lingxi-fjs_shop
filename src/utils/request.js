@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant';
-// import { getToken } from './auth'
+import { getToken } from './auth'
 
 // create an axios instance
 const service = axios.create({
