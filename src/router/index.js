@@ -248,6 +248,10 @@ export const routes = [{
   {
     path: '/deal/detail',
     component: () => import('@/views/deal/detail.vue')
+  },
+  {
+    path: '/pc',
+    component: () => import('@/views/common/pc.vue')
   }
 ]
 

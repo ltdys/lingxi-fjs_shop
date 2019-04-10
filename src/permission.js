@@ -1,5 +1,6 @@
 import router from './router'
 import store from './store'
+import platform from '@/utils/platform'
 
 // router.beforeEach((to, from, next) => {
 //   //判断登录权限
@@ -19,7 +20,7 @@ var localStorage = window.localStorage
 
 router.beforeEach((to, from, next) => {
   var storage = JSON.parse(localStorage.getItem('USER_ID'))
-  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+  if (to.meta.requireAuth && !platform.isPc()) {  // 判断该路由是否需要登录权限
     if (storage) {  // 通过storage判断是否登录
       next()
     } else {
