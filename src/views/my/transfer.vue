@@ -1,29 +1,19 @@
 <template>
 	<com-page>
 		<com-header title="钻石券转让" is-back slot="header"></com-header>
-     <template  v-if="step==1">
       <van-cell-group>
-        <van-field label="受让人" input-align="right" placeholder="账号/手机号" v-model="accountPhone"></van-field>
-      </van-cell-group>
-      <div class="submit_buttons">
-        <van-button type="primary" block :disabled="rechargeShow" @click="getUserByPhone">下一步</van-button>
-      </div>
-    </template>
-    <template v-else>
-      <div class="transfer">
-        <img class="transfer__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'"/>
-        <div>{{ realname }}</div>
-      </div>
-      <van-cell-group>
-        <van-field label="转让钻石券" input-align="right" type="number" placeholder="请输入转让钻石券" v-model="transferNum"></van-field>
+        <van-field label="受让人" input-align="right" placeholder="账号/手机号"
+          v-model="accountPhone" @blur="getUserByPhone" @keyup.enter.native="balanceTransfer">
+        </van-field>
+        <van-field label="转让钻石券" input-align="right" type="number" placeholder="请输入转让钻石券" 
+          v-model="transferNum" @keyup.enter.native="balanceTransfer"></van-field>
         <van-cell>
           <span class="f666">您的当前钻石券 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
         </van-cell>
       </van-cell-group>
       <div class="submit_buttons">
-        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfer">确认转让</van-button>
+        <van-button type="primary" block :disabled="autoTransfer" @click="balanceTransfer" v-focus @keyup.enter="balanceTransfer">确认转让</van-button>
       </div>
-    </template>
 	</com-page>
 </template>
 
@@ -85,7 +75,9 @@ export default {
 				Toast({
 					message: resData.data.Msg,
 					duration: 1500
-				})
+        })
+        this.accountPhone = ''
+        this.autoTransfer = true
 			}
 		},
     async balanceTransfer(){

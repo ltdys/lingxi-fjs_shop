@@ -1,6 +1,6 @@
 <template>
 	<com-page>
-		<com-header title="余额充值申请记录" is-back slot="header"></com-header>
+		<com-header title="兑换券记录" is-back slot="header"></com-header>
     <van-list class="yllist2_list" v-model="reLoading" :finished="reFinished" finished-text="没有更多了" @load="reLoadBottom">
       <van-cell v-for="(v,i) in rechargeList" :key="'d'+i">
         <div slot="title">

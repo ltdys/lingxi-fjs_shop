@@ -11,6 +11,7 @@
       	clearable
 				:error-message="errorMsg.newPhone"
         @input="phoneChange"
+        @keyup.enter.native="confirmBtn"
         @blur="oneValidate('newPhone')">
         <van-button slot="button" size="small" type="primary" :disabled="isBtnShow" @click="getAccCode">{{codeText}}</van-button>
       </van-field>
@@ -21,19 +22,20 @@
         required
       	clearable
 				:error-message="errorMsg.code"
+        @keyup.enter.native="confirmBtn"
         @blur="oneValidate('code')"></van-field>
 			<van-field
 				label="登录密码"
-				type="password"
 				placeholder="请输入登录密码"
 				v-model="formData.password"
         required
       	clearable
 				:error-message="errorMsg.password"
+        @keyup.enter.native="confirmBtn"
         @blur="oneValidate('password')"></van-field>
 		</van-cell-group>
     <div class="submit_buttons">
-      <van-button type="primary" block @click="confirmBtn">确认修改</van-button>
+      <van-button type="primary" block @click="confirmBtn" v-focus @keyup.enter="confirmBtn">确认修改</van-button>
     </div>
 	</com-page>
 </template>

@@ -12,7 +12,8 @@
 		</div>
 		<div class="text-prompt">输入回购金额</div>
 		<van-cell-group>
-			<van-field label="回购金额" type="number" input-align="right" placeholder="请输入回购金额" v-model="withdrawrNum"></van-field>
+			<van-field label="回购金额" type="number" input-align="right" placeholder="请输入回购金额"
+			  v-model="withdrawrNum" @keyup.enter.native="cashDeposit"></van-field>
 			<van-cell>
 				<span class="f666">您的当前余额 <span class="amount">{{ userInfo.price | number }}</span> 钻石券</span>
 			</van-cell>
@@ -35,7 +36,7 @@
 			</van-cell>
 		</div>
 		<div class="submit_buttons">
-			<van-button type="primary" block :disabled="autoWithdrawr" @click="cashDeposit">确认回购</van-button>
+			<van-button type="primary" block :disabled="autoWithdrawr" @click="cashDeposit" v-focus @keyup.enter="cashDeposit">确认回购</van-button>
 		</div>
 	</com-page>
 </template>

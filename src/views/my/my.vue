@@ -4,7 +4,10 @@
 		<div class="my-info">
 			<img class="my__avatar" :src="userInfo.icon | userImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'" @click="$router.push('/my/info')"/>
 			<div>
-				<div>{{ userInfo.userName | phone }} <van-tag round color="rgb(229,96,3)">{{ userInfo.userLevel }}</van-tag></div>
+				<div>
+					{{ userInfo.userLevel }}
+					<van-tag round color="rgb(229,96,3)">{{ userInfo.userName | phone }}</van-tag>
+				</div>
 				<div class="m-t-sm my_vip">
 					<span>会员账号：<span class="my_vip__acc">{{ userInfo.userName }}</span></span>
 					<van-button
@@ -77,9 +80,9 @@
 				</van-row>
 			</van-cell-group>
 			<van-cell-group>
-				<van-cell icon="balance-o" title="购买申请记录" is-link to="/my/yl_list2">
+				<van-cell icon="balance-o" title="兑换券记录" is-link to="/my/yl_list2">
 				</van-cell>
-				<van-cell  icon="balance-pay"  title="变动明细" is-link  to="/my/yl_list">
+				<van-cell  icon="balance-pay"  title="兑换券明细" is-link  to="/my/yl_list">
 				</van-cell>
 				<van-cell  icon="records"  title="回购记录" is-link to="/my/yl_list3">
 				</van-cell>

@@ -4,11 +4,11 @@
 		<van-cell-group>
 			<van-field
 				label="旧密码"
-        type="password"
 				placeholder="请输入旧密码"
 				v-model="formData.oldPwd"
 				required
       	clearable
+				@keyup.enter.native="confirmBtn"
 				:error-message="errorMsg.oldPwd"></van-field>
 			<van-field
 				label="新密码"
@@ -17,18 +17,19 @@
 				v-model="formData.newPwd"
 				required
       	clearable
+				@keyup.enter.native="confirmBtn"
 				:error-message="errorMsg.newPwd"></van-field>
       <van-field
 				label="确认新密码"
-				type="password"
 				placeholder="请再次输入新密码"
 				v-model="formData.newNextPwd"
 				required
       	clearable
+				@keyup.enter.native="confirmBtn"
 				:error-message="errorMsg.newNextPwd"></van-field>
 		</van-cell-group>
     <div class="submit_buttons">
-      <van-button type="primary" block @click="confirmBtn">修改密码</van-button>
+      <van-button type="primary" block @click="confirmBtn" v-focus @keyup.enter="confirmBtn">修改密码</van-button>
     </div>
 	</com-page>
 </template>

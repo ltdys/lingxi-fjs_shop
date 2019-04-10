@@ -1,6 +1,6 @@
 <template>
 	<com-page>
-		<com-header title="余额变动明细" is-back slot="header"></com-header>
+		<com-header title="兑换券明细" is-back slot="header"></com-header>
     <div class="yu_e">
       <van-button round size="small" type="default" @click="selectTime">
         <div class="yu_e_btn">

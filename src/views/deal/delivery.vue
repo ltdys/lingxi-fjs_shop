@@ -1,6 +1,6 @@
 <template>
   <com-page>
-    <com-header title="我要提货" is-back slot="header"></com-header>
+    <com-header :title="'我要'+currentType" is-back slot="header"></com-header>
     <div class="delivery-top">
       <div class="delivery-left">
         <div>{{this.deliveryList.title}}</div>
@@ -27,6 +27,7 @@
         :placeholder="currentObj.numPlace"
         clearable
         v-model="formData.num"
+        @keyup.enter.native="submit"
       >
       </van-field>
       <div>{{currentObj.addTitle}}</div>
@@ -34,6 +35,7 @@
         :placeholder="currentObj.addPlace"
         clearable
         v-model="formData.address"
+        @keyup.enter.native="submit"
       >
       </van-field>
       <div>{{currentObj.nameTitle}}</div>
@@ -41,6 +43,15 @@
         :placeholder="currentObj.namePlace"
         clearable
         v-model="formData.accountName"
+        @keyup.enter.native="submit"
+      >
+      </van-field>
+      <div>您的身份证号</div>
+      <van-field
+        placeholder="您的身份证号"
+        clearable
+        v-model="formData.card"
+        @keyup.enter.native="submit"
       >
       </van-field>
     </div>
@@ -49,7 +60,7 @@
       {{currentObj.deal}}
     </div>
     <div class="submit_buttons">
-      <van-button type="primary" block @click="submit" :disabled="!isCheck">提交审核</van-button>
+      <van-button type="primary" block @click="submit" :disabled="!isCheck" v-focus @keyup.enter="submit">提交审核</van-button>
     </div>
     <van-popup v-model="datePopShow" position="bottom">
       <!-- <van-picker :columns="types" @change="typeChange" /> -->
@@ -67,6 +78,7 @@
   import { Toast } from "vant"
   import { pickGoods } from "@/api/index"
   import { paramConvert } from "@/utils/stringUtil.js"
+  import { validateIdCard } from "@/utils/validate.js"
   export default {
     data () {
       return {
@@ -75,7 +87,8 @@
           num: '',  //提货数量
           address: '',  //钱包地址
           accountName: '',  //帐户姓名
-          shopId: ''  //钱包地址
+          shopId: '',  //钱包地址
+          card: ''  //身份证号
         },
         isCheck: false,
         currentType: '提货',
@@ -154,21 +167,35 @@
         if (!this.isCheck) { return } 
         if (this.formData.num === '') {
           Toast({
-            message: ('提货数量不能为空'),
+            message: (this.currentObj.numTitle + '不能为空'),
             duration: 1500
           })
           return
         }
         if (this.formData.address === '') {
           Toast({
-            message: ('钱包地址不能为空'),
+            message: (this.currentObj.addTitle + '不能为空'),
             duration: 1500
           })
           return
         }
         if (this.formData.accountName === '') {
           Toast({
-            message: ('帐户姓名不能为空'),
+            message: ('帐号姓名不能为空'),
+            duration: 1500
+          })
+          return
+        }
+        if (this.formData.card === '') {
+          Toast({
+            message: ('身份证号不能为空'),
+            duration: 1500
+          })
+          return
+        }
+        if (!validateIdCard(this.formData.card)) {
+          Toast({
+            message: ('身份证号格式不正确'),
             duration: 1500
           })
           return

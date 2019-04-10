@@ -14,6 +14,7 @@
       :error-message="errorMsg.tjrPhone"
       :disabled="this.$route.query.mobile"
       @blur="getUserByPhone"
+      @keyup.enter.native="submit"
     ></van-field>
     <van-field
       label="推荐人姓名"
@@ -29,15 +30,15 @@
       v-model="formData.phone"
       @blur="oneValidate('phone')"
       :error-message="errorMsg.phone"
+      @keyup.enter.native="submit"
     ></van-field>
     <van-field
       label="密码"
       placeholder="请输入密码"
-      required
       clearable
       v-model="formData.pwd"
-      @blur="oneValidate('pwd')"
 			:error-message="errorMsg.pwd"
+      @keyup.enter.native="submit"
     >
 		</van-field>
     <van-field
@@ -48,6 +49,7 @@
       clearable
       v-model="formData.name"
       :error-message="errorMsg.name"
+      @keyup.enter.native="submit"
     >
 		</van-field>
     <!-- <van-field
@@ -59,7 +61,7 @@
 			:error-message="errorMsg.card">
 		</van-field> -->
     <div class="submit_buttons">
-      <van-button type="primary" block @click="submit">立即注册</van-button>
+      <van-button type="primary" block @click="submit" v-focus @keyup.enter="submit">立即注册</van-button>
     </div>
   </com-page>
 </template>
@@ -79,7 +81,7 @@ export default {
         tjrPhone: "", //推荐人手机号
         phone: "", //手机号
         name: "", //名称
-        pwd: "a000000", //密码
+        pwd: "", //密码
         card: "" //身份证号码
       },
       tjrName: "",  //推荐人姓名

@@ -157,7 +157,7 @@ export default {
       let queryParams = paramConvert(this.formData)
       let resData = await placeShop(queryParams, this.formData)
       if (resData.status === 200 && resData.data.Success) {
-        Toast("下订单成功")
+        // Toast("下订单成功")
         this.orderList = resData.data.Data
         this.orderList.title = this.goods.title
         this.orderList.imgurl = this.goods.imgurl

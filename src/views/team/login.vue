@@ -9,6 +9,7 @@
       placeholder="请输入手机号/用户名"
       clearable
       v-model="formData.phone"
+      @keyup.enter.native="submit"
     >
     </van-field>
     <van-field
@@ -17,6 +18,7 @@
       placeholder="请输入登录密码"
       clearable
       v-model="formData.pwd"
+      @keyup.enter.native="submit"
     >
 		</van-field>
     <div class="lx-wrap">
@@ -25,7 +27,7 @@
       <span @click="$router.push('/team/forgetPwd')">忘记密码</span>
     </div>
     <div class="lx-btn">
-      <van-button type="primary" block @click="submit">登录</van-button>
+      <van-button type="primary" block @click="submit" v-focus @keyup.enter="submit">登录</van-button>
     </div>
   </com-page>
 </template>

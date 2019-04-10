@@ -1,22 +1,23 @@
 <template>
 	<com-page class="recharge">
-		<com-header title="购买钻石券" is-back slot="header"></com-header>
+		<com-header title="兑换钻石券" is-back slot="header"></com-header>
 		<van-cell-group>
 			<van-cell title="会员号" :value="userInfo.mobile"></van-cell>
 			<van-cell title="当前钻石券数量" :value="userInfo.price | number"></van-cell>
 		</van-cell-group>
 		<van-cell-group>
-			<van-field v-model="form.amount" label="购买数量" type="number" input-align="right" placeholder="请输入购买数量"></van-field>
+			<van-field v-model="form.amount" label="兑换数量" type="number" input-align="right"
+			  placeholder="请输入兑换数量" @keyup.enter.native="setYECZ"></van-field>
 			<van-cell title="付款途径" is-link clickable @click="show=true">
 				<span v-if="channelName" class="f333">{{channelName}}</span>
 				<span v-else>请选择</span>
 			</van-cell>
 			<van-cell>
-				<div slot="title" class="recharge__tip">提交申请之后，后台审核通过即充值成功</div>
+				<div slot="title" class="recharge__tip">提交申请之后，后台审核通过即购买成功</div>
 			</van-cell>
 		</van-cell-group>
     <div class="submit_buttons">
-      <van-button type="primary" block :disabled="rechargeShow" @click="setYECZ">提交购买申请</van-button>
+      <van-button type="primary" block :disabled="rechargeShow" @click="setYECZ" v-focus @keyup.enter="setYECZ">提交兑换申请</van-button>
     </div>
 		<van-actionsheet slot="popup"
 			v-model="show"

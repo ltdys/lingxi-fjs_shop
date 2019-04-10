@@ -15,7 +15,7 @@
         <div class="myteam-num">{{myTeamSonData.price|number}}</div>
 			</div>
 			<div class="tl-r">
-				<div class="myteam-title">钻友人数(人)</div>
+				<div class="myteam-title">钻友圈</div>
         <div class="myteam-num">{{myTeamSonData.num|number(0)}}</div>
 			</div>
 		</div>
