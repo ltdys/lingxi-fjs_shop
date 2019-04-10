@@ -251,7 +251,10 @@ export const routes = [{
   },
   {
     path: '/pc',
-    component: () => import('@/views/common/pc.vue')
+    component: () => import('@/views/common/pc.vue'),
+    meta: {
+      requireAuth: true
+    }
   }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <iframe src="http://zzlh.m.witrh.com/#/" frameborder="0" width="375" height="667"></iframe>
+    <iframe src="http://zzlh.m.witrh.com/#/team/login" frameborder="0" width="375" height="667"></iframe>
   </div>
 </template>
 

@@ -11,7 +11,7 @@ export default {
   name: 'App',
   created() {
     //pc端显示
-    if (platform.isPc()) {
+    if (platform.isPc() && window.self === window.top) {
       this.$router.push("/pc")
     }
     if(platform.inIOS()){
@@ -23,13 +23,13 @@ export default {
   },
   watch: {
     '$route': {
-      handler:function(val,oldval){
-        if (platform.isPc() && val.fullPath === "/") {
+      handler: function(val, oldVal) {
+        if (platform.isPc() && window.self === window.top) {
           this.$router.push("/pc")
         }
-      },
-      deep: true
-    }
+      } 
+    },
+    deep: true
   }
 }
 </script>
