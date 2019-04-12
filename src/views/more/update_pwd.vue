@@ -4,6 +4,7 @@
 		<van-cell-group>
 			<van-field
 				label="旧密码"
+				type="password"
 				placeholder="请输入旧密码"
 				v-model="formData.oldPwd"
 				required
@@ -21,6 +22,7 @@
 				:error-message="errorMsg.newPwd"></van-field>
       <van-field
 				label="确认新密码"
+				type="password"
 				placeholder="请再次输入新密码"
 				v-model="formData.newNextPwd"
 				required

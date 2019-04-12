@@ -6,7 +6,7 @@
           v-model="accountPhone" @blur="getUserByPhone" @keyup.enter.native="balanceTransfer">
         </van-field>
         <van-field label="转让钻石券" input-align="right" type="number" placeholder="请输入转让钻石券" 
-          v-model="transferNum" @keyup.enter.native="balanceTransfer"></van-field>
+          v-model="transferNum" @blur="change" @keyup.enter.native="balanceTransfer"></van-field>
         <van-cell>
           <span class="f666">您的当前钻石券 <span class="amount">{{ userInfo.price | number }}</span> 元</span>
         </van-cell>
@@ -37,28 +37,6 @@ export default {
   created () {
     this.getUserInfo()
   },
-  watch: {
-    accountPhone:{
-      handler: function (val, old) {
-        if (val == null || val == '') {
-					this.rechargeShow = true
-				} else {
-					this.rechargeShow = false
-				}
-      },
-      deep: true
-    },
-    transferNum:{
-      handler: function (val, old) {
-        if (val == null || val == '') {
-					this.autoTransfer = true
-				} else {
-					this.autoTransfer = false
-				}
-      },
-      deep: true
-    }
-  },
   methods: {
     async getUserByPhone () { //根据手机号获取用户信息
       let self = this;
@@ -68,9 +46,9 @@ export default {
 			let queryParams = paramConvert(param)
 			let resData = await getUserByPhone(queryParams, param)
       if (resData.status === 200 && resData.data.Success) {
-        console.log("根据手机号获取用户信息",resData.data.Data)
         self.realname = resData.data.Data.realname
-				self.step++
+        self.step++
+        this.change()
 			} else {
 				Toast({
 					message: resData.data.Msg,
@@ -103,6 +81,13 @@ export default {
 					duration: 1500
 				})
 			}
+    },
+    change () {
+      if (this.realname == null || this.realname == '' || this.transferNum == null || this.realname == '') {
+        this.autoTransfer = true
+      } else {
+        this.autoTransfer = false
+      }
     }
   },
 }

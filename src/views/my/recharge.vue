@@ -13,7 +13,7 @@
 				<span v-else>请选择</span>
 			</van-cell>
 			<van-cell>
-				<div slot="title" class="recharge__tip">提交申请之后，后台审核通过即购买成功</div>
+				<div slot="title" class="recharge__tip">提交申请之后，后台审核通过即兑换成功</div>
 			</van-cell>
 		</van-cell-group>
     <div class="submit_buttons">

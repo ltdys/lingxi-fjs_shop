@@ -5,43 +5,44 @@
     <div class="message_detail">
       <div class="message_detail__title">{{messageObject.title}}</div>
       <div class="message_detail__date">{{messageObject.addtime}}</div>
-      <!-- <div class="message_detail__img">
-        <img src="static/images/banner.png"/>
-      </div> -->
-      <!-- <div class="message_detail__desc">
-         <p>价格股票公示</p>
-          <p v-for="i in 9" :key="i">1月{{i}}号 1.{{i}}元/股</p>
-      </div> -->
+      <div v-html="messageObject.text"></div>
     </div>
 	</com-page>
 </template>
 
 <script>
-import { getMyMsgList } from "@/api/index"
+import { getMsgInfo } from "@/api/index"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
 
   data () {
     return {
-      id: this.$store.getters.getUserId,
-      messageObject: {}
+      id: '',
+      messageObject: {
+        title: '',
+        addtime: '',
+        text: '',
+        id: ''
+      }
     }
   },
 
   created () {
-    this.getMyMsgList()
+    this.id = this.$route.params.id || ''
+    this.getMsgInfo()
   },
 
   methods: {
-    async getMyMsgList () {
+    async getMsgInfo () {
       let queryParams = paramConvert({
         id: this.id
       })
-      let resData = await getMyMsgList(queryParams, {
+      let resData = await getMsgInfo(queryParams, {
         id: this.id
       })
+      console.log("resData", resData)
       if (resData.status === 200 && resData.data.Success) {
-        this.messageObject = resData.data.Data[0] || []
+        this.messageObject = resData.data.Data
       }
     }
   }

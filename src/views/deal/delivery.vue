@@ -35,6 +35,7 @@
         :placeholder="currentObj.addPlace"
         clearable
         v-model="formData.address"
+        disabled
         @keyup.enter.native="submit"
       >
       </van-field>
@@ -42,6 +43,7 @@
       <van-field
         :placeholder="currentObj.namePlace"
         clearable
+        disabled
         v-model="formData.accountName"
         @keyup.enter.native="submit"
       >
@@ -52,6 +54,7 @@
         clearable
         v-model="formData.card"
         @keyup.enter.native="submit"
+        :disabled="cardDisabled"
       >
       </van-field>
     </div>
@@ -80,12 +83,13 @@
   import { paramConvert } from "@/utils/stringUtil.js"
   import { validateIdCard } from "@/utils/validate.js"
   export default {
+
     data () {
       return {
         formData: {
           id: '',  //用户id
           num: '',  //提货数量
-          address: '',  //钱包地址
+          address: '福建省福州市鼓楼区东街83号',  //钱包地址
           accountName: '',  //帐户姓名
           shopId: '',  //钱包地址
           card: ''  //身份证号
@@ -103,11 +107,15 @@
           nameTitle: '您的帐户姓名',
           namePlace: '您的帐户姓名',
           deal: '我同意提货协议'
-        }
+        },
+        cardDisabled: false
       }
     },
 
     created () {
+      this.formData.accountName = JSON.parse(this.$store.getters.getUserInfo).realname
+      this.formData.card = JSON.parse(this.$store.getters.getUserInfo).card
+      this.cardDisabled = JSON.parse(this.$store.getters.getUserInfo).card === null ? false : true
       this.formData.id = this.userId || ''
       this.formData.shopId = this.deliveryList.id || ''
     },

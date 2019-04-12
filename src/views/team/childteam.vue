@@ -27,7 +27,7 @@
 			<van-cell :title="item.username|phone" :label="item.level" is-link @click="changeTeam(item)">
 				<com-icon name="iconwode" slot="icon" class="lx-svg"></com-icon>
 				<div class="f333 tc">
-					总业绩<br/>{{item.price|number}}元
+					红包钻石券<br/>{{item.price|number}}元
 				</div>
 			</van-cell>
 		</div>

@@ -6,7 +6,7 @@
 			<div>
 				<div>
 					{{ userInfo.userLevel }}
-					<van-tag round color="rgb(229,96,3)">{{ userInfo.userName | phone }}</van-tag>
+					<van-tag round color="rgb(229,96,3)">{{ userInfo.realname | phone }}</van-tag>
 				</div>
 				<div class="m-t-sm my_vip">
 					<span>会员账号：<span class="my_vip__acc">{{ userInfo.userName }}</span></span>

@@ -6,10 +6,7 @@
         <li class="message-item" v-for="(item,i) in messageList" :key="i" @click="$router.push('/message/' + item.id)">
           <div class="message__title">{{item.title}}</div>
           <div class="message__date">{{item.addtime}}</div>
-          <!-- <div class="message__img">
-            <img src="static/images/banner.png"/>
-          </div> -->
-          <div v-html="item.text"></div>
+          <!-- <div v-html="item.text"></div> -->
         </li>
       </ul>
     </van-list>
@@ -18,32 +15,31 @@
 
 <script>
 import { list_mixins } from "@/mixins";
-import { getMsgInfo } from "@/api/index"
+import { getMyMsgList } from "@/api/index"
 import { paramConvert } from "@/utils/stringUtil.js"
 export default {
   mixins: [list_mixins],
   data(){
     return {
-      messageId: '',
+      id: this.$store.getters.getUserId,
       messageList: []
     }
   },
   
   created () {
-    this.messageId = this.$route.query.messageId || ''
-    this.getMsgInfo()
+    this.getMyMsgList()
   },
 
   methods: {
-    async getMsgInfo () {
+    async getMyMsgList () {
       let queryParams = paramConvert({
-        id: this.messageId
+        id: this.id
       })
-      let resData = await getMsgInfo(queryParams, {
-        id: this.messageId
+      let resData = await getMyMsgList(queryParams, {
+        id: this.id
       })
       if (resData.status === 200 && resData.data.Success) {
-        this.messageList[0] = resData.data.Data
+        this.messageList = resData.data.Data
       }
     }
   }
