@@ -279,16 +279,24 @@ input {
   position: relative;
   background: #FFF;
 }
+.home-bot-tabbar .van-tabbar-item{
+  border-top: 1px solid #EEE;
+}
+.home-bot-tabbar .van-tabbar-item.zy-item{
+  border: none;
+}
 .zy-item::before{
   content: '';
   position:absolute;
-  top: -5vw;
+  top: -6.5vw;
   left: 0;
   z-index: -1;
   width: 100%;
-  height: calc(100vw / 5);
+  height: calc(100vw / 5 - 10px);
   background: #FFF;
   border-radius: 50%;
+  border: 1px solid #EEE;
+  box-sizing: border-box;
 }
 .van-hairline--top-bottom::after{
   border-width: 0;

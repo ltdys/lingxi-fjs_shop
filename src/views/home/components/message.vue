@@ -36,12 +36,14 @@ export default {
 
 <style lang="scss">
 .home-message {
-  background: #F7F2EB;
+  // background: #F7F2EB;
+  background: #FFF;
   border-radius: 4px;
-  height: 1rem;
+  height: 0.9rem;
   padding: 0 0.4rem;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #EEEEEE;
   > :nth-child(1) {
     padding-right: 0.4rem;
   }

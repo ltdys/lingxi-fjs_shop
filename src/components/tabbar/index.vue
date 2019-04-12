@@ -1,5 +1,5 @@
 <template>
-    <van-tabbar v-model="selected" :fixed="false">
+    <van-tabbar v-model="selected" :fixed="false" class="home-bot-tabbar">
       <van-tabbar-item :icon="menu.icon" v-for="menu in menus" :key="menu.icons" :to="menu.path" :class="[{'zy-item': menu.id == 3}]">
             {{menu.name}}
       </van-tabbar-item>

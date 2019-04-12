@@ -27,11 +27,11 @@ export default {
 <style lang="scss">
 .home-navs {
   display: flex;
-  padding: 10px 15px;
+  padding: 20px 25px;
   border-radius: 4px;
   background: #fff;
-  margin-top: 10px;
-  margin-bottom: 8px;
+  // margin-top: 10px;
+  // margin-bottom: 15px;
   justify-content: space-between;
   > a {
     // flex: 1;

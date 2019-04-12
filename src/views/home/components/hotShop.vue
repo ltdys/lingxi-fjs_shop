@@ -1,18 +1,20 @@
 <template>
-  <div class="home-hot_shop">
-    <div class="hot-title">热卖商品</div>
-    <div class="shop" v-for="(item, index) in shopList" :key="index">
-      <img class="w-100 h-115" :src="item.imgurl">
-      <div class="shop-desc">
-        <div class="shop-title">{{item.title}}</div>
-        <div>
-          <!-- <div class="shop-price">￥{{item.price | number}}</div> -->
-          <div class="shop-price">{{item.price | number}}钻石券</div>
-          <div class="shop-btn" @click="buy(item.id)">立刻购买</div>
+  <!-- <div class="home-out_shop"> -->
+    <div class="home-hot_shop">
+      <div class="hot-title">热卖商品</div>
+      <div class="shop" v-for="(item, index) in shopList" :key="index">
+        <img class="w-100 h-115" :src="item.imgurl">
+        <div class="shop-desc">
+          <div class="shop-title">{{item.title}}</div>
+          <div class="shop-mai-box">
+            <!-- <div class="shop-price">￥{{item.price | number}}</div> -->
+            <div class="shop-price">{{item.price | number}}钻石券</div>
+            <div class="shop-btn" @click="buy(item.id)">立刻购买</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -43,10 +45,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-out_shop{
+  padding: 0.2rem 0.3rem;
+  background: #FFF;
+}
 .home-hot_shop {
-  margin-top: 0.16rem;
+  // margin-top: 0.16rem;
+  margin: 0.3rem 0.3rem;
   background: #fff;
   border-radius: 4px;
+  box-shadow:0px 1px 5px 0px rgba(157,157,157,0.25);
   .hot-title {
     height: 57px;
     line-height: 57px;
@@ -61,6 +69,10 @@ export default {
     }
     border-radius: 4px;
     // box-shadow: 1px 1px 8px #ccc;
+    .shop-mai-box{
+      display: flex;
+      align-items: center;
+    }
     .shop-title {
       font-size: 0.28rem;
       color: #333;
