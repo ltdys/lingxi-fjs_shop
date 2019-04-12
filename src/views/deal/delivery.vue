@@ -102,8 +102,8 @@
         currentObj: {
           numTitle: '您本次提货数量',
           numPlace: '您本次提货数量',
-          addTitle: '您的收货地址',
-          addPlace: '您的收货地址',
+          addTitle: '您的海关地址',
+          addPlace: '您的海关地址',
           nameTitle: '您的帐户姓名',
           namePlace: '您的帐户姓名',
           deal: '我同意提货协议'
@@ -139,16 +139,16 @@
           if (val == '提货') {
             this.currentObj.numTitle = '您本次提货数量'
             this.currentObj.numPlace = '您本次提货数量'
-            this.currentObj.addTitle = '您的收货地址'
-            this.currentObj.addPlace = '您的收货地址'
+            this.currentObj.addTitle = '您的海关地址'
+            this.currentObj.addPlace = '您的海关地址'
             this.currentObj.nameTitle = '您的帐户姓名'
             this.currentObj.namePlace = '您的帐户姓名'
             this.currentObj.deal = '我同意提货协议'
           } else if (val == '寄卖') {
             this.currentObj.numTitle = '您本次寄卖数量'
             this.currentObj.numPlace = '您本次寄卖数量'
-            this.currentObj.addTitle = '您的寄卖地址'
-            this.currentObj.addPlace = '您的寄卖地址'
+            this.currentObj.addTitle = '您的海关地址'
+            this.currentObj.addPlace = '您的海关地址'
             this.currentObj.nameTitle = '您的寄卖账号姓名'
             this.currentObj.namePlace = '您的寄卖账号姓名'
             this.currentObj.deal = '我同意寄卖协议'
